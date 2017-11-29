@@ -12,14 +12,7 @@ namespace DeftEngine
     /// </summary>
     public interface IEventSystem
     {
-        void Process(ECSData ecsData);
-
-        /// <summary>
-        /// Determines whether or not an event system should process this update.
-        /// // TODO: Currently brute forcing all event systems.
-        /// // Need to build an "Event.. System" so we only check IEventSystems when an incoming event
-        /// // arrives - like messaging.
-        /// </summary>
-        bool ShouldProcess(ECSData ecsData);
+        void SubscribeToEvents();
+        void OnEvent(ECSData ecsData, params object[] args);
     }
 }

@@ -41,13 +41,23 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ActionPool.cs" />
+    <Compile Include="Action_SetVelocity.cs" />
+    <Compile Include="Action_ShootBullet.cs" />
+    <Compile Include="BulletComponent.cs" />
+    <Compile Include="CollisionSystem.cs" />
+    <Compile Include="EntityFactory.cs" />
+    <Compile Include="FighterComponent.cs" />
+    <Compile Include="IDeftAction.cs" />
     <Compile Include="DeftEngine.cs" />
     <Compile Include="DeftEvent.cs" />
     <Compile Include="ECSCore.cs" />
     <Compile Include="ECSData.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityPool.cs" />
+    <Compile Include="EventPool.cs" />
     <Compile Include="HIDStateData.cs" />
+    <Compile Include="IActionSystem.cs" />
     <Compile Include="IDisplaySystem.cs" />
     <Compile Include="IEntityQuery.cs" />
     <Compile Include="EntitySystemPool.cs" />
@@ -56,13 +66,29 @@
     <Compile Include="IComponent.cs" />
     <Compile Include="IEventSystem.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="InputEventTriggerSystem.cs" />
     <Compile Include="IUpdateSystem.cs" />
+    <Compile Include="KillMeComponent.cs" />
+    <Compile Include="KillMeSystem.cs" />
+    <Compile Include="Net_GetInputSystem.cs" />
+    <Compile Include="Net_ProcessOutputSystem.cs" />
+    <Compile Include="Net_RunNetSystem.cs" />
+    <Compile Include="NeuralNet.cs" />
+    <Compile Include="NeuralNetComponent.cs" />
+    <Compile Include="OffScreenCleanupSystem.cs" />
+    <Compile Include="OnLeftMouseClickEvent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RectDisplayComponent.cs" />
     <Compile Include="RectRenderSystem.cs" />
+    <Compile Include="SetVelocityActionSystem.cs" />
+    <Compile Include="ShootBulletActionSystem.cs" />
+    <Compile Include="ShootBulletFighterSystem.cs" />
+    <Compile Include="SimParams.cs" />
     <Compile Include="SpatialComponent.cs" />
     <Compile Include="SpawnEntityOnClickSystem.cs" />
+    <Compile Include="VelocityComponent.cs" />
+    <Compile Include="VelocitySystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=0.6.602.0, Culture=neutral, processorArchitecture=MSIL">

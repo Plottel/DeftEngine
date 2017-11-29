@@ -8,36 +8,50 @@ namespace DeftEngine
 {
     public class EntitySystemPool
     {
-        public List<IEntitySystem> pool;
-        public List<IDisplaySystem> displayPool;
-        public List<IUpdateSystem> updatePool;
-        public List<IEventSystem> eventPool;
+        public List<IEntitySystem> entitySystems;
+        public List<IDisplaySystem> displaySystems;
+        public List<IUpdateSystem> updateSystems;
+        public List<IEventSystem> eventSystems;
+        public List<IActionSystem> actionSystems;
 
         public EntitySystemPool()
         {
-            pool = new List<IEntitySystem>();
-            displayPool = new List<IDisplaySystem>();
-            updatePool = new List<IUpdateSystem>();
-            eventPool = new List<IEventSystem>();
+            entitySystems = new List<IEntitySystem>();
+            displaySystems = new List<IDisplaySystem>();
+            updateSystems = new List<IUpdateSystem>();
+            eventSystems = new List<IEventSystem>();
+            actionSystems = new List<IActionSystem>();
         }
 
         public void SyncEntityQueriesWithPool()
         {
-            foreach (var system in pool)
+            foreach (var system in entitySystems)
                 ECSCore.pool.AddQuery(system.GetQuery());
         } 
 
         public void Add(IEntitySystem system)
         {
-            pool.Add(system);
+            entitySystems.Add(system);
 
             var isDisplay = system as IDisplaySystem;
             var isUpdate = system as IUpdateSystem;
             var isEvent = system as IEventSystem;
+            var isAction = system as IActionSystem;
 
-            if (isDisplay != null)  displayPool.    Add(isDisplay);
-            if (isUpdate != null)   updatePool.     Add(isUpdate);
-            if (isEvent != null)    eventPool.      Add(isEvent);
+            if (isDisplay != null)  displaySystems.    Add(isDisplay);
+            if (isUpdate != null)   updateSystems.     Add(isUpdate);
+
+            if (isEvent != null)
+            {
+                eventSystems.Add(isEvent);
+                isEvent.SubscribeToEvents();
+            }
+
+            if (isAction != null)
+            {
+                actionSystems.Add(isAction);
+                ECSCore.actionPool.SubscribeTo(isAction.GetActionType(), isAction);
+            }
         }
 
         public void Add<T>() where T : IEntitySystem

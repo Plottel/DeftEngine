@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace DeftEngine
 {
@@ -13,10 +14,35 @@ namespace DeftEngine
         SpriteBatch spriteBatch;
         GameTime gameTime;
 
+        private static Random _rand = new Random();
+
+        public static int RandInt(int min, int max)
+            => _rand.Next(min, max);
+
+        public static byte RandByte(byte min, byte max)
+            => (byte)_rand.Next(min, max);
+
+        public static float RandFloat1Neg1()
+        {
+            var result = _rand.NextDouble();
+
+            if (RandInt(0, 1) > 0.5f)
+                result *= -1;
+
+            return (float)result;
+        }
+
         public DeftEngine()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
+            graphics.PreferredBackBufferWidth = 1366;
+            graphics.PreferredBackBufferHeight = 768;
+
+            // Restrict mouse to stay within the window.
+            Input.SetMaxMouseX(graphics.PreferredBackBufferWidth);
+            Input.SetMaxMouseY(graphics.PreferredBackBufferHeight);
         }
 
         /// <summary>
@@ -31,6 +57,10 @@ namespace DeftEngine
 
             EntityPool.Init();
             ECSCore.Start();
+
+            IsMouseVisible = true;
+            Mouse.WindowHandle = Window.Handle;
+
 
 
             base.Initialize();
@@ -72,9 +102,8 @@ namespace DeftEngine
             this.gameTime = gameTime;
 
             // TODO: Add your update logic here
+            ECSCore.RunActionSystems(GenerateECSData());
             ECSCore.RunUpdateSystems(GenerateECSData());
-            ECSCore.RunEventSystems(GenerateECSData());
-
 
             base.Update(gameTime);
         }
@@ -85,7 +114,7 @@ namespace DeftEngine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DimGray);
 
             spriteBatch.Begin();
 

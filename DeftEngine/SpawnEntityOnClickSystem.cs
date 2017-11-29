@@ -7,20 +7,29 @@ using Microsoft.Xna.Framework;
 
 namespace DeftEngine
 {
-    public class SpawnEntityOnClickSystem : IEntitySystem, IEventSystem
+    public class SpawnEntityOnClickSystem : IEntitySystem, IEventSystem, IUpdateSystem
     {
         public IEntityQuery GetQuery()
             => EntityPool.QUERY_NO_ENTITIES;
 
-        public bool ShouldProcess(ECSData ecsData)
-            => Input.LeftMouseClicked();
+        public void SubscribeToEvents()
+        {
+            ECSCore.eventPool.SubscribeTo<Event_OnLeftMouseClick>(this);
+        }
+
+        public void OnEvent(ECSData ecsData, params object[] args)
+        {
+            var newEntity = EntityFactory.Fighter(Input.MousePos);
+            //ecsData.pool.AddEntity(newEntity);
+
+            var setMyVel = new Action_SetVelocity();
+            setMyVel.newVelocity = Vector2.Zero;
+            setMyVel.actor = newEntity;
+            ECSCore.actionPool.AddAction(setMyVel);
+        }
 
         public void Process(ECSData ecsData)
         {
-            // We can assume left mouse click is already down.
-
-            // NOTE: It's only okay to add an entity this way since we're adding it to the ECSCore immediately after instantiation.
-            ecsData.pool.AddEntity(MakeDefaultEntity());
         }
 
         private Entity MakeDefaultEntity()
@@ -28,6 +37,7 @@ namespace DeftEngine
             var newEntity = new Entity();
             var spatial = new SpatialComponent();
             var rectDisplay = new RectDisplayComponent();
+            var velocity = new VelocityComponent();
 
             spatial.pos = Input.MousePos;
             spatial.size = new Vector2(50, 50);
@@ -35,11 +45,14 @@ namespace DeftEngine
 
             rectDisplay.color = Color.Blue;
 
+            //velocity.velocity = new Vector2(5, 5);
+
             // TODO: BIG BIG BIG COUPLING PROBLEM HERE
             // Every time I add a component... it triggers on the ECS core and the Entity Pool and reruns queries and such.
             // DeCouple Entities from ECSCore.
             // Really need something like entityPool.AddComponent(Entity e, IComponent c);
             newEntity.AddComponent(spatial);
+            newEntity.AddComponent(velocity);
             newEntity.AddComponent(rectDisplay);
 
             return newEntity;

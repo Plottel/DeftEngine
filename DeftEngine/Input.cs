@@ -196,6 +196,16 @@ namespace DeftEngine
             return oldMouseState.RightButton == ButtonState.Pressed && currentMouseState.RightButton == ButtonState.Released;
         }
 
+        public static int MaxMouseX
+        {
+            get => _maxMouseX;
+        }
+
+        public static int MaxMouseY
+        {
+            get => _maxMouseY;
+        }
+
         /// <summary>
         /// Sets the maximum returnable X value of the mouse position.
         /// </summary>

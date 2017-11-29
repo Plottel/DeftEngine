@@ -28,7 +28,7 @@ namespace DeftEngine
 
             var batch = ecsData.spriteBatch;
             foreach (var e in entities)
-                batch.FillRectangle(e.Get<SpatialComponent>().Bounds, Color.Blue);                
+                batch.FillRectangle(e.Get<SpatialComponent>().Bounds, e.Get<RectDisplayComponent>().color);            
         }
     }
 }
