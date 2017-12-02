@@ -11,7 +11,7 @@ namespace DeftEngine
     public static class ECSCore
     {
         public static EntityPool pool;
-        public static EntitySystemPool systemPool;
+        public static SystemPool systemPool;
         public static EventPool eventPool;
         public static ActionPool actionPool;
         public static SpriteBatch spriteBatch;
@@ -20,48 +20,46 @@ namespace DeftEngine
         {
             // Setup pools.
             pool = new EntityPool();
-            systemPool = new EntitySystemPool();
+            systemPool = new SystemPool();
             eventPool = new EventPool();
             actionPool = new ActionPool();
 
             // Setup event handlers
-            eventPool.AddEvent<Event_OnLeftMouseClick>();
+            var allEventTypes = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                                  from assemblyType in domainAssembly.GetTypes()
+                                  where typeof(DeftEvent).IsAssignableFrom(assemblyType)
+                                  select assemblyType).ToList();
+
+            foreach (var eventType in allEventTypes)
+                eventPool.AddEvent(eventType);
+
+            systemPool.Add<TestInputEventsSystem>();
+
+            systemPool.Add<System_Teleport>();
+            systemPool.Add<System_Regen>();
 
             // Setup systems.
             systemPool.Add<InputEventTriggerSystem>();
             systemPool.Add<SetVelocityActionSystem>();
-            systemPool.Add<ShootBulletActionSystem>();
+
+            systemPool.Add<System_Action_SetPosition>();
+
             systemPool.Add<SpawnEntityOnClickSystem>();
-            systemPool.Add<ShootBulletFighterSystem>();
+            systemPool.Add<RemoveEntityOnRightClickSystem>();
 
-
-            // Setup neural net systems
-            systemPool.Add<Net_GetInputSystem>();
-            systemPool.Add<Net_RunNetSystem>();
-            systemPool.Add<Net_ProcessOutputSystem>();
-
-            systemPool.Add<VelocitySystem>();
-            systemPool.Add<CollisionSystem>();
+            systemPool.Add<System_Velocity>();
             systemPool.Add<OffScreenCleanupSystem>();
             systemPool.Add<KillMeSystem>();
             systemPool.Add<RectDisplaySystem>();
             systemPool.SyncEntityQueriesWithPool();
-
-            // Make two fighters
-            var f1 = EntityFactory.Fighter(new Vector2(100, 100));
-            var f2 = EntityFactory.Fighter(new Vector2(800, 800));
-            var f3 = EntityFactory.Fighter(new Vector2(800, 800));
-            var f4 = EntityFactory.Fighter(new Vector2(800, 800));
-            var f5 = EntityFactory.Fighter(new Vector2(800, 800));
-
-            f1.Get<NeuralNetComponent>().net.Randomise();
-            f2.Get<NeuralNetComponent>().net.Randomise();
         }
 
         public static void RunActionSystems(ECSData ecsData)
         {
             foreach (var system in systemPool.actionSystems)
-                system.Process(ecsData);
+                system.ProcessActions();
+
+            actionPool.ClearActionBuffer();
         }
 
         public static void RunUpdateSystems(ECSData ecsData)
@@ -70,12 +68,10 @@ namespace DeftEngine
                 system.Process(ecsData);
         }
 
-        public static void RunDisplaySystems(ECSData ecsData)
+        public static void RunDisplaySystems(ECSData ecsData, SpriteBatch spriteBatch)
         {
             foreach (var system in systemPool.displaySystems)
-                system.Process(ecsData);
-
-            Console.WriteLine("Ent Count" + pool.GetEntities().Count);
+                system.Display(ecsData, spriteBatch);
         }
     }
 }

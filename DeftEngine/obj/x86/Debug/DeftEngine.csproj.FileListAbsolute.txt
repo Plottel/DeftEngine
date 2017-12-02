@@ -1,4 +1,3 @@
-C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\DeftEngine.exe
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\DeftEngine.pdb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\MonoGame.Framework.dll
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
@@ -20,7 +19,6 @@ C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.XInput
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.csprojResolveAssemblyReference.cache
 C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.exe
 C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.pdb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\MonoGame.Extended.dll
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Newtonsoft.Json.dll
@@ -53,3 +51,5 @@ C:\Users\Bryn\Code\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.Direct3D1
 C:\Users\Bryn\Code\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 C:\Users\Bryn\Code\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.XInput.xml
 C:\Users\Bryn\Code\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\DeftEngine.exe
+C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.exe

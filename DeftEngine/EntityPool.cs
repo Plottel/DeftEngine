@@ -7,6 +7,8 @@ using System.Diagnostics;
 
 namespace DeftEngine
 {
+    public delegate bool EntityQuery(Entity e);
+
     public class EntityPool
     {
         private class Query_NoEntities : IEntityQuery
@@ -27,7 +29,7 @@ namespace DeftEngine
 
         private Dictionary<Type, List<Entity>> _poolSortedByComponentType;
 
-        private Dictionary<Type, List<Entity>> _poolQueryResults;
+        private Dictionary<IQuerySystem, List<Entity>> _poolQueryResults;
 
         public static void Init()
         {
@@ -48,7 +50,7 @@ namespace DeftEngine
             foreach (Type componentType in _allComponentTypes)
                 _poolSortedByComponentType[componentType] = new List<Entity>();
 
-            _poolQueryResults = new Dictionary<Type, List<Entity>>();
+            _poolQueryResults = new Dictionary<IQuerySystem, List<Entity>>();
 
         }
 
@@ -65,9 +67,7 @@ namespace DeftEngine
 
             foreach (var queryData in _poolQueryResults)
             {
-                var query = Activator.CreateInstance(queryData.Key) as IEntityQuery;
-
-                if (query.Query(e))
+                if (queryData.Key.Query(e))
                     queryData.Value.Add(e);
             }
         }
@@ -98,28 +98,35 @@ namespace DeftEngine
             return _poolSortedByComponentType[typeof(T)];
         }
 
-        public List<Entity> Query(IEntityQuery query)
+        public List<Entity> Query(IQuerySystem querySystem)
         {
-            var queryType = query.GetType();
-
             // If query is already cached, just return it.
-            if (_poolQueryResults.ContainsKey(queryType))
-                return _poolQueryResults[queryType];
+            if (_poolQueryResults.ContainsKey(querySystem))
+                return _poolQueryResults[querySystem];
 
             // If query hasn't been cached, add it.
-            return AddQuery(query);
+            return AddQuery(querySystem);
         }
 
-        public List<Entity> Query<T>() where T : IEntityQuery
+        public List<Entity> AddQuery(IQuerySystem querySystem)
         {
-            var queryType = typeof(T);
+            var queryResult = new List<Entity>();
 
-            // If query is already cached, just return it.
-            if (_poolQueryResults.ContainsKey(queryType))
-                return _poolQueryResults[queryType];
+            // Add all entities which meet the requirements of the query.
+            foreach (Entity e in _pool)
+            {
+                if (querySystem.Query(e))
+                    queryResult.Add(e);
+            }
 
-            // If query hasn't been cached, add it.
-            return AddQuery((T)Activator.CreateInstance(queryType));
+            // Store the query result for quick future access.
+            _poolQueryResults[querySystem] = queryResult;
+            return queryResult;
+        }
+
+        public void RemoveQuery(IQuerySystem querySystem)
+        {
+            _poolQueryResults.Remove(querySystem);
         }
 
         public List<Entity> GetEntities(Type componentType)
@@ -148,8 +155,7 @@ namespace DeftEngine
         {
             foreach (var queryData in _poolQueryResults)
             {
-                var query = Activator.CreateInstance(queryData.Key) as IEntityQuery;
-                var passesQuery = query.Query(e);
+                var passesQuery = queryData.Key.Query(e);
                 var queryEntities = queryData.Value;
 
                 if (queryEntities.Contains(e))
@@ -166,27 +172,6 @@ namespace DeftEngine
         public void ClearQueries()
         {
             _poolQueryResults.Clear();
-        }
-
-        public List<Entity> AddQuery(IEntityQuery query)
-        {
-            var queryResult = new List<Entity>();
-
-            // Add all entities which meet the requirements of the query.
-            foreach (Entity e in _pool)
-            {
-                if (query.Query(e))
-                    queryResult.Add(e);
-            }
-
-            // Store the query result for quick future access.
-            _poolQueryResults[query.GetType()] = queryResult;
-            return queryResult;
-        }
-
-        public void RemoveQuery<T>() where T : IEntityQuery
-        {
-            _poolQueryResults.Remove(typeof(T));
-        }
+        }        
     }
 }

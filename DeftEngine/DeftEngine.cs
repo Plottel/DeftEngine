@@ -56,6 +56,7 @@ namespace DeftEngine
             // TODO: Add your initialization logic here
 
             EntityPool.Init();
+            ActionPool.Init();
             ECSCore.Start();
 
             IsMouseVisible = true;
@@ -64,6 +65,9 @@ namespace DeftEngine
 
 
             base.Initialize();
+
+            // User-defined Setup.
+            Program.SetupProgram();
         }
 
         /// <summary>
@@ -119,7 +123,7 @@ namespace DeftEngine
             spriteBatch.Begin();
 
             // TODO: Add your drawing code here
-            ECSCore.RunDisplaySystems(GenerateECSData());
+            ECSCore.RunDisplaySystems(GenerateECSData(), spriteBatch);
 
 
             spriteBatch.End();

@@ -7,9 +7,10 @@ using System.IO;
 
 namespace DeftEngine
 {
-    public class NeuralNetComponent : IComponent
+    public class HealthComponent : IComponent
     {
-        public NeuralNet net = new NeuralNet();
+        public int health;
+
 
         public void Serialize(BinaryWriter writer) { }
         public void Deserialize(BinaryReader reader) { }

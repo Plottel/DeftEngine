@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace DeftEngine
 {
-    public interface IActionSystem
+    public interface ISystem
     {
-        // To fetch actions, query the Action Pool.
-        void ProcessActions();
     }
 }

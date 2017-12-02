@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DeftEngine
 {
@@ -12,6 +13,6 @@ namespace DeftEngine
     /// </summary>
     public interface IDisplaySystem
     {
-        void Process(ECSData ecsData);
+        void Display(ECSData ecsData, SpriteBatch spriteBatch);
     }
 }

@@ -7,36 +7,16 @@ using System.Diagnostics;
 
 namespace DeftEngine
 {
-    public class SetVelocityActionSystem : IEntitySystem, IActionSystem
+    public class SetVelocityActionSystem : ISystem, IActionSystem
     {
-        public Queue<Action_SetVelocity> actions = new Queue<Action_SetVelocity>();
-
-        public Type GetActionType()
-            => typeof(Action_SetVelocity);
-
-        public IEntityQuery GetQuery()
-            => EntityPool.QUERY_NO_ENTITIES;
-
-        public void EnqueueAction(DeftAction action)
+        public void ProcessActions()
         {
-            Debug.Assert(action is Action_SetVelocity, "Wrong action type");
-            actions.Enqueue(action as Action_SetVelocity);
+            var actions = ECSCore.actionPool.GetActions<Action_SetVelocity>();
+
+            foreach (var action in actions)
+                action.actor.Get<VelocityComponent>().velocity = action.newVelocity;
         }
 
-        public void Process(ECSData ecsData)
-        {
-            while (actions.Count > 0)
-                OnAction(actions.Dequeue());
-        }
-
-        public void OnAction(DeftAction action)
-        {
-            Debug.Assert(action is Action_SetVelocity, "Wrong action type");
-
-            var setVel = action as Action_SetVelocity;
-
-            if (setVel.actor != null)
-                setVel.actor.Get<VelocityComponent>().velocity = setVel.newVelocity;            
-        }
+        public void Process(ECSData ecsData) { }
     }
 }

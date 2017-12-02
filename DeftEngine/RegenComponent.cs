@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DeftEngine
 {
-    public class Event_OnLeftMouseClick : DeftEvent
+    public class RegenComponent : IComponent
     {
+        public int regenAmount;
     }
 }

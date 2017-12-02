@@ -7,10 +7,8 @@ using Microsoft.Xna.Framework;
 
 namespace DeftEngine
 {
-    public class Action_ShootBullet : DeftAction
+    public class Action_SetPosition : DeftAction
     {
-        public Vector2 pos;
-        public Vector2 dir;
-        public float speed;
+        public Vector2 newPosition;
     }
 }

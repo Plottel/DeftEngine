@@ -9,27 +9,52 @@ namespace DeftEngine
 {
     public class ActionPool
     {
-        public Dictionary<Type, IActionSystem> systemMap =
-            new Dictionary<Type, IActionSystem>();
+        private static List<Type> _allActionTypes;
 
-        public void SubscribeTo<T>(IActionSystem subscriber) where T : DeftAction
+        public Dictionary<Type, List<DeftAction>> actionBuffer = 
+            new Dictionary<Type, List<DeftAction>>();
+
+        public static void Init()
         {
-            var actionType = typeof(T);
-            systemMap[actionType] = subscriber;
+            _allActionTypes = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                              from assemblyType in domainAssembly.GetTypes()
+                              where typeof(DeftAction).IsAssignableFrom(assemblyType)
+                              select assemblyType).ToList();
         }
 
-        public void SubscribeTo(Type actionType, IActionSystem subscriber)
+        public ActionPool()
         {
-            Debug.Assert(typeof(DeftAction).IsAssignableFrom(actionType));
-            systemMap[actionType] = subscriber;
+            foreach (var actionType in _allActionTypes)
+            {
+                var listType = typeof(List<>).MakeGenericType(actionType);
+                actionBuffer[actionType] = new List<DeftAction>();
+            }
+        }
+
+        public List<T> GetActions<T>() where T : DeftAction
+        {
+            var actionType = typeof(T);
+
+            if (actionBuffer.ContainsKey(actionType))
+                return actionBuffer[typeof(T)].Cast<T>().ToList();
+
+            return new List<T>();
         }
 
         public void AddAction(DeftAction action)
         {
             var actionType = action.GetType();
 
-            if (systemMap.ContainsKey(actionType))
-                systemMap[actionType].EnqueueAction(action);
+            if (!actionBuffer.ContainsKey(actionType))
+                actionBuffer[actionType] = new List<DeftAction>();
+
+            actionBuffer[actionType].Add(action);
+        }
+
+        public void ClearActionBuffer()
+        {
+            foreach (var actionMap in actionBuffer)
+                actionMap.Value.Clear();
         }
     }
 }

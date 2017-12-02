@@ -9,8 +9,8 @@ namespace DeftEngine
 {
     public interface IComponent
     {
-        void Serialize(BinaryWriter writer);
-        void Deserialize(BinaryReader reader);
-        IComponent Copy();
+        //void Serialize(BinaryWriter writer);
+        //void Deserialize(BinaryReader reader);
+        //IComponent Copy();
     }
 }

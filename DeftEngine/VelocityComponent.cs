@@ -13,7 +13,6 @@ namespace DeftEngine
         public Vector2 velocity;
         public float speed;
 
-
         public void Serialize(BinaryWriter writer) { }
         public void Deserialize(BinaryReader reader) { }
         public IComponent Copy() { return default(IComponent); }

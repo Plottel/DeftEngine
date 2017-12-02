@@ -12,7 +12,7 @@ namespace DeftEngine
     public class ECSData
     {
         public EntityPool pool;
-        public EntitySystemPool systemPool;
+        public SystemPool systemPool;
         public SpriteBatch spriteBatch;
         public GameTime gameTime;
     }

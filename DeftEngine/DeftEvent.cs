@@ -13,7 +13,7 @@ namespace DeftEngine
         public void Trigger(ECSData data, params object[] args)
         {
             foreach (var listener in listeners)
-                listener.OnEvent(data, args);
+                listener.OnEvent(data, this, args);
         }
     }
 }

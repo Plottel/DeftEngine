@@ -8,11 +8,8 @@ using Microsoft.Xna.Framework;
 
 namespace DeftEngine
 {
-    public class OffScreenCleanupSystem : IEntitySystem, IUpdateSystem
+    public class OffScreenCleanupSystem : ISystem, IProcessSystem
     {
-        public IEntityQuery GetQuery()
-            => EntityPool.QUERY_NO_ENTITIES;
-
         public void Process(ECSData ecsData)
         {
             var entities = ecsData.pool.GetEntities<SpatialComponent>();

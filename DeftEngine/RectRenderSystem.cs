@@ -9,26 +9,17 @@ using MonoGame.Extended;
 
 namespace DeftEngine
 {
-    public class Query_RectDisplayAndSpatialComponents : IEntityQuery
+    public class RectDisplaySystem : ISystem, IDisplaySystem, IQuerySystem
     {
         public bool Query(Entity e)
+            => e.Has<RectDisplayComponent>() && e.Has<SpatialComponent>();
+
+        public void Display(ECSData ecsData, SpriteBatch spriteBatch)
         {
-            return e.Has<RectDisplayComponent>() && e.Has<SpatialComponent>();
-        }
-    }
+            var entities = ecsData.pool.Query(this);
 
-    public class RectDisplaySystem : IEntitySystem, IDisplaySystem
-    {
-        public IEntityQuery GetQuery()
-                => new Query_RectDisplayAndSpatialComponents();
-
-        public void Process(ECSData ecsData)
-        {
-            var entities = ecsData.pool.Query<Query_RectDisplayAndSpatialComponents>();
-
-            var batch = ecsData.spriteBatch;
             foreach (var e in entities)
-                batch.FillRectangle(e.Get<SpatialComponent>().Bounds, e.Get<RectDisplayComponent>().color);            
+                spriteBatch.FillRectangle(e.Get<SpatialComponent>().Bounds, e.Get<RectDisplayComponent>().color);            
         }
     }
 }
