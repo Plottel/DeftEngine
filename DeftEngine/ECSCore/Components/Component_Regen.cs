@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DeftEngine
 {
-    public interface IEntityQuery
+    public class Component_Regen : IComponent
     {
-        bool Query(Entity e);
+        public int regenAmount;
     }
 }

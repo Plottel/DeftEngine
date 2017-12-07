@@ -13,18 +13,18 @@ namespace DeftEngine
         {
             var e = new Entity();
 
-            var spatial = new SpatialComponent();
+            var spatial = new Component_Spatial();
             spatial.pos = pos;
             spatial.size = size;
 
             e.AddComponent(spatial);
 
-            var rectDisplay = new RectDisplayComponent();
+            var rectDisplay = new Component_RectDisplay();
             rectDisplay.color = color;
 
             e.AddComponent(rectDisplay);
 
-            var vel = new VelocityComponent();
+            var vel = new Component_Velocity();
             vel.velocity = Vector2.Zero;
             vel.speed = 2f;
 

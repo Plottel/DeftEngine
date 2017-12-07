@@ -18,10 +18,10 @@ namespace DeftEngine
             foreach (var action in actions)
             {
                 // Check nothing went wrong.
-                Debug.Assert(action.actor.Has<SpatialComponent>());
+                Debug.Assert(action.actor.Has<Component_Spatial>());
 
                 // Move the entity.
-                action.actor.Get<SpatialComponent>().pos = action.newPosition;
+                action.actor.Get<Component_Spatial>().pos = action.newPosition;
             }
         }
     }

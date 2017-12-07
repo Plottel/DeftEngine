@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+using System.IO;
 
 namespace DeftEngine
 {
-    public class Action_SetPosition : DeftAction
+    public class Component_Health : IComponent
     {
-        public Vector2 newPosition;
+        public int health;
     }
 }

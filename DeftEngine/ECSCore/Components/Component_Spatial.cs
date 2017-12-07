@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace DeftEngine
 {
-    public class SpatialComponent : IComponent
+    public class Component_Spatial : IComponent
     {
         public Vector2 pos;
         public Vector2 size;
@@ -27,25 +27,6 @@ namespace DeftEngine
         public Vector2 MidVector
         {
             get { return new Vector2(pos.X + size.X / 2, pos.Y + size.Y / 2); }
-        }
-
-        public void Serialize(BinaryWriter writer)
-        {
-            writer.WriteVector2(pos);
-            writer.WriteVector2(size);
-            writer.Write(rotation);
-        }
-
-        public void Deserialize(BinaryReader reader)
-        {
-            pos = reader.ReadVector2();
-            size = reader.ReadVector2();
-            rotation = reader.ReadSingle();
-        }
-
-        public IComponent Copy()
-        {
-            return default(SpatialComponent);
         }
     }
 }

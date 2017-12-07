@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace DeftEngine
 {
+    // System_Action_Query_Regen
     public class System_Regen : ISystem, IProcessSystem, IQuerySystem
     {
         public bool Query(Entity e)
-            => e.Has<HealthComponent>() && e.Has<RegenComponent>();      
+            => e.Has<Component_Health>() && e.Has<Component_Regen>();      
 
         public void Process(ECSData ecsData)
         {
             var entities = ecsData.pool.Query(this);
-            HealthComponent hp;
-            RegenComponent regen;
+            Component_Health hp;
+            Component_Regen regen;
 
             foreach (var e in entities)
             {
-                hp = e.Get<HealthComponent>();
-                regen = e.Get<RegenComponent>();
+                hp = e.Get<Component_Health>();
+                regen = e.Get<Component_Regen>();
 
                 hp.health += regen.regenAmount;
             }

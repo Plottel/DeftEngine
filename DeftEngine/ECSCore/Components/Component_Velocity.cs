@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.Xna.Framework;
 
+
 namespace DeftEngine
 {
-    public class VelocityComponent : IComponent
+    public class Component_Velocity : IComponent
     {
         public Vector2 velocity;
         public float speed;
-
-        public void Serialize(BinaryWriter writer) { }
-        public void Deserialize(BinaryReader reader) { }
-        public IComponent Copy() { return default(IComponent); }
     }
 }

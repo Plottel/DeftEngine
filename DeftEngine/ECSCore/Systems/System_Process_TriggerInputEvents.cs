@@ -10,7 +10,7 @@ namespace DeftEngine
     // We need a way to determine when an event has been triggered.
     // Easiest way is to use a Process System, which can check once
     // per update if any events should be triggered.
-    public class InputEventTriggerSystem : ISystem, IProcessSystem
+    public class System_Process_TriggerInputEvents : ISystem, IProcessSystem
     {
         public void Process(ECSData ecsData)
         {

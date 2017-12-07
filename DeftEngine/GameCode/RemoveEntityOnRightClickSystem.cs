@@ -23,11 +23,11 @@ namespace DeftEngine
         {
             get
             {
-                SpatialComponent s;
+                Component_Spatial s;
 
-                foreach (var e in ECSCore.pool.GetEntities<SpatialComponent>())
+                foreach (var e in ECSCore.pool.GetEntities<Component_Spatial>())
                 {
-                    s = e.Get<SpatialComponent>();
+                    s = e.Get<Component_Spatial>();
                     if (s.Bounds.Contains(Input.MousePos))
                         return e;
                 }

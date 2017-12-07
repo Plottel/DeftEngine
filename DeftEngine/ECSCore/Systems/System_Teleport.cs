@@ -12,8 +12,8 @@ namespace DeftEngine
         public void Process(ECSData ecsData)
         {
             // Useful for iterating over entities...
-            var entities = ecsData.pool.GetEntities<SpatialComponent>();
-            SpatialComponent s;
+            var entities = ecsData.pool.GetEntities<Component_Spatial>();
+            Component_Spatial s;
 
             // Useful when an Entity is off screen...
             var screenBounds = new Rectangle(0, 0, Input.MaxMouseX, Input.MaxMouseY);
@@ -23,7 +23,7 @@ namespace DeftEngine
             // If it is, submit a new Action_SetPosition to the screen centre.
             foreach (var e in entities)
             {
-                s = e.Get<SpatialComponent>();
+                s = e.Get<Component_Spatial>();
 
                 if (!s.Bounds.Intersects(screenBounds))
                 {

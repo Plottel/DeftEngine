@@ -10,7 +10,7 @@ namespace DeftEngine
     {
         public void Process (ECSData ecsData)
         {
-            var entities = ecsData.pool.GetEntities<KillMeComponent>();
+            var entities = ecsData.pool.GetEntities<Component_KillMe>();
 
             for (int i = entities.Count - 1; i >= 0; --i)
                 ecsData.pool.RemoveEntity(entities[i]);

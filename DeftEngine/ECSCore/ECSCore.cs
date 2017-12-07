@@ -39,8 +39,8 @@ namespace DeftEngine
             systemPool.Add<System_Regen>();
 
             // Setup systems.
-            systemPool.Add<InputEventTriggerSystem>();
-            systemPool.Add<SetVelocityActionSystem>();
+            systemPool.Add<System_Process_TriggerInputEvents>();
+            systemPool.Add<System_Action_SetVelocity>();
 
             systemPool.Add<System_Action_SetPosition>();
 
@@ -48,9 +48,9 @@ namespace DeftEngine
             systemPool.Add<RemoveEntityOnRightClickSystem>();
 
             systemPool.Add<System_Velocity>();
-            systemPool.Add<OffScreenCleanupSystem>();
+            systemPool.Add<System_Process_OffScreenCleanup>();
             systemPool.Add<KillMeSystem>();
-            systemPool.Add<RectDisplaySystem>();
+            systemPool.Add<System_Display_Rect>();
             systemPool.SyncEntityQueriesWithPool();
         }
 

@@ -11,19 +11,7 @@ namespace DeftEngine
 
     public class EntityPool
     {
-        private class Query_NoEntities : IEntityQuery
-        {
-            public bool Query(Entity e) => false;
-        }
-
-        private class Query_AllEntities : IEntityQuery
-        {
-            public bool Query(Entity e) => true;
-        }
-
         private static List<Type> _allComponentTypes;
-        public static IEntityQuery QUERY_NO_ENTITIES;
-        public static IEntityQuery QUERY_ALL_ENTITIES;
 
         private List<Entity> _pool;
 
@@ -37,9 +25,6 @@ namespace DeftEngine
                                     from assemblyType in domainAssembly.GetTypes()
                                     where typeof(IComponent).IsAssignableFrom(assemblyType)
                                     select assemblyType).ToList();
-
-            QUERY_NO_ENTITIES = new Query_NoEntities();
-            QUERY_ALL_ENTITIES = new Query_AllEntities();
         }
 
         public EntityPool()
@@ -85,7 +70,6 @@ namespace DeftEngine
 
             foreach (var queryResult in _poolQueryResults.Values)
                 queryResult.Remove(e);
-
         }
 
         public List<Entity> GetEntities()

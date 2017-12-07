@@ -22,7 +22,7 @@ namespace DeftEngine
         /// Define your setup logic here.
         /// </summary>
         public static void SetupProgram()
-        { 
+        {
         }
     }
 #endif
