@@ -51,5 +51,5 @@ C:\Users\Bryn\Code\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.Direct3D1
 C:\Users\Bryn\Code\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 C:\Users\Bryn\Code\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.XInput.xml
 C:\Users\Bryn\Code\DeftEngine\DeftEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
-C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\DeftEngine.exe
-C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.exe
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\DeftEngine.dll
+C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.dll
