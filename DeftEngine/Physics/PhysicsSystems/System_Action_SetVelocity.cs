@@ -14,9 +14,7 @@ namespace DeftEngine
             var actions = ECSCore.actionPool.GetActions<Action_SetVelocity>();
 
             foreach (var action in actions)
-                action.actor.Get<Component_Velocity>().velocity = action.newVelocity;
+                action.actor.Get<Component_Velocity>().direction = action.newVelocity;
         }
-
-        public void Process(ECSData ecsData) { }
     }
 }

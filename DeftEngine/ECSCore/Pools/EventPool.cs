@@ -37,12 +37,12 @@ namespace DeftEngine
                 deftEvent.listeners.Add(subscriber);
         }
 
-        public void Trigger<T>(ECSData ecsData, params object[] args) where T : DeftEvent
+        public void Trigger<T>(params object[] args) where T : DeftEvent
         {
             var eType = typeof(T);
 
             if (events.ContainsKey(eType))
-                events[eType].Trigger(ecsData, args);
+                events[eType].Trigger(args);
         }
     }
 }

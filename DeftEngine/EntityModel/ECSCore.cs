@@ -14,15 +14,20 @@ namespace DeftEngine
         public static SystemPool systemPool;
         public static EventPool eventPool;
         public static ActionPool actionPool;
+        public static CollisionPool collisionPool;
         public static SpriteBatch spriteBatch;
 
-        public static void Start()
+        public static void Setup()
         {
             // Setup pools.
+            EntityPool.Init();
+            ActionPool.Init();
+
             pool = new EntityPool();
             systemPool = new SystemPool();
             eventPool = new EventPool();
             actionPool = new ActionPool();
+            collisionPool = new CollisionPool();
 
             // Setup event handlers
             var allEventTypes = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
@@ -33,23 +38,31 @@ namespace DeftEngine
             foreach (var eventType in allEventTypes)
                 eventPool.AddEvent(eventType);
 
-            systemPool.Add<System_Teleport>();
-            systemPool.Add<System_Regen>();
+            Collisions.Setup();
 
             // Setup systems.
             systemPool.Add<System_Process_TriggerInputEvents>();
             systemPool.Add<System_Action_SetVelocity>();
 
-            systemPool.Add<System_Action_SetPosition>();
+            systemPool.Add<System_Action_MoveTo>();
 
             systemPool.Add<System_Process_VelocityMovement>();
-            systemPool.Add<System_Process_OffScreenCleanup>();
-            systemPool.Add<KillMeSystem>();
-            systemPool.Add<System_Display_Rect>();
+            systemPool.Add<System_Process_RegisterCollisions>();
+            systemPool.Add<System_Process_CleanupStopCollisions>();
+            systemPool.Add<System_Process_RegisterNewStopCollisions>();
+
+            systemPool.Add<System_Process_KillMe>();
+
+            systemPool.Add<System_Display_Box>();
+            systemPool.Add<System_Display_Circle>();
+        }
+
+        public static void Start()
+        {
             systemPool.SyncEntityQueriesWithPool();
         }
 
-        public static void RunActionSystems(ECSData ecsData)
+        public static void RunActionSystems()
         {
             foreach (var system in systemPool.actionSystems)
                 system.ProcessActions();
@@ -57,16 +70,22 @@ namespace DeftEngine
             actionPool.ClearActionBuffer();
         }
 
-        public static void RunUpdateSystems(ECSData ecsData)
+        public static void RunProcessSystems()
         {
-            foreach (var system in systemPool.updateSystems)
-                system.Process(ecsData);
+            foreach (var system in systemPool.processSystems)
+                system.Process();
         }
 
-        public static void RunDisplaySystems(ECSData ecsData, SpriteBatch spriteBatch)
+        public static void RunCollisionSystems()
+        {
+            foreach (var system in systemPool.collisionSystems)
+                system.HandleCollisions();
+        }
+
+        public static void RunDisplaySystems(SpriteBatch spriteBatch)
         {
             foreach (var system in systemPool.displaySystems)
-                system.Display(ecsData, spriteBatch);
+                system.Display(spriteBatch);
         }
     }
 }

@@ -13,6 +13,6 @@ namespace DeftEngine
     /// </summary>
     public interface IDisplaySystem
     {
-        void Display(ECSData ecsData, SpriteBatch spriteBatch);
+        void Display(SpriteBatch spriteBatch);
     }
 }

@@ -11,7 +11,7 @@ namespace DeftEngine
 {
     public class Component_Velocity : IComponent
     {
-        public Vector2 velocity;
+        public Vector2 direction;
         public float speed;
     }
 }

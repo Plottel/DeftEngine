@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DeftEngine
 {
-    public class KillMeSystem : ISystem, IProcessSystem
+    public class System_Process_KillMe : ISystem, IProcessSystem
     {
-        public void Process (ECSData ecsData)
+        public void Process ()
         {
-            var entities = ecsData.pool.GetEntities<Component_KillMe>();
+            var entities = ECSCore.pool.GetEntities<Component_KillMe>();
 
             for (int i = entities.Count - 1; i >= 0; --i)
-                ecsData.pool.RemoveEntity(entities[i]);
+                ECSCore.pool.RemoveEntity(entities[i]);
         }
     }
 }

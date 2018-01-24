@@ -11,6 +11,6 @@ namespace DeftEngine
     /// </summary>
     public interface IProcessSystem
     {
-        void Process(ECSData ecsData);
+        void Process();
     }
 }

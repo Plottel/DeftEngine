@@ -10,9 +10,10 @@ namespace DeftEngine
     /// </summary>
     public class DeftEngine : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        GameTime gameTime;
+        public GraphicsDeviceManager graphics;
+        public Color bgColor = Color.DimGray;
+        public SpriteBatch spriteBatch;
+        public GameTime gameTime;
 
         private static Random _rand = new Random();
 
@@ -21,6 +22,11 @@ namespace DeftEngine
 
         public static byte RandByte(byte min, byte max)
             => (byte)_rand.Next(min, max);
+
+        public static float RandFloat01()
+        {
+            return (float)_rand.NextDouble();
+        }
 
         public static float RandFloat1Neg1()
         {
@@ -41,8 +47,8 @@ namespace DeftEngine
             graphics.PreferredBackBufferHeight = 768;
 
             // Restrict mouse to stay within the window.
-            Input.SetMaxMouseX(graphics.PreferredBackBufferWidth);
-            Input.SetMaxMouseY(graphics.PreferredBackBufferHeight);
+            //Input.SetMaxMouseX(graphics.PreferredBackBufferWidth);
+            //Input.SetMaxMouseY(graphics.PreferredBackBufferHeight);
         }
 
         /// <summary>
@@ -55,14 +61,8 @@ namespace DeftEngine
         {
             // TODO: Add your initialization logic here
 
-            EntityPool.Init();
-            ActionPool.Init();
-            ECSCore.Start();
-
             IsMouseVisible = true;
             Mouse.WindowHandle = Window.Handle;
-
-
 
             base.Initialize();
 
@@ -105,9 +105,12 @@ namespace DeftEngine
             Input.UpdateStates();
             this.gameTime = gameTime;
 
+
+
             // TODO: Add your update logic here
-            ECSCore.RunActionSystems(GenerateECSData());
-            ECSCore.RunUpdateSystems(GenerateECSData());
+            ECSCore.RunProcessSystems();
+            ECSCore.RunCollisionSystems();
+            ECSCore.RunActionSystems();
 
             base.Update(gameTime);
         }
@@ -118,28 +121,17 @@ namespace DeftEngine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DimGray);
+            GraphicsDevice.Clear(bgColor);
 
             spriteBatch.Begin();
 
             // TODO: Add your drawing code here
-            ECSCore.RunDisplaySystems(GenerateECSData(), spriteBatch);
+            ECSCore.RunDisplaySystems(spriteBatch);
 
 
             spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        public ECSData GenerateECSData()
-        {
-            var data = new ECSData();
-            data.spriteBatch = spriteBatch;
-            data.gameTime = gameTime;
-            data.pool = ECSCore.pool;
-            data.systemPool = ECSCore.systemPool;
-
-            return data;
         }
     }
 }

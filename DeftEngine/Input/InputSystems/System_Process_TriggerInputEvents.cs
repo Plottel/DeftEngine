@@ -12,21 +12,21 @@ namespace DeftEngine
     // per update if any events should be triggered.
     public class System_Process_TriggerInputEvents : ISystem, IProcessSystem
     {
-        public void Process(ECSData ecsData)
+        public void Process()
         {
             var pool = ECSCore.eventPool;
 
             // Trigger events if their conditions are met.
             if (Input.RightMouseClicked())
-                pool.Trigger<Event_OnRightMouseClick>(ecsData);
+                pool.Trigger<Event_OnRightMouseClick>();
             if (Input.RightMousePressed())
-                pool.Trigger<Event_OnRightMousePress>(ecsData);
+                pool.Trigger<Event_OnRightMousePress>();
             if (Input.LeftMouseClicked())
-                pool.Trigger<Event_OnLeftMouseClick>(ecsData);
+                pool.Trigger<Event_OnLeftMouseClick>();
             if (Input.LeftMousePressed())
-                pool.Trigger<Event_OnLeftMousePress>(ecsData);
+                pool.Trigger<Event_OnLeftMousePress>();
             if (Input.DeltaMousePos != Vector2.Zero)
-                pool.Trigger<Event_OnMouseMove>(ecsData, Input.DeltaMousePos);
+                pool.Trigger<Event_OnMouseMove>(Input.DeltaMousePos);
         }
     }
 }

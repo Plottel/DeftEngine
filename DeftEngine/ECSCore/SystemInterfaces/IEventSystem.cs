@@ -13,6 +13,6 @@ namespace DeftEngine
     public interface IEventSystem
     {
         void SubscribeToEvents(EventPool pool);
-        void OnEvent(ECSData ecsData, DeftEvent theEvent, params object[] args);
+        void OnEvent(DeftEvent theEvent, params object[] args);
     }
 }

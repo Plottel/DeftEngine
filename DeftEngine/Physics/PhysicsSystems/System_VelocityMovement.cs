@@ -6,20 +6,17 @@ using System.Threading.Tasks;
 
 namespace DeftEngine
 {
-    public class System_Process_VelocityMovement : ISystem, IQuerySystem, IProcessSystem
+    public class System_Process_VelocityMovement : ISystem, IProcessSystem
     {
-        public bool Query(Entity e)
-            => e.Has<Component_Spatial>() && e.Has<Component_Velocity>();
-
-        public void Process(ECSData ecsData)
+        public void Process()
         {
-            var entities = ecsData.pool.Query(this);
+            var entities = ECSCore.pool.GetEntities<Component_Velocity>();
             Component_Velocity velComp;
 
             foreach (var e in entities)
             {
                 velComp = e.Get<Component_Velocity>();
-                e.Get<Component_Spatial>().pos += velComp.velocity * velComp.speed;
+                e.MoveBy(velComp.direction * velComp.speed);
             }                
         }
     }

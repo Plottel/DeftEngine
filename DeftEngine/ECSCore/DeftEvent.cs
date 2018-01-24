@@ -10,10 +10,10 @@ namespace DeftEngine
     {
         public List<IEventSystem> listeners = new List<IEventSystem>();
 
-        public void Trigger(ECSData data, params object[] args)
+        public void Trigger(params object[] args)
         {
             foreach (var listener in listeners)
-                listener.OnEvent(data, this, args);
+                listener.OnEvent(this, args);
         }
     }
 }

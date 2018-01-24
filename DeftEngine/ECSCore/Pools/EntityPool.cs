@@ -7,8 +7,6 @@ using System.Diagnostics;
 
 namespace DeftEngine
 {
-    public delegate bool EntityQuery(Entity e);
-
     public class EntityPool
     {
         private static List<Type> _allComponentTypes;
@@ -30,6 +28,7 @@ namespace DeftEngine
         public EntityPool()
         {
             _pool = new List<Entity>();
+
             _poolSortedByComponentType = new Dictionary<Type, List<Entity>>();
 
             foreach (Type componentType in _allComponentTypes)
@@ -47,9 +46,11 @@ namespace DeftEngine
         {
             _pool.Add(e);
 
+            // Add entity to component query results.
             foreach (Type componentType in e.ComponentTypes)
                 _poolSortedByComponentType[componentType].Add(e);
 
+            // Add entity to non-component query results.
             foreach (var queryData in _poolQueryResults)
             {
                 if (queryData.Key.Query(e))
