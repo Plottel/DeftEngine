@@ -53,3 +53,12 @@ C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.pdb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.csprojResolveAssemblyReference.cache
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\DeftEngine.exe
 C:\Users\User\Desktop\DeftEngine\DeftEngine\obj\x86\Debug\DeftEngine.exe
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\nunit.framework.dll
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\nunit.framework.xml
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\NUnit3.TestAdapter.dll
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\nunit.engine.dll
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\nunit.engine.api.dll
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Mono.Cecil.dll
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Mono.Cecil.Pdb.dll
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Mono.Cecil.Mdb.dll
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Mono.Cecil.Rocks.dll

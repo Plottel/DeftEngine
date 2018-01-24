@@ -27,10 +27,6 @@ namespace DeftEngine
                         collisionPool.RegisterCollision(e1, e2);
                         collisionPool.RegisterCollision(e2, e1);
                     }
-                    else
-                    {
-                        Console.WriteLine("They.... didnt collide?");
-                    }
                 }
             }
         }

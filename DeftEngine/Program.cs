@@ -50,6 +50,8 @@ namespace DeftEngine
             e2.Add<Component_Collision_Circle>();
             e2.Get<Component_Collision_Circle>().radius = (int)e2.size.X / 2;
             e2.Get<Component_Collision_Circle>().offset = Vector2.Zero;
+
+            DeftDebug.ActivateDebugColliders();
         }
     }
 #endif
