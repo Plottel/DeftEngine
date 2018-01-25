@@ -28,7 +28,7 @@ namespace DeftEngine
                 actor = action.actor;
 
                 if (actor.pos != action.newPosition)
-                    actor.Add<Component_Moved>();
+                    actor.Add(new Component_Moved { oldPos = actor.pos });
             }
 
             var moveByActions = ECSCore.actionPool.GetActions<Action_MoveBy>();
@@ -38,7 +38,7 @@ namespace DeftEngine
                 actor = action.actor;
 
                 if (action.deltaPos != Vector2.Zero)
-                    actor.Add<Component_Moved>();
+                    actor.Add(new Component_Moved { oldPos = actor.pos });
             }
         }
     }

@@ -16,7 +16,12 @@ namespace DeftEngine
             {
                 var start = collisionMap[CollisionState.Start];
                 var colliding = collisionMap[CollisionState.Colliding];
-                var stop = collisionMap[CollisionState.Colliding];
+                var stop = collisionMap[CollisionState.Stop];
+
+                if (start.Count != 0)
+                {
+                    int x = 5;
+                }
 
                 Console.WriteLine("");
                 Console.WriteLine("##########################");

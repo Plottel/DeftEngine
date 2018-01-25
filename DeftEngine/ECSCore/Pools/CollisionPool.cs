@@ -19,8 +19,6 @@ namespace DeftEngine
         public Dictionary<Entity, Dictionary<CollisionState, List<Collision>>> collisions
             = new Dictionary<Entity, Dictionary<CollisionState, List<Collision>>>();
 
-
-
         public void RegisterCollision(Entity entity, Entity collidedWith)
         {
             // New entity, set up collision map.
