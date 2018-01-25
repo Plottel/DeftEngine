@@ -7,7 +7,7 @@ using NUnit.Framework;
 using DeftEngine;
 using Microsoft.Xna.Framework;
 
-namespace DeftEngineTests
+namespace DeftEngineTesting
 {
     [TestFixture]
     public class Test_BoxBoxCollisions
@@ -30,14 +30,14 @@ namespace DeftEngineTests
             e1.pos = new Vector2(50, 50);
             e1.size = new Vector2(50, 50);
             e1.Add<Component_Collision_Box>();
-            e1.Get<Component_Collision_Box>().offset = Vector2.Zero;
+            e1.Get<Component_Collision_Box>().offsetEntityPos = Vector2.Zero;
             e1.Get<Component_Collision_Box>().size = e1.size;
 
             e2 = new Entity();
             e2.pos = new Vector2(50, 50);
             e2.size = new Vector2(50, 50);
             e2.Add<Component_Collision_Box>();
-            e2.Get<Component_Collision_Box>().offset = Vector2.Zero;
+            e2.Get<Component_Collision_Box>().offsetEntityPos = Vector2.Zero;
             e2.Get<Component_Collision_Box>().size = e2.size;
         }
 

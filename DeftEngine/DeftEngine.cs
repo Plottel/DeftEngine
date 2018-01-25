@@ -65,9 +65,6 @@ namespace DeftEngine
             Mouse.WindowHandle = Window.Handle;
 
             base.Initialize();
-
-            // User-defined Setup.
-            Program.SetupProgram();
         }
 
         /// <summary>

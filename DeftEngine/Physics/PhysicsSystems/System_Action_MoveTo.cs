@@ -15,6 +15,9 @@ namespace DeftEngine
 
             foreach (var action in actions)
                 action.actor.pos = action.newPosition;
+
+            foreach (var action in actions)
+                Collisions.SyncColliders(action.actor);
         }
     }
 }

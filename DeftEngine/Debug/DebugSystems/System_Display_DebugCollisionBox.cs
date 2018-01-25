@@ -19,7 +19,7 @@ namespace DeftEngine
             foreach (var e in entities)
             {
                 box = e.Get<Component_Collision_Box>();
-                spriteBatch.DrawRectangle(e.pos + box.offset, box.size, Color.LawnGreen, 1);
+                spriteBatch.DrawRectangle(box.bounds, Color.LawnGreen, 1);
             }
         }
     }

@@ -16,7 +16,6 @@ namespace DeftEngine
             float dx = 0;
             float dy = 0;
 
-
             if (Input.KeyDown(Keys.W)) dy -= 1;
             if (Input.KeyDown(Keys.S)) dy += 1;
             if (Input.KeyDown(Keys.A)) dx -= 1;
@@ -25,7 +24,7 @@ namespace DeftEngine
             Vector2 delta = new Vector2(dx, dy);
 
             foreach (var e in entities)
-                e.pos += delta;
+                ECSCore.actionPool.AddAction(new Action_MoveBy { actor = e, deltaPos = delta });
         }
     }
 }

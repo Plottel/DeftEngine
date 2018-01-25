@@ -9,7 +9,16 @@ namespace DeftEngine
 {
     public class Component_Collision_Box : IComponent, IColliderComponent
     {
-        public Vector2 offset;
+        public Vector2 offsetEntityPos;
         public Vector2 size;
+
+        public Rectangle bounds;
+
+        public void SetDefault(Entity e)
+        {
+            offsetEntityPos = Vector2.Zero;
+            size = e.size;
+            bounds = new Rectangle(e.pos.ToPoint(), e.size.ToPoint());
+        }
     }
 }

@@ -8,5 +8,6 @@ namespace DeftEngine
 {
     public interface IColliderComponent
     {
+        void SetDefault(Entity e);
     }
 }

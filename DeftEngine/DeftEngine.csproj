@@ -103,6 +103,7 @@
     <Compile Include="Collisions\CollisionSystems\System_Process_CleanupStopCollisions.cs" />
     <Compile Include="Collisions\CollisionSystems\System_Process_RegisterNewStopCollisions.cs" />
     <Compile Include="Testing\Test_BoxBoxCollisions.cs" />
+    <Compile Include="Testing\Test_BoxCircleCollisions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=0.6.602.0, Culture=neutral, processorArchitecture=MSIL">

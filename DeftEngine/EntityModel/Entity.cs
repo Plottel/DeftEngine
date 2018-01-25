@@ -44,10 +44,14 @@ namespace DeftEngine
         public void MoveToY(float newY)
             => ECSCore.actionPool.AddAction(new Action_MoveTo { actor = this, newPosition = new Vector2(pos.X, pos.Y) });
 
-        public void MoveBy(Vector2 deltaPos) => pos += deltaPos;
-        public void MoveByX(float deltaX) => pos.X += deltaX;
-        public void MoveByY(float deltaY) => pos.Y += deltaY;
+        public void MoveBy(Vector2 deltaPos)
+            => ECSCore.actionPool.AddAction(new Action_MoveBy { actor = this, deltaPos = deltaPos });
 
+        public void MoveByX(float deltaX) 
+            => ECSCore.actionPool.AddAction(new Action_MoveBy { actor = this, deltaPos = new Vector2(deltaX, 0) });
+
+        public void MoveByY(float deltaY)
+            => ECSCore.actionPool.AddAction(new Action_MoveBy { actor = this, deltaPos = new Vector2(0, deltaY) });
 
         //public Entity Copy()
         //{
@@ -147,32 +151,44 @@ namespace DeftEngine
 
         public void Add<T>(IComponent component) where T : IComponent
         {
+            var collider = component as IColliderComponent;
+            if (collider != null)
+            {
+                collider.SetDefault(this);
+                _colliders.Add(collider);
+            }
+
             _components.Add(typeof(T), component);
             ECSCore.pool.OnAddComponent(this, component);
-
-            var collider = component as IColliderComponent;
-            if (collider != null) _colliders.Add(collider);
         }
 
         public void Add(IComponent component)
         {
+            var collider = component as IColliderComponent;
+            if (collider != null)
+            {
+                collider.SetDefault(this);
+                _colliders.Add(collider);
+            }
+
             _components[component.GetType()] = component;
             ECSCore.pool.OnAddComponent(this, component);
-
-            var collider = component as IColliderComponent;
-            if (collider != null) _colliders.Add(collider);
         }
 
         public void Add<T>() where T : IComponent
         {
             var cType = typeof(T);
             var c = (T)Activator.CreateInstance(cType);
-  
-            _components[cType] = (T)Activator.CreateInstance(cType);
-            ECSCore.pool.OnAddComponent(this, _components[cType]);
 
             var collider = c as IColliderComponent;
-            if (collider != null) _colliders.Add(collider);
+            if (collider != null)
+            {
+                collider.SetDefault(this);
+                _colliders.Add(collider);
+            }
+
+            _components[cType] = c;
+            ECSCore.pool.OnAddComponent(this, _components[cType]);
         }
 
         public void Remove<T>()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace DeftEngine
 {
@@ -19,14 +20,24 @@ namespace DeftEngine
                 entities[i].Remove<Component_Moved>();
 
             // Populate newly moved entities
-            var actions = ECSCore.actionPool.GetActions<Action_MoveTo>();
+            var moveToActions = ECSCore.actionPool.GetActions<Action_MoveTo>();
             Entity actor;
 
-            foreach (var a in actions)
+            foreach (var action in moveToActions)
             {
-                actor = a.actor;
+                actor = action.actor;
 
-                if (actor.pos != a.newPosition)
+                if (actor.pos != action.newPosition)
+                    actor.Add<Component_Moved>();
+            }
+
+            var moveByActions = ECSCore.actionPool.GetActions<Action_MoveBy>();
+
+            foreach (var action in moveByActions)
+            {
+                actor = action.actor;
+
+                if (action.deltaPos != Vector2.Zero)
                     actor.Add<Component_Moved>();
             }
         }

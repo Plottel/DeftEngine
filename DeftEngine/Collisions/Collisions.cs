@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace DeftEngine
 {
@@ -27,6 +28,29 @@ namespace DeftEngine
 
             _collisionMethods[circle][circle] = TestCircleCircle;
             _collisionMethods[circle][box] = TestCircleBox;
+        }
+
+        public static void SyncColliders(Entity e)
+        {
+            foreach (var collider in e.Colliders)
+                SyncCollider(e, collider);
+        }
+
+        // TODO: Check if doing this manually is ACTUALLY faster than just using IColliderComponent.SetDefault()
+        // This method has additional type checking but less assignments.
+        private static void SyncCollider(Entity e, IColliderComponent collider)
+        {
+            // Figure out which type it is, sync accordingly.
+            if (collider is Component_Collision_Box)
+            {
+                var box = collider as Component_Collision_Box;
+                box.bounds.Location = (e.pos + box.offsetEntityPos).ToPoint();
+            }
+            else if (collider is Component_Collision_Circle)
+            {
+                var circle = collider as Component_Collision_Circle;
+                circle.bounds.Center = e.MidPt + circle.offsetEntityMid.ToPoint();
+            }
         }
 
         public static bool EntitiesCollide(Entity e1, Entity e2)
@@ -55,11 +79,11 @@ namespace DeftEngine
             var box1 = e1.Get<Component_Collision_Box>();
             var box2 = e2.Get<Component_Collision_Box>();
 
-            Vector2 box1Min = e1.pos + box1.offset;
-            Vector2 box1Max = box1Min + box1.size;
+            Vector2 box1Min = box1.bounds.TopLeft();
+            Vector2 box1Max = box1.bounds.BottomRight();
 
-            Vector2 box2Min = e2.pos + box2.offset;
-            Vector2 box2Max = box2Min + box2.size;
+            Vector2 box2Min = box2.bounds.TopLeft();
+            Vector2 box2Max = box2.bounds.BottomRight();
 
             if (box1Max.X < box2Min.X || box1Min.X > box2Max.X) return false;
             if (box1Max.Y < box2Min.Y || box1Min.Y > box2Max.Y) return false;
@@ -71,11 +95,8 @@ namespace DeftEngine
             var circle1 = e1.Get<Component_Collision_Circle>();
             var circle2 = e2.Get<Component_Collision_Circle>();
 
-            Vector2 circle1Mid = e1.pos + circle1.offset;
-            Vector2 circle2Mid = e2.pos + circle2.offset;
-
             float radiusSum = circle1.radius + circle2.radius;
-            float sqDistApart = Vector2.DistanceSquared(circle1Mid, circle2Mid);
+            float sqDistApart = Vector2.DistanceSquared(circle1.bounds.Center, circle2.bounds.Center);
 
             return sqDistApart <= radiusSum * radiusSum;
         }
@@ -85,12 +106,10 @@ namespace DeftEngine
             var box = e1.Get<Component_Collision_Box>();
             var circle = e2.Get<Component_Collision_Circle>();
 
-            Vector2 boxMid = e1.pos + box.offset + (box.size / 2);
-            Vector2 circleMid = e2.pos + circle.offset;
+            Vector2 circleMid = circle.bounds.Center;
+            float sqRadius = circle.radius * circle.radius;
 
-            float sqDistApart = Vector2.DistanceSquared(boxMid, circleMid);
-
-            return sqDistApart < circle.radius * circle.radius;
+            return box.bounds.ToRectangleF().SquaredDistanceTo(circleMid) <= sqRadius;
         }
 
         private static bool TestCircleBox(Entity e1, Entity e2) => TestBoxCircle(e2, e1);

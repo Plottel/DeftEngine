@@ -45,6 +45,8 @@ namespace DeftEngine
             systemPool.Add<System_Action_SetVelocity>();
 
             systemPool.Add<System_Action_MoveTo>();
+            systemPool.Add<System_Action_MoveBy>();
+            systemPool.Add<System_Action_TrackMovedEntities>();
 
             systemPool.Add<System_Process_VelocityMovement>();
             systemPool.Add<System_Process_RegisterCollisions>();
