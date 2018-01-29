@@ -10,29 +10,15 @@ namespace DeftEngine
     {
         public void Process()
         {
-            int eNum = 1;
+            var pool = ECSCore.collisionPool;
+            int numStart = pool.NumStartCollisions;
+            int numCol = pool.NumCollidingCollisions;
+            int numStop = pool.NumStopCollisions;
 
-            foreach (var collisionMap in ECSCore.collisionPool.collisions.Values)
-            {
-                var start = collisionMap[CollisionState.Start];
-                var colliding = collisionMap[CollisionState.Colliding];
-                var stop = collisionMap[CollisionState.Stop];
+            if (numStart + numCol + numStop == 0)
+                return;
 
-                if (start.Count != 0)
-                {
-                    int x = 5;
-                }
-
-                Console.WriteLine("");
-                Console.WriteLine("##########################");
-                Console.WriteLine("Collision Details for Entity : " + eNum);
-                Console.WriteLine(start.Count + " - Start Collisions");
-                Console.WriteLine(colliding.Count + " - Colliding Collisions");
-                Console.WriteLine(stop.Count + " - Stop Collisions");
-                Console.WriteLine("###########################");
-
-                ++eNum;
-            }
+            Console.WriteLine("Start : " + numStart + " - " + "Colliding : " + numCol + " - " + "Stop : " + numStop);
         }
     }
 }

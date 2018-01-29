@@ -19,6 +19,39 @@ namespace DeftEngine
         public Dictionary<Entity, Dictionary<CollisionState, List<Collision>>> collisions
             = new Dictionary<Entity, Dictionary<CollisionState, List<Collision>>>();
 
+        public int NumStartCollisions
+        {
+            get
+            {
+                int result = 0;
+                foreach (var collisionMap in collisions.Values)
+                    result += collisionMap[CollisionState.Start].Count;
+                return result;
+            }
+        }
+
+        public int NumCollidingCollisions
+        {
+            get
+            {
+                int result = 0;
+                foreach (var collisionMap in collisions.Values)
+                    result += collisionMap[CollisionState.Colliding].Count;
+                return result;
+            }
+        }
+
+        public int NumStopCollisions
+        {
+            get
+            {
+                int result = 0;
+                foreach (var collisionMap in collisions.Values)
+                    result += collisionMap[CollisionState.Stop].Count;
+                return result;
+            }
+        }
+
         public void RegisterCollision(Entity entity, Entity collidedWith)
         {
             // New entity, set up collision map.

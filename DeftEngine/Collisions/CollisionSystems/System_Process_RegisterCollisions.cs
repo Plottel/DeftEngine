@@ -16,6 +16,7 @@ namespace DeftEngine
             var entities = ECSCore.pool.GetEntities();
             var collisionPool = ECSCore.collisionPool;
 
+            // TODO: Simple optimisation with more efficient FOR-FOR loop.
             foreach (var e1 in entities)
             {
                 foreach (var e2 in entities)
@@ -23,10 +24,7 @@ namespace DeftEngine
                     if (e1 == e2) continue;
 
                     if (Collisions.EntitiesCollide(e1, e2))
-                    {
                         collisionPool.RegisterCollision(e1, e2);
-                        collisionPool.RegisterCollision(e2, e1);
-                    }
                 }
             }
         }

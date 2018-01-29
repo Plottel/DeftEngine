@@ -13,7 +13,30 @@ namespace DeftEngine
         private Dictionary<Type, IComponent> _components = new Dictionary<Type, IComponent>();
         private List<IColliderComponent> _colliders = new List<IColliderComponent>();
 
+        /// <summary>
+        /// Do not change this variable unless you understand the consequences.
+        /// Colliders will be out of sync. Colliders can be Synced manually using
+        /// Collisions.SyncColliders(Entity)
+        /// </summary>
         public Vector2 pos;
+
+        /// <summary>
+        /// Used to access the Position. On set, immediately moves the entity and forces collider Sync.
+        /// This is slow, avoid using this method of moving an Entity unless you need to. Prefer using 
+        /// MoveTo and MoveBy methods.
+        /// </summary>
+        public Vector2 Pos
+        {
+            get => pos;
+
+            set
+            {
+                pos = value;
+                Collisions.SyncColliders(this);
+                MoveTo(value);
+            }
+        }
+
         public Vector2 size;
         public float rotation;
 
@@ -96,9 +119,6 @@ namespace DeftEngine
         //        AddComponent(newComponent);
         //    }
         //}
-
-        public bool Is<T>() where T : Entity
-            => this.GetType() == typeof(T);
 
         public Dictionary<Type, IComponent> ComponentMap
         {
