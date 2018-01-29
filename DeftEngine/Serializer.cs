@@ -9,42 +9,55 @@ namespace DeftEngine
 {
     public static class Serializer
     {
-        // Use the obnoxious type checking function.
-        // Do a LOT of stuff on program start up.
-        // Loop through each component type, figure out:
-        //          - Does it contain any complex types? If no, super simple serialization
-        //          - If yes, store which ones
-        //          - When copying, check if contains complex type or not. Different serialization function depending.
+        private static Type[] _simpleTypes;
 
-        // Add extra dictionary for in-built support of serialization of some types (Vector, Rectangle etc)
-
-
-        // Copy Field()
-        // Copy SimpleData()
-        // Copy ComplexData()
-        // If (IsSimpleType) SetField else CopyField() recursively call until down to simple dat types
-
-        public static IComponent Copy(IComponent c)
+        static Serializer()
         {
-            var componentType = c.GetType();
-            IComponent result = (IComponent)Activator.CreateInstance(c.GetType());
+            _simpleTypes = new Type[] {
+                typeof(String),
+                typeof(Decimal),
+                typeof(DateTime),
+                typeof(DateTimeOffset),
+                typeof(TimeSpan),
+                typeof(Guid)
+                };
+        }
 
-            var fields = componentType.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).ToList();
+        public static Entity CopyEntity(Entity e)
+        {
+            Entity result = new Entity();
+            result.pos = e.pos;
+            result.size = e.size;
+            result.rotation = e.rotation;
+
+            foreach (var component in e.ComponentList)
+                result.Add(CopyComponent(component));
+
+            return result;
+        }
+
+        public static IComponent CopyComponent(IComponent c)
+            => CopyObject(c) as IComponent;
+
+        public static T CopyComponent<T>(T component) where T : IComponent
+            => (T)CopyObject(component);
+
+        public static object CopyObject(object o)
+        {
+            var type = o.GetType();
+            var result = Activator.CreateInstance(type);
+
+            var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var field in fields)
             {
-                var fieldType = field.GetType();
+                var fieldType = field.FieldType;
 
                 if (fieldType.IsSimpleType())
-                    field.SetValue(result, field.GetValue(c));
+                    field.SetValue(result, field.GetValue(o));
                 else
-                {
-
-                }
-
-
+                    field.SetValue(result, CopyObject(field.GetValue(o))); // Recursively call CopyObject until reach SimpleType.
             }
-
 
             return result;
         }
@@ -52,16 +65,8 @@ namespace DeftEngine
         private static bool IsSimpleType(this Type type)
         {
             return
-                type.IsValueType ||
                 type.IsPrimitive ||
-                new Type[] {
-                typeof(String),
-                typeof(Decimal),
-                typeof(DateTime),
-                typeof(DateTimeOffset),
-                typeof(TimeSpan),
-                typeof(Guid)
-                }.Contains(type) ||
+                _simpleTypes.Contains(type) ||
                 Convert.GetTypeCode(type) != TypeCode.Object;
         }
     }

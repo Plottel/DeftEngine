@@ -46,6 +46,8 @@ namespace DeftEngine
             e2.Add<Component_Collision_Circle>();
 
             DeftDebug.ActivateDebugColliders();
+
+            var dicks = Serializer.CopyObject(new Vector2(50, 50));
         }
     }
 #endif

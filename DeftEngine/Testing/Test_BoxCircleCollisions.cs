@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace DeftEngineTesting
 {
-    [TestFixture]
+    //[TestFixture]
     public class Test_BoxCircleCollisions
     {
         Entity box;

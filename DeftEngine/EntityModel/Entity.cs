@@ -20,6 +20,9 @@ namespace DeftEngine
         /// </summary>
         public Vector2 pos;
 
+        public Vector2 size;
+        public float rotation;
+
         /// <summary>
         /// Used to access the Position. On set, immediately moves the entity and forces collider Sync.
         /// This is slow, avoid using this method of moving an Entity unless you need to. Prefer using 
@@ -36,9 +39,6 @@ namespace DeftEngine
                 MoveTo(value);
             }
         }
-
-        public Vector2 size;
-        public float rotation;
 
         public List<IColliderComponent> Colliders
         {

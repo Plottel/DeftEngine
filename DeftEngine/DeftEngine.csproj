@@ -80,7 +80,7 @@
     <Compile Include="ECSCore\Pools\SystemPool.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ECSCore\SystemInterfaces\ISystem.cs" />
-    <Compile Include="ECSCore\IComponent.cs" />
+    <Compile Include="ECSCore\ComponentInterfaces\IComponent.cs" />
     <Compile Include="ECSCore\SystemInterfaces\IEventSystem.cs" />
     <Compile Include="Input\Input.cs" />
     <Compile Include="Input\InputSystems\System_Process_TriggerInputEvents.cs" />
@@ -102,8 +102,10 @@
     <Compile Include="Debug\DebugSystems\System_Display_DebugCollisionCircle.cs" />
     <Compile Include="Collisions\CollisionSystems\System_Process_CleanupStopCollisions.cs" />
     <Compile Include="Collisions\CollisionSystems\System_Process_RegisterNewStopCollisions.cs" />
+    <Compile Include="Serializer.cs" />
     <Compile Include="Testing\Test_BoxBoxCollisions.cs" />
     <Compile Include="Testing\Test_BoxCircleCollisions.cs" />
+    <Compile Include="Testing\Test_ObjectCopying.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=0.6.602.0, Culture=neutral, processorArchitecture=MSIL">
