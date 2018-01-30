@@ -45,6 +45,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Geometry\Box.cs" />
     <Compile Include="Collisions\Collisions.cs" />
     <Compile Include="Collisions\Collision.cs" />
     <Compile Include="Debug\DeftDebug.cs" />
@@ -53,18 +54,15 @@
     <Compile Include="Graphics\GraphicsComponents\Component_Display_Box.cs" />
     <Compile Include="Graphics\GraphicsComponents\Component_Display_Circle.cs" />
     <Compile Include="ECSCore\Pools\CollisionPool.cs" />
-    <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
+    <Compile Include="Collisions\CollisionComponents\Component_Collision_AABox.cs" />
     <Compile Include="Collisions\CollisionComponents\Component_Collision_Circle.cs" />
     <Compile Include="ECSCore\Pools\ActionPool.cs" />
     <Compile Include="ECSCore\SystemInterfaces\ICollisionSystem.cs" />
     <Compile Include="ECSCore\ComponentInterfaces\IColliderComponent.cs" />
     <Compile Include="Maker.cs" />
     <Compile Include="NormalizedVector.cs" />
-    <Compile Include="Physics\PhysicsActions\Action_MoveBy.cs" />
     <Compile Include="Physics\PhysicsComponents\Component_Moved.cs" />
-    <Compile Include="Physics\PhysicsSystems\System_Action_MoveBy.cs" />
-    <Compile Include="Physics\PhysicsSystems\System_Action_TrackMovedEntities.cs" />
-    <Compile Include="Physics\PhysicsActions\Action_MoveTo.cs" />
+    <Compile Include="Physics\PhysicsSystems\System_Process_ClearMovedComponents.cs" />
     <Compile Include="Physics\PhysicsActions\Action_SetVelocity.cs" />
     <Compile Include="ECSCore\DeftAction.cs" />
     <Compile Include="DeftEngine.cs" />
@@ -91,8 +89,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Physics\PhysicsSystems\System_Action_SetVelocity.cs" />
-    <Compile Include="Physics\PhysicsSystems\System_Action_MoveTo.cs" />
-    <Compile Include="Physics\PhysicsSystems\System_VelocityMovement.cs" />
+    <Compile Include="Physics\PhysicsSystems\System_Process_VelocityMovement.cs" />
     <Compile Include="Physics\PhysicsComponents\Component_Velocity.cs" />
     <Compile Include="Collisions\CollisionSystems\System_Process_RegisterCollisions.cs" />
     <Compile Include="Examples\ExampleSystems\System_Process_PrintCollisionDetails.cs" />
@@ -103,8 +100,8 @@
     <Compile Include="Collisions\CollisionSystems\System_Process_CleanupStopCollisions.cs" />
     <Compile Include="Collisions\CollisionSystems\System_Process_RegisterNewStopCollisions.cs" />
     <Compile Include="Serializer.cs" />
-    <Compile Include="Testing\Test_BoxBoxCollisions.cs" />
-    <Compile Include="Testing\Test_BoxCircleCollisions.cs" />
+    <Compile Include="Testing\Test_AABoxAABoxCollisions.cs" />
+    <Compile Include="Testing\Test_AABoxCircleCollisions.cs" />
     <Compile Include="Testing\Test_ObjectCopying.cs" />
   </ItemGroup>
   <ItemGroup>

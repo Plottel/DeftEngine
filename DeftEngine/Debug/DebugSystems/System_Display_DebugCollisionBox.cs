@@ -13,12 +13,12 @@ namespace DeftEngine
     {
         public void Display(SpriteBatch spriteBatch)
         {
-            var entities = ECSCore.pool.GetEntities<Component_Collision_Box>();
-            Component_Collision_Box box;
+            var entities = ECSCore.pool.GetEntities<Component_Collision_AABox>();
+            Component_Collision_AABox box;
 
             foreach (var e in entities)
             {
-                box = e.Get<Component_Collision_Box>();
+                box = e.Get<Component_Collision_AABox>();
                 spriteBatch.DrawRectangle(box.bounds, Color.LawnGreen, 1);
             }
         }

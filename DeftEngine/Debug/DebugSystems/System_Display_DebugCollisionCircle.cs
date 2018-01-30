@@ -19,7 +19,7 @@ namespace DeftEngine
             foreach (var e in entities)
             {
                 circle = e.Get<Component_Collision_Circle>();
-                spriteBatch.DrawCircle(e.MidVector + circle.offsetEntityMid, circle.radius, 360, Color.LawnGreen, 1);
+                spriteBatch.DrawCircle(e.MidVector + circle.offsetEntityMid, circle.offsetRadius, 360, Color.LawnGreen, 1);
             }
         }
     }

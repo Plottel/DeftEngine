@@ -26,8 +26,8 @@ namespace DeftEngine
         public static Entity CopyEntity(Entity e)
         {
             Entity result = new Entity();
-            result.pos = e.pos;
-            result.size = e.size;
+            result.MoveTo(e.Pos);
+            result.Size = e.Size;
             result.rotation = e.rotation;
 
             foreach (var component in e.ComponentList)

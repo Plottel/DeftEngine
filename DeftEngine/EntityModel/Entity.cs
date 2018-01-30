@@ -18,25 +18,24 @@ namespace DeftEngine
         /// Colliders will be out of sync. Colliders can be Synced manually using
         /// Collisions.SyncColliders(Entity)
         /// </summary>
-        public Vector2 pos;
+        private Vector2 _pos;
 
-        public Vector2 size;
+        private Vector2 _size;
         public float rotation;
 
-        /// <summary>
-        /// Used to access the Position. On set, immediately moves the entity and forces collider Sync.
-        /// This is slow, avoid using this method of moving an Entity unless you need to. Prefer using 
-        /// MoveTo and MoveBy methods.
-        /// </summary>
         public Vector2 Pos
         {
-            get => pos;
+            get => _pos;
+        }
+
+        public Vector2 Size
+        {
+            get => _size;
 
             set
             {
-                pos = value;
+                _size = value;
                 Collisions.SyncColliders(this);
-                MoveTo(value);
             }
         }
 
@@ -47,34 +46,42 @@ namespace DeftEngine
 
         public Point MidPt
         {
-            get { return new Point((int)pos.X + (int)size.X / 2, (int)pos.Y + (int)size.Y / 2); }
+            get { return new Point((int)_pos.X + (int)_size.X / 2, (int)_pos.Y + (int)_size.Y / 2); }
         }
 
         public Vector2 MidVector
         {
-            get { return new Vector2(pos.X + size.X / 2, pos.Y + size.Y / 2); }
+            get { return new Vector2(_pos.X + _size.X / 2, _pos.Y + _size.Y / 2); }
         }
 
         public void Destroy()
             => Add<Component_KillMe>();
 
         public void MoveTo(Vector2 newPos)
-            => ECSCore.actionPool.AddAction(new Action_MoveTo { actor = this, newPosition = newPos });
+        {
+            if (_pos != newPos)
+                Add(new Component_Moved { oldPos = _pos });
 
-        public void MoveToX(float newX)
-            => ECSCore.actionPool.AddAction(new Action_MoveTo { actor = this, newPosition = new Vector2(newX, pos.Y) });
+            _pos = newPos;
+            Collisions.SyncColliders(this);
+        }
 
-        public void MoveToY(float newY)
-            => ECSCore.actionPool.AddAction(new Action_MoveTo { actor = this, newPosition = new Vector2(pos.X, pos.Y) });
+        public void MoveTo(float newX, float newY) => MoveTo(new Vector2(newX, newY));
+        public void MoveToX(float newX) => MoveTo(new Vector2(newX, 0));
+        public void MoveToY(float newY) => MoveTo(new Vector2(0, newY));
 
         public void MoveBy(Vector2 deltaPos)
-            => ECSCore.actionPool.AddAction(new Action_MoveBy { actor = this, deltaPos = deltaPos });
+        {
+            if (deltaPos != Vector2.Zero)
+                Add(new Component_Moved { oldPos = _pos });
 
-        public void MoveByX(float deltaX) 
-            => ECSCore.actionPool.AddAction(new Action_MoveBy { actor = this, deltaPos = new Vector2(deltaX, 0) });
+            _pos += deltaPos;
+            Collisions.SyncColliders(this);
+        }
 
-        public void MoveByY(float deltaY)
-            => ECSCore.actionPool.AddAction(new Action_MoveBy { actor = this, deltaPos = new Vector2(0, deltaY) });
+        public void MoveBy(float deltaX, float deltaY) => MoveBy(new Vector2(deltaX, deltaY));
+        public void MoveByX(float deltaX) => MoveBy(new Vector2(deltaX, 0));
+        public void MoveByY(float deltaY) => MoveBy(new Vector2(0, deltaY));
 
         //public Entity Copy()
         //{

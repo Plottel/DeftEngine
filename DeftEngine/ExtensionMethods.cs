@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace DeftEngine
 {
@@ -27,6 +28,18 @@ namespace DeftEngine
                 SpriteEffects.None,                                 // NOTE: Not used, bound by MonoGame/XNA function calls
                 0                                                   // Layer depth (default 0)
             );
+        }
+
+        public static void DrawBox(this SpriteBatch spriteBatch, Box box, Color color)
+        {
+            Vector2[] corners = box.Corners;
+
+            spriteBatch.DrawLine(corners[0], corners[1], color, 1);
+            spriteBatch.DrawLine(corners[1], corners[2], color, 1);
+            spriteBatch.DrawLine(corners[2], corners[3], color, 1);
+            spriteBatch.DrawLine(corners[3], corners[0], color, 1);
+
+            spriteBatch.DrawPoint(box.center, color, 5);
         }
 
         public static Rectangle GetInflated(this Rectangle rectangle, int horizontalAmount, int verticalAmount)

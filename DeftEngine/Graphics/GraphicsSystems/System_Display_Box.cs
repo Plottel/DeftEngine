@@ -16,7 +16,7 @@ namespace DeftEngine
             var entities = ECSCore.pool.GetEntities<Component_Display_Box>();
 
             foreach (var e in entities)
-                spriteBatch.FillRectangle(e.pos, new Size2(e.size.X, e.size.Y), e.Get<Component_Display_Box>().color);
+                spriteBatch.FillRectangle(e.Pos, new Size2(e.Size.X, e.Size.Y), e.Get<Component_Display_Box>().color);
         }
     }
 }

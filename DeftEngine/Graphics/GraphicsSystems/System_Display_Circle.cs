@@ -18,7 +18,7 @@ namespace DeftEngine
 
             foreach (var e in entities)
             {
-                radius = e.size.X / 2;
+                radius = e.Size.X / 2;
                 spriteBatch.DrawCircle(e.MidVector, radius, 360, e.Get<Component_Display_Circle>().color, radius);
             }        
         }

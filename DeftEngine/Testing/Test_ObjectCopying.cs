@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DeftEngine;
 using NUnit.Framework;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace DeftEngineTesting
 {

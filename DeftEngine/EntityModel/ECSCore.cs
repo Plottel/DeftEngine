@@ -41,12 +41,9 @@ namespace DeftEngine
             Collisions.Setup();
 
             // Setup systems.
+            systemPool.Add<System_Process_ClearMovedComponents>();
             systemPool.Add<System_Process_TriggerInputEvents>();
             systemPool.Add<System_Action_SetVelocity>();
-
-            systemPool.Add<System_Action_TrackMovedEntities>();
-            systemPool.Add<System_Action_MoveTo>();
-            systemPool.Add<System_Action_MoveBy>();
 
             systemPool.Add<System_Process_VelocityMovement>();
             systemPool.Add<System_Process_RegisterCollisions>();
@@ -64,12 +61,11 @@ namespace DeftEngine
             systemPool.SyncEntityQueriesWithPool();
         }
 
-        public static void RunActionSystems()
+        public static void Update()
         {
-            foreach (var system in systemPool.actionSystems)
-                system.ProcessActions();
-
-            actionPool.ClearActionBuffer();
+            RunProcessSystems();
+            RunCollisionSystems();
+            RunActionSystems();
         }
 
         public static void RunProcessSystems()
@@ -82,6 +78,14 @@ namespace DeftEngine
         {
             foreach (var system in systemPool.collisionSystems)
                 system.HandleCollisions();
+        }
+
+        public static void RunActionSystems()
+        {
+            foreach (var system in systemPool.actionSystems)
+                system.ProcessActions();
+
+            actionPool.ClearActionBuffer();
         }
 
         public static void RunDisplaySystems(SpriteBatch spriteBatch)
