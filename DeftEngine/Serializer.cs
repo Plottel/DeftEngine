@@ -28,7 +28,7 @@ namespace DeftEngine
             Entity result = new Entity();
             result.MoveTo(e.Pos);
             result.Size = e.Size;
-            result.rotation = e.rotation;
+            result.Rotation = e.Rotation;
 
             foreach (var component in e.ComponentList)
                 result.Add(CopyComponent(component));

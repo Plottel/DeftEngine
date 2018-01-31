@@ -9,20 +9,20 @@ using MonoGame.Extended;
 
 namespace DeftEngine
 {
-    public class System_Display_DebugCollisionCircle : ISystem, IDisplaySystem
+    public class System_Display_DebugCollisionAABox : ISystem, IDisplaySystem
     {
         public void Display(SpriteBatch spriteBatch)
         {
-            var entities = ECSCore.pool.GetEntities<Component_Collision_Circle>();
-            Component_Collision_Circle circle;
+            var entities = ECSCore.pool.GetEntities<Component_Collision_AABox>();
+            Component_Collision_AABox box;
             Color color;
 
             foreach (var e in entities)
             {
-                circle = e.Get<Component_Collision_Circle>();
+                box = e.Get<Component_Collision_AABox>();
                 color = ECSCore.collisionPool.HasCollision(e) ? Color.Red : Color.LawnGreen;
 
-                spriteBatch.DrawCircle(circle.bounds, 360, color, 1);
+                spriteBatch.DrawRectangle(box.bounds, color, 1);
             }
         }
     }

@@ -13,14 +13,21 @@ namespace DeftEngine
     {
         public void Display(SpriteBatch spriteBatch)
         {
-            var entities = ECSCore.pool.GetEntities<Component_Collision_AABox>();
-            Component_Collision_AABox box;
+            var entities = ECSCore.pool.GetEntities<Component_Collision_Box>();
+            Box box;
+            Color color;
 
             foreach (var e in entities)
             {
-                box = e.Get<Component_Collision_AABox>();
-                spriteBatch.DrawRectangle(box.bounds, Color.LawnGreen, 1);
+                box = e.Get <Component_Collision_Box>().box;
+                color = ECSCore.collisionPool.HasCollision(e) ? Color.Red : Color.LawnGreen;
+
+                spriteBatch.DrawBox(box, color);
+                spriteBatch.DrawLine(box.Center, box.Center + box.LocalXAxis * (box.Size.X * 1.5f), Color.LawnGreen, 1);
+                spriteBatch.DrawLine(box.Center, box.Center + box.LocalYAxis * (box.Size.Y * 1.5f), Color.LawnGreen, 1);
+                spriteBatch.DrawPoint(box.ClosestPointTo(Input.MousePos), Color.Red, 5);
             }
+
         }
     }
 }

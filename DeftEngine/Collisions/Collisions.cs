@@ -19,15 +19,23 @@ namespace DeftEngine
         {
             Type aaBox = typeof(Component_Collision_AABox);
             Type circle = typeof(Component_Collision_Circle);
+            Type box = typeof(Component_Collision_Box);
 
             _collisionMethods[aaBox] = new Dictionary<Type, CollisionTest>();
             _collisionMethods[circle] = new Dictionary<Type, CollisionTest>();
+            _collisionMethods[box] = new Dictionary<Type, CollisionTest>();
 
             _collisionMethods[aaBox][aaBox] = TestAABoxAABox;
             _collisionMethods[aaBox][circle] = TestAABoxCircle;
+            _collisionMethods[aaBox][box] = TestAABoxBox;
 
             _collisionMethods[circle][circle] = TestCircleCircle;
             _collisionMethods[circle][aaBox] = TestCircleAABox;
+            _collisionMethods[circle][box] = TestCircleBox;
+
+            _collisionMethods[box][box] = TestBoxBox;
+            _collisionMethods[box][aaBox] = TestBoxAABox;
+            _collisionMethods[box][circle] = TestBoxCircle;
         }
 
         public static void SyncColliders(Entity e)
@@ -73,28 +81,46 @@ namespace DeftEngine
             return true; // Colliding.
         }
 
-        private static bool TestCircleCircle(Entity e1, Entity e2)
-        {
-            var circle1 = e1.Get<Component_Collision_Circle>();
-            var circle2 = e2.Get<Component_Collision_Circle>();
-
-            float radiusSum = circle1.offsetRadius + circle2.offsetRadius;
-            float sqDistApart = Vector2.DistanceSquared(circle1.bounds.Center, circle2.bounds.Center);
-
-            return sqDistApart <= radiusSum * radiusSum;
-        }
-
         private static bool TestAABoxCircle(Entity e1, Entity e2)
         {
             var box = e1.Get<Component_Collision_AABox>();
             var circle = e2.Get<Component_Collision_Circle>();
 
             Vector2 circleMid = circle.bounds.Center;
-            float sqRadius = circle.offsetRadius * circle.offsetRadius;
+            float sqRadius = circle.bounds.Radius * circle.bounds.Radius;
 
             return box.bounds.ToRectangleF().SquaredDistanceTo(circleMid) <= sqRadius;
         }
 
+        private static bool TestAABoxBox(Entity e1, Entity e2)
+        {
+            return false;
+        }
+
+        private static bool TestCircleCircle(Entity e1, Entity e2)
+        {
+            var circle1 = e1.Get<Component_Collision_Circle>();
+            var circle2 = e2.Get<Component_Collision_Circle>();
+
+            float radiusSum = circle1.bounds.Radius + circle2.bounds.Radius;
+            float sqDistApart = Vector2.DistanceSquared(circle1.bounds.Center, circle2.bounds.Center);
+
+            return sqDistApart <= radiusSum * radiusSum;
+        }
+
+        private static bool TestCircleBox(Entity e1, Entity e2)
+        {
+            return false;
+        }
+
+        private static bool TestBoxBox(Entity e1, Entity e2)
+        {
+            return false;
+        }
+
         private static bool TestCircleAABox(Entity e1, Entity e2) => TestAABoxCircle(e2, e1);
+        private static bool TestBoxAABox(Entity e1, Entity e2) => TestAABoxBox(e2, e1);
+        private static bool TestBoxCircle(Entity e1, Entity e2) => TestCircleBox(e2, e1);
+
     }
 }

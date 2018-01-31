@@ -13,15 +13,9 @@ namespace DeftEngine
         private Dictionary<Type, IComponent> _components = new Dictionary<Type, IComponent>();
         private List<IColliderComponent> _colliders = new List<IColliderComponent>();
 
-        /// <summary>
-        /// Do not change this variable unless you understand the consequences.
-        /// Colliders will be out of sync. Colliders can be Synced manually using
-        /// Collisions.SyncColliders(Entity)
-        /// </summary>
         private Vector2 _pos;
-
         private Vector2 _size;
-        public float rotation;
+        private float _rotation;
 
         public Vector2 Pos
         {
@@ -35,6 +29,17 @@ namespace DeftEngine
             set
             {
                 _size = value;
+                Collisions.SyncColliders(this);
+            }
+        }
+
+        public float Rotation
+        {
+            get => _rotation;
+
+            set
+            {
+                _rotation = value;
                 Collisions.SyncColliders(this);
             }
         }

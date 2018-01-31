@@ -32,7 +32,7 @@ namespace DeftEngine
         public static void SetupProgram()
         {
             ECSCore.systemPool.Add<System_Process_WASDMovement>();
-            ECSCore.systemPool.Add<System_Process_PrintCollisionDetails>();
+            ECSCore.systemPool.Add<System_Process_DebugHack>();
 
             var e = Maker.Make("Blank", new Vector2(200, 200), new Vector2(50, 50));
             e.Add<Component_Display_Box>();
@@ -44,6 +44,9 @@ namespace DeftEngine
             e2.Add<Component_Display_Circle>();
             e2.Get<Component_Display_Circle>().color = Color.Blue;
             e2.Add<Component_Collision_Circle>();
+
+            var e3 = Maker.Make("Blank", new Vector2(500, 500), new Vector2(50, 75));
+            e3.Add<Component_Collision_Box>();
 
             DeftDebug.ActivateDebugColliders();
             

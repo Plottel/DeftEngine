@@ -92,5 +92,13 @@ namespace DeftEngine
             Debug.Assert(collisions.ContainsKey(entity));
             return collisions[entity][state];
         }
+
+        public bool HasCollision(Entity entity)
+        {
+            if (!collisions.ContainsKey(entity)) return false;
+
+            return collisions[entity][CollisionState.Start].Count != 0 ||
+                collisions[entity][CollisionState.Colliding].Count != 0;
+        }
     }
 }

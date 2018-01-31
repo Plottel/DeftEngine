@@ -46,14 +46,9 @@ namespace DeftEngine
             graphics.PreferredBackBufferWidth = 1366;
             graphics.PreferredBackBufferHeight = 768;
 
-
-            box.center = new Vector2(500, 500);
-            box.size = new Vector2(50, 75);
-            box.rotation = 0;
-
             // Restrict mouse to stay within the window.
-            //Input.SetMaxMouseX(graphics.PreferredBackBufferWidth);
-            //Input.SetMaxMouseY(graphics.PreferredBackBufferHeight);
+            Input.SetMaxMouseX(graphics.PreferredBackBufferWidth);
+            Input.SetMaxMouseY(graphics.PreferredBackBufferHeight);
         }
 
         /// <summary>
@@ -110,13 +105,8 @@ namespace DeftEngine
             // TODO: Add your update logic here
             ECSCore.Update();
 
-            if (Input.KeyDown(Keys.R))
-                box.rotation += 1;
-
             base.Update(gameTime);
         }
-
-        Box box = new Box();
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -130,8 +120,6 @@ namespace DeftEngine
 
             // TODO: Add your drawing code here
             ECSCore.RunDisplaySystems(spriteBatch);
-
-            spriteBatch.DrawBox(box, Color.LawnGreen);
 
             spriteBatch.End();
 

@@ -45,6 +45,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
     <Compile Include="Geometry\Box.cs" />
     <Compile Include="Collisions\Collisions.cs" />
     <Compile Include="Collisions\Collision.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="ECSCore\Pools\ActionPool.cs" />
     <Compile Include="ECSCore\SystemInterfaces\ICollisionSystem.cs" />
     <Compile Include="ECSCore\ComponentInterfaces\IColliderComponent.cs" />
+    <Compile Include="ExtensionMethods\IOExtensions.cs" />
     <Compile Include="Maker.cs" />
     <Compile Include="NormalizedVector.cs" />
     <Compile Include="Physics\PhysicsComponents\Component_Moved.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="ECSCore\SystemInterfaces\IDisplaySystem.cs" />
     <Compile Include="ECSCore\SystemInterfaces\ISetupSystem.cs" />
     <Compile Include="ECSCore\Pools\SystemPool.cs" />
-    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ECSCore\SystemInterfaces\ISystem.cs" />
     <Compile Include="ECSCore\ComponentInterfaces\IComponent.cs" />
     <Compile Include="ECSCore\SystemInterfaces\IEventSystem.cs" />
@@ -86,23 +87,28 @@
     <Compile Include="ECSCore\SystemInterfaces\IQuerySystem.cs" />
     <Compile Include="EntityModel\EntityModelComponents\Component_KillMe.cs" />
     <Compile Include="EntityModel\EntityModelSystems\System_Process_KillMe.cs" />
+    <Compile Include="ExtensionMethods\PointExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Physics\PhysicsSystems\System_Action_SetVelocity.cs" />
     <Compile Include="Physics\PhysicsSystems\System_Process_VelocityMovement.cs" />
     <Compile Include="Physics\PhysicsComponents\Component_Velocity.cs" />
     <Compile Include="Collisions\CollisionSystems\System_Process_RegisterCollisions.cs" />
-    <Compile Include="Examples\ExampleSystems\System_Process_PrintCollisionDetails.cs" />
     <Compile Include="Graphics\GraphicsSystems\System_Display_Box.cs" />
     <Compile Include="Graphics\GraphicsSystems\System_Display_Circle.cs" />
-    <Compile Include="Debug\DebugSystems\System_Display_DebugCollisionBox.cs" />
+    <Compile Include="Debug\DebugSystems\System_Display_DebugCollisionAABox.cs" />
     <Compile Include="Debug\DebugSystems\System_Display_DebugCollisionCircle.cs" />
     <Compile Include="Collisions\CollisionSystems\System_Process_CleanupStopCollisions.cs" />
     <Compile Include="Collisions\CollisionSystems\System_Process_RegisterNewStopCollisions.cs" />
+    <Compile Include="ExtensionMethods\RectangleExtensions.cs" />
     <Compile Include="Serializer.cs" />
+    <Compile Include="ExtensionMethods\SpriteBatchExtensions.cs" />
+    <Compile Include="Debug\DebugSystems\System_Display_DebugCollisionBox.cs" />
+    <Compile Include="Debug\DebugSystems\System_Process_DebugHack.cs" />
     <Compile Include="Testing\Test_AABoxAABoxCollisions.cs" />
     <Compile Include="Testing\Test_AABoxCircleCollisions.cs" />
     <Compile Include="Testing\Test_ObjectCopying.cs" />
+    <Compile Include="ExtensionMethods\VectorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=0.6.602.0, Culture=neutral, processorArchitecture=MSIL">
