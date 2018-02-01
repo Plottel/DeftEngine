@@ -92,11 +92,6 @@ namespace DeftEngine
             return box.bounds.ToRectangleF().SquaredDistanceTo(circleMid) <= sqRadius;
         }
 
-        private static bool TestAABoxBox(Entity e1, Entity e2)
-        {
-            return false;
-        }
-
         private static bool TestCircleCircle(Entity e1, Entity e2)
         {
             var circle1 = e1.Get<Component_Collision_Circle>();
@@ -110,17 +105,83 @@ namespace DeftEngine
 
         private static bool TestCircleBox(Entity e1, Entity e2)
         {
-            return false;
+            var circle = e1.Get<Component_Collision_Circle>();
+            var box = e2.Get<Component_Collision_Box>();
+
+            Vector2 circleMid = circle.bounds.Center;
+            float sqRadius = circle.bounds.Radius * circle.bounds.Radius;
+
+            Vector2 closestPt = box.box.ClosestPointTo(circleMid);
+
+            return Vector2.DistanceSquared(closestPt, circleMid) <= sqRadius;
+        }
+
+        // TODO: SLOW. Massive point conversion, should be able to take advantage of 1 box being Axis-Aligned.
+        private static bool TestAABoxBox(Entity e1, Entity e2)
+        {
+            var aaBox = e1.Get<Component_Collision_AABox>().bounds;
+            var box = e2.Get<Component_Collision_Box>().box;
+
+            Vector2[] aaBoxCorners = aaBox.GetVectorCorners();
+            Vector2[] boxCorners = box.Corners;
+
+            Vector2[] axes = { box.LocalXAxis, box.LocalYAxis, new Vector2(1, 0), new Vector2(0, 1) };
+
+            foreach (Vector2 axis in axes)
+            {
+                if (!BoxesCollideOnAxis(aaBoxCorners, boxCorners, axis))
+                    return false;
+            }
+
+            // All of the axes are colliding, collision.
+            return true;
         }
 
         private static bool TestBoxBox(Entity e1, Entity e2)
         {
-            return false;
+            var box1 = e1.Get<Component_Collision_Box>().box;
+            var box2 = e2.Get<Component_Collision_Box>().box;
+
+            Vector2[] box1Corners = box1.Corners;
+            Vector2[] box2Corners = box2.Corners;
+
+            Vector2[] axes = { box1.LocalXAxis, box1.LocalYAxis, box2.LocalXAxis, box2.LocalYAxis };
+
+            foreach (Vector2 axis in axes)
+            {
+                if (!BoxesCollideOnAxis(box1Corners, box2Corners, axis))
+                    return false;
+            }
+
+            // All of the axes are colliding, collision.
+            return true;
         }
 
         private static bool TestCircleAABox(Entity e1, Entity e2) => TestAABoxCircle(e2, e1);
         private static bool TestBoxAABox(Entity e1, Entity e2) => TestAABoxBox(e2, e1);
         private static bool TestBoxCircle(Entity e1, Entity e2) => TestCircleBox(e2, e1);
+
+        private static bool BoxesCollideOnAxis(Vector2[] box1Corners, Vector2[] box2Corners, Vector2 axis)
+        {
+            float[] box1Projections = new float[4];
+            float[] box2Projections = new float[4];
+
+            // Project all 8 corners to generate 8 scalars.
+            for (int i = 0; i < 4; ++i)
+            {
+                box1Projections[i] = Vector2.Dot(box1Corners[i], axis);
+                box2Projections[i] = Vector2.Dot(box2Corners[i], axis);
+            }
+
+            // Fetch box1Min/Max and box2Min/Max
+            float box1Min = box1Projections.Min();
+            float box1Max = box1Projections.Max();
+            float box2Min = box2Projections.Min();
+            float box2Max = box2Projections.Max();
+
+            return (box2Min <= box1Max && box2Max >= box1Max) ||
+                                (box1Min <= box2Max && box1Max >= box2Max);
+        }
 
     }
 }

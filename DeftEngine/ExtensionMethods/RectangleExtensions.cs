@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace DeftEngine
 {
@@ -23,6 +24,17 @@ namespace DeftEngine
             inflated.Inflate(horizontalAmount, verticalAmount);
 
             return inflated;
+        }
+
+        public static Vector2[] GetVectorCorners(this Rectangle rectangle)
+        {
+            return new Vector2[4]
+            {
+                new Vector2(rectangle.Left, rectangle.Top),
+                new Vector2(rectangle.Right, rectangle.Top),
+                new Vector2(rectangle.Left, rectangle.Bottom),
+                new Vector2(rectangle.Right, rectangle.Bottom),
+            };
         }
 
         public static Vector2 TopLeft(this Rectangle rectangle)

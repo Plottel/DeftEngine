@@ -64,6 +64,9 @@ namespace DeftEngine
             set { _rotation = value; CalculateOBB(); }
         }
 
+        /// <summary>
+        /// Given in order: BotRight, BotLeft, TopLeft, TopRight
+        /// </summary>
         public Vector2[] Corners
         {
             get => _corners;
@@ -112,6 +115,7 @@ namespace DeftEngine
             // Calculate local axes
             _localXAxis = new Vector2((float)Math.Cos(radianRot), (float)Math.Sin(radianRot));
             _localYAxis = _localXAxis.PerpendicularClockwise();
+            
         }
     }
 }
