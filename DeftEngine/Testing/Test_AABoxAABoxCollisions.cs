@@ -103,7 +103,7 @@ namespace DeftEngineTesting
         public void SmallBoxCompletelyInsideBigBox()
         {
             e2.Size = new Vector2(5, 5);
-            e2.Get<Component_Collision_AABox>().offsetSize = new Vector2(5, 5);
+            e2.Get<Component_Collision_AABox>()._offsetSize = new Vector2(5, 5);
             e2.MoveBy(e1.Size / 2);
             Assert.IsTrue(Collisions.EntitiesCollide(e1, e2));
         }

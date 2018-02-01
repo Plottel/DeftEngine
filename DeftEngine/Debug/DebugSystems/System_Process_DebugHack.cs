@@ -14,7 +14,9 @@ namespace DeftEngine
             if (Input.KeyDown(Keys.R))
             {
                 var entities = ECSCore.pool.GetEntities<Component_Collision_Box>();
-                entities[0].Rotation += 1;
+
+                foreach (var e in entities)
+                    e.Rotation += 1;
             }
         }
     }

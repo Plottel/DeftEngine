@@ -70,11 +70,11 @@ namespace DeftEngine
             var box1 = e1.Get<Component_Collision_AABox>();
             var box2 = e2.Get<Component_Collision_AABox>();
 
-            Vector2 box1Min = box1.bounds.TopLeft();
-            Vector2 box1Max = box1.bounds.BottomRight();
+            Vector2 box1Min = box1.Bounds.TopLeft();
+            Vector2 box1Max = box1.Bounds.BottomRight();
 
-            Vector2 box2Min = box2.bounds.TopLeft();
-            Vector2 box2Max = box2.bounds.BottomRight();
+            Vector2 box2Min = box2.Bounds.TopLeft();
+            Vector2 box2Max = box2.Bounds.BottomRight();
 
             if (box1Max.X < box2Min.X || box1Min.X > box2Max.X) return false;
             if (box1Max.Y < box2Min.Y || box1Min.Y > box2Max.Y) return false;
@@ -89,7 +89,7 @@ namespace DeftEngine
             Vector2 circleMid = circle.bounds.Center;
             float sqRadius = circle.bounds.Radius * circle.bounds.Radius;
 
-            return box.bounds.ToRectangleF().SquaredDistanceTo(circleMid) <= sqRadius;
+            return box.Bounds.ToRectangleF().SquaredDistanceTo(circleMid) <= sqRadius;
         }
 
         private static bool TestCircleCircle(Entity e1, Entity e2)
@@ -119,7 +119,7 @@ namespace DeftEngine
         // TODO: SLOW. Massive point conversion, should be able to take advantage of 1 box being Axis-Aligned.
         private static bool TestAABoxBox(Entity e1, Entity e2)
         {
-            var aaBox = e1.Get<Component_Collision_AABox>().bounds;
+            var aaBox = e1.Get<Component_Collision_AABox>().Bounds;
             var box = e2.Get<Component_Collision_Box>().box;
 
             Vector2[] aaBoxCorners = aaBox.GetVectorCorners();

@@ -22,7 +22,7 @@ namespace DeftEngine
                 box = e.Get<Component_Collision_AABox>();
                 color = ECSCore.collisionPool.HasCollision(e) ? Color.Red : Color.LawnGreen;
 
-                spriteBatch.DrawRectangle(box.bounds, color, 1);
+                spriteBatch.DrawRectangle(box.Bounds, color, 1);
             }
         }
     }
