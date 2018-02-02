@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
+using System.Runtime.CompilerServices;
 
 namespace DeftEngine
 {
@@ -161,6 +162,7 @@ namespace DeftEngine
         private static bool TestBoxAABox(Entity e1, Entity e2) => TestAABoxBox(e2, e1);
         private static bool TestBoxCircle(Entity e1, Entity e2) => TestCircleBox(e2, e1);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool BoxesCollideOnAxis(Vector2[] box1Corners, Vector2[] box2Corners, Vector2 axis)
         {
             float[] box1Projections = new float[4];

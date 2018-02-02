@@ -49,6 +49,9 @@ namespace DeftEngine
             // Restrict mouse to stay within the window.
             Input.SetMaxMouseX(graphics.PreferredBackBufferWidth);
             Input.SetMaxMouseY(graphics.PreferredBackBufferHeight);
+
+            Assets.content = Content;
+            Assets.LoadAssets();
         }
 
         /// <summary>

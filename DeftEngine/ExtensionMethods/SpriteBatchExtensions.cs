@@ -11,6 +11,9 @@ namespace DeftEngine
 {
     public static class SpriteBatchExtensions
     {
+        /// <summary>
+        /// Draws an entire Texture. Rescales the texture according to passed in Scale vector.
+        /// </summary>
         public static void Draw(this SpriteBatch spriteBatch, Texture2D texture, Vector2 pos, float rotation, Vector2 scale)
         {
             var midVec = new Vector2((texture.Width * scale.X) / 2, (texture.Height * scale.Y) / 2);
@@ -21,7 +24,7 @@ namespace DeftEngine
                 pos + midVec,                                       // Top left point to draw
                 null,                                               // Subsection of texture to render
                 Color.White,                                        // Color mask   
-                MathHelper.ToRadians(rotation),                     // Rotation in degrees
+                MathHelper.ToRadians(rotation),                     // Rotation in radians
                 unscaledMidVec,                                     // Rotation anchor point (center by default)
                 scale,                                              // Scale
                 SpriteEffects.None,                                 // NOTE: Not used, bound by MonoGame/XNA function calls

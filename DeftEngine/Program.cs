@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.IO;
 
 namespace DeftEngine
 {
@@ -50,7 +51,7 @@ namespace DeftEngine
             e3.Add<Component_Collision_Box>();
             e3.Add<Component_WASDMovement>();
 
-            var e4 = Maker.Make("Blank", new Vector2(200, 500), new Vector2(84, 25));
+            var e4 = Maker.Make("Blank", new Vector2(280, 180), new Vector2(84, 25));
             e4.Add<Component_Collision_Box>();
 
             DeftDebug.ActivateDebugColliders();

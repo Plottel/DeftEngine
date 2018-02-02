@@ -52,6 +52,7 @@ namespace DeftEngine
 
             systemPool.Add<System_Process_KillMe>();
 
+            systemPool.Add<System_Display_Texture>();
             systemPool.Add<System_Display_Box>();
             systemPool.Add<System_Display_Circle>();
         }
