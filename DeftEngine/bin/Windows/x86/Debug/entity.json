@@ -1,0 +1,100 @@
+{
+  "Pos": "200, 200",
+  "Size": "50, 50",
+  "Rotation": 0.0,
+  "Colliders": [
+    {
+      "_offsetEntityPos": "0, 0",
+      "_offsetSize": "0, 0",
+      "_bounds": {
+        "X": 200,
+        "Y": 200,
+        "Width": 50,
+        "Height": 50
+      },
+      "OffsetEntityPos": "0, 0",
+      "OffsetSize": "0, 0",
+      "Bounds": {
+        "X": 200,
+        "Y": 200,
+        "Width": 50,
+        "Height": 50
+      }
+    }
+  ],
+  "MidPt": {
+    "X": 225,
+    "Y": 225
+  },
+  "MidVector": "225, 225",
+  "ComponentMap": {
+    "DeftEngine.Component_Moved, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": {
+      "oldPos": "0, 0"
+    },
+    "DeftEngine.Component_Display_Box, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": {
+      "color": {
+        "B": 255,
+        "G": 0,
+        "R": 0,
+        "A": 255
+      }
+    },
+    "DeftEngine.Component_Collision_AABox, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": {
+      "_offsetEntityPos": "0, 0",
+      "_offsetSize": "0, 0",
+      "_bounds": {
+        "X": 200,
+        "Y": 200,
+        "Width": 50,
+        "Height": 50
+      },
+      "OffsetEntityPos": "0, 0",
+      "OffsetSize": "0, 0",
+      "Bounds": {
+        "X": 200,
+        "Y": 200,
+        "Width": 50,
+        "Height": 50
+      }
+    },
+    "DeftEngine.Component_UI_Draggable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": {}
+  },
+  "ComponentList": [
+    {
+      "oldPos": "0, 0"
+    },
+    {
+      "color": {
+        "B": 255,
+        "G": 0,
+        "R": 0,
+        "A": 255
+      }
+    },
+    {
+      "_offsetEntityPos": "0, 0",
+      "_offsetSize": "0, 0",
+      "_bounds": {
+        "X": 200,
+        "Y": 200,
+        "Width": 50,
+        "Height": 50
+      },
+      "OffsetEntityPos": "0, 0",
+      "OffsetSize": "0, 0",
+      "Bounds": {
+        "X": 200,
+        "Y": 200,
+        "Width": 50,
+        "Height": 50
+      }
+    },
+    {}
+  ],
+  "ComponentTypes": [
+    "DeftEngine.Component_Moved, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "DeftEngine.Component_Display_Box, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "DeftEngine.Component_Collision_AABox, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "DeftEngine.Component_UI_Draggable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace DeftEngine
 {
@@ -60,6 +62,19 @@ namespace DeftEngine
             }
 
             return result;
+        }
+
+        public static void WriteEntityTo(Entity e, string filePath)
+        {
+            JsonSerializer serializer = new JsonSerializer();
+
+
+            string serializedEntity = JsonConvert.SerializeObject(e, Formatting.Indented);
+
+            using (StreamWriter stream = new StreamWriter(filePath))
+            {
+                stream.Write(serializedEntity);
+            }
         }
 
         private static bool IsSimpleType(this Type type)

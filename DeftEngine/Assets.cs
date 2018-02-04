@@ -17,17 +17,43 @@ namespace DeftEngine
 
         public static ContentManager content;
 
+        private static void ShowAllFoldersUnder(string path, int indent)
+        {
+            foreach (string folder in Directory.GetDirectories(path))
+            {
+                Console.WriteLine("{0}{1}", new string(' ', indent), Path.GetFileName(folder));
+                ShowAllFoldersUnder(folder, indent + 2);
+            }
+        }
+
         public static void LoadAssets()
         {
+            return;
             // Recursively trace structure
 
             // foreach folder
             // Load Textures in that folder
             // fetch all folders
             // repeat until no more sub folders
+            LoadAssetsUnder("Content/Textures/");
+
+
             var allTextureNames = Directory.GetFiles("Content/Textures/", "*.xnb").Select(Path.GetFileNameWithoutExtension).ToList();
             foreach (var textureName in allTextureNames)
                 _textures[textureName.ToLower()] = content.Load<Texture2D>("Textures/" + textureName);
+        }
+
+        public static void LoadAssetsUnder(string path)
+        {
+            foreach (string folder in Directory.GetDirectories(path))
+            {
+                var allTextureNames = Directory.GetFiles(path, "*.xnb").Select(Path.GetFileNameWithoutExtension).ToList();
+
+                foreach (var textureName in allTextureNames)
+                    _textures[textureName.ToLower()] = content.Load<Texture2D>(path + textureName);
+
+                LoadAssetsUnder(folder);
+            }
         }
 
         public static bool HasTexture(string textureName) => _textures.ContainsKey(textureName.ToLower());

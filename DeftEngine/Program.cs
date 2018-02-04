@@ -40,6 +40,7 @@ namespace DeftEngine
             e.Get<Component_Display_Box>().color = Color.Blue;
             e.Add<Component_Collision_AABox>();
             //e.Add<Component_WASDMovement>();
+            e.Add<Component_UI_Draggable>();
 
             var e2 = Maker.Make("Blank", new Vector2(350, 200), new Vector2(50, 50));
             e2.Add<Component_Display_Circle>();
@@ -53,6 +54,8 @@ namespace DeftEngine
 
             var e4 = Maker.Make("Blank", new Vector2(280, 180), new Vector2(84, 25));
             e4.Add<Component_Collision_Box>();
+
+            Serializer.WriteEntityTo(e, "entity.json");
 
             DeftDebug.ActivateDebugColliders();
             

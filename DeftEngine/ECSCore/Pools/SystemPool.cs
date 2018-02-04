@@ -16,6 +16,7 @@ namespace DeftEngine
         public List<IQuerySystem> querySystems;
         public List<ISetupSystem> setupSystems;
         public List<ICollisionSystem> collisionSystems;
+        public List<IUIDisplaySystem> uiDisplaySystems;
 
         public SystemPool()
         {
@@ -27,6 +28,7 @@ namespace DeftEngine
             querySystems = new List<IQuerySystem>();
             setupSystems = new List<ISetupSystem>();
             collisionSystems = new List<ICollisionSystem>();
+            uiDisplaySystems = new List<IUIDisplaySystem>();
         }
 
         public void SyncEntityQueriesWithPool()
@@ -46,6 +48,7 @@ namespace DeftEngine
             var isQuery = system as IQuerySystem;
             var isSetup = system as ISetupSystem;
             var isCollision = system as ICollisionSystem;
+            var isUIDisplay = system as IUIDisplaySystem;
 
             if (isDisplay != null)  displaySystems.    Add(isDisplay);
             if (isUpdate != null)   processSystems.     Add(isUpdate);
@@ -71,6 +74,9 @@ namespace DeftEngine
 
             if (isCollision != null)
                 collisionSystems.Add(isCollision);
+
+            if (isUIDisplay != null)
+                uiDisplaySystems.Add(isUIDisplay);
         }
 
         public void Add<T>() where T : ISystem

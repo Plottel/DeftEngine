@@ -123,6 +123,7 @@ namespace DeftEngine
 
             // TODO: Add your drawing code here
             ECSCore.RunDisplaySystems(spriteBatch);
+            ECSCore.RunUIDisplaySystems(spriteBatch);
 
             spriteBatch.End();
 

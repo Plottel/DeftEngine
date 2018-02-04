@@ -45,7 +45,16 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets.cs" />
     <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
+    <Compile Include="UI\UISystems\System_Event_DragUIOnMouseMove.cs" />
+    <Compile Include="UI\UISystems\System_Event_StopUIDragOnLeftRelease.cs" />
+    <Compile Include="UI\UISystems\System_Event_StartUIDragOnLeftPress.cs" />
+    <Compile Include="UI\UIComponents\Component_UI_Drag.cs" />
+    <Compile Include="UI\UIComponents\Component_UI_Selectable.cs" />
+    <Compile Include="UI\UISystems\System_Event_SelectUIOnLeftPress.cs" />
+    <Compile Include="UI\UIComponents\Component_UI_Draggable.cs" />
+    <Compile Include="Graphics\GraphicsComponents\Component_Display_Texture.cs" />
     <Compile Include="Geometry\Box.cs" />
     <Compile Include="Collisions\Collisions.cs" />
     <Compile Include="Collisions\Collision.cs" />
@@ -61,6 +70,7 @@
     <Compile Include="ECSCore\SystemInterfaces\ICollisionSystem.cs" />
     <Compile Include="ECSCore\ComponentInterfaces\IColliderComponent.cs" />
     <Compile Include="ExtensionMethods\IOExtensions.cs" />
+    <Compile Include="ECSCore\SystemInterfaces\IUIDisplaySystem.cs" />
     <Compile Include="Maker.cs" />
     <Compile Include="NormalizedVector.cs" />
     <Compile Include="Physics\PhysicsComponents\Component_Moved.cs" />
@@ -105,20 +115,21 @@
     <Compile Include="ExtensionMethods\SpriteBatchExtensions.cs" />
     <Compile Include="Debug\DebugSystems\System_Display_DebugCollisionBox.cs" />
     <Compile Include="Debug\DebugSystems\System_Process_DebugHack.cs" />
+    <Compile Include="Graphics\GraphicsSystems\System_Display_Texture.cs" />
     <Compile Include="Testing\Test_AABoxAABoxCollisions.cs" />
     <Compile Include="Testing\Test_AABoxCircleCollisions.cs" />
     <Compile Include="Testing\Test_ObjectCopying.cs" />
     <Compile Include="ExtensionMethods\VectorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Extended, Version=0.6.602.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Extended.0.6.602\lib\portable-net45+win8+wpa81\MonoGame.Extended.dll</HintPath>
+    <Reference Include="MonoGame.Extended, Version=1.0.617.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Extended.1.0.617\lib\portable-net45+win8+wpa81\MonoGame.Extended.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
@@ -131,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
+    <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
