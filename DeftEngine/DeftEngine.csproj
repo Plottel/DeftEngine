@@ -47,6 +47,15 @@
   <ItemGroup>
     <Compile Include="Assets.cs" />
     <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
+    <Compile Include="UI\UISystems\System_Event_ResizeUIOnMouseMove.cs" />
+    <Compile Include="UI\UISystems\System_Event_StopUIResizeOnLeftRelease.cs" />
+    <Compile Include="UI\UIComponents\Component_UI_Resize.cs" />
+    <Compile Include="UI\UISystems\System_Event_StartUIResizeOnLeftPress.cs" />
+    <Compile Include="UI\UISystems\System_UIDisplay_ResizePoints.cs" />
+    <Compile Include="UI\UIComponents\Component_UI_Resizable.cs" />
+    <Compile Include="Debug\DebugSystems\System_UIDisplay_DebugHack.cs" />
+    <Compile Include="UI\UIComponents\Component_UI_Selected.cs" />
+    <Compile Include="UI\UISystems\System_UIDisplay_SelectedBorder.cs" />
     <Compile Include="UI\UISystems\System_Event_DragUIOnMouseMove.cs" />
     <Compile Include="UI\UISystems\System_Event_StopUIDragOnLeftRelease.cs" />
     <Compile Include="UI\UISystems\System_Event_StartUIDragOnLeftPress.cs" />

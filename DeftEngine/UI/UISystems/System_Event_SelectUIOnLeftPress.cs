@@ -14,26 +14,32 @@ namespace DeftEngine
 
         public void OnEvent(DeftEvent theEvent, params object[] args)
         {
-            var entities = ECSCore.pool.GetEntities<Component_UI_Selectable>();
-            Component_UI_Selectable selectComp;
+            var selectableEntities = ECSCore.pool.GetEntities<Component_UI_Selectable>();
+            var selectedEntities = ECSCore.pool.GetEntities<Component_UI_Selected>();
             Rectangle uiBounds;
             Vector2 mousePos = Input.MousePos;
 
-            foreach (var e in entities)
-            {
-                selectComp = e.Get<Component_UI_Selectable>();
-                selectComp.isSelected = false;
-            }
+            var newSelectionEntities = new List<Entity>();
 
-            foreach (var e in entities)
+            // Determine which entities are part of the new selection.
+            foreach (var e in selectableEntities)
             {
-                selectComp = e.Get<Component_UI_Selectable>();
                 uiBounds = new Rectangle(e.Pos.ToPoint(), e.Size.ToPoint());
 
                 if (uiBounds.Contains(Input.MousePos))
-                    selectComp.isSelected = true;
+                    newSelectionEntities.Add(e);
             }
 
+            // If a selection was made, remove previous selection so only new selection remains.
+            if (newSelectionEntities.Count > 0)
+            {
+                for (int i = selectedEntities.Count - 1; i >= 0; --i)
+                    selectedEntities[i].Remove<Component_UI_Selected>();
+            }            
+
+            // Add components to new selection
+            for (int i = newSelectionEntities.Count - 1; i >= 0; --i)
+                newSelectionEntities[i].Add<Component_UI_Selected>();
         }
     }
 }

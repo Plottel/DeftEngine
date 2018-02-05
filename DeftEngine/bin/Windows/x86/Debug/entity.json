@@ -57,7 +57,9 @@
         "Height": 50
       }
     },
-    "DeftEngine.Component_UI_Draggable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": {}
+    "DeftEngine.Component_UI_Draggable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": {},
+    "DeftEngine.Component_UI_Selectable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": {},
+    "DeftEngine.Component_UI_Resizable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": {}
   },
   "ComponentList": [
     {
@@ -89,12 +91,16 @@
         "Height": 50
       }
     },
+    {},
+    {},
     {}
   ],
   "ComponentTypes": [
     "DeftEngine.Component_Moved, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
     "DeftEngine.Component_Display_Box, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
     "DeftEngine.Component_Collision_AABox, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "DeftEngine.Component_UI_Draggable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    "DeftEngine.Component_UI_Draggable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "DeftEngine.Component_UI_Selectable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "DeftEngine.Component_UI_Resizable, DeftEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
   ]
 }

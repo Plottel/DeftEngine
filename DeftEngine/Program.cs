@@ -34,6 +34,7 @@ namespace DeftEngine
         {
             ECSCore.systemPool.Add<System_Process_WASDMovement>();
             ECSCore.systemPool.Add<System_Process_DebugHack>();
+            ECSCore.systemPool.Add<System_UIDisplay_DebugHack>();
 
             var e = Maker.Make("Blank", new Vector2(200, 200), new Vector2(50, 50));
             e.Add<Component_Display_Box>();
@@ -41,6 +42,8 @@ namespace DeftEngine
             e.Add<Component_Collision_AABox>();
             //e.Add<Component_WASDMovement>();
             e.Add<Component_UI_Draggable>();
+            e.Add<Component_UI_Selectable>();
+            e.Add<Component_UI_Resizable>();
 
             var e2 = Maker.Make("Blank", new Vector2(350, 200), new Vector2(50, 50));
             e2.Add<Component_Display_Circle>();
@@ -56,8 +59,6 @@ namespace DeftEngine
             e4.Add<Component_Collision_Box>();
 
             Serializer.WriteEntityTo(e, "entity.json");
-
-            DeftDebug.ActivateDebugColliders();
             
         }
     }

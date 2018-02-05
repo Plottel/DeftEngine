@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DeftEngine
 {
-    public class Component_UI_Selectable : IComponent
+    public class Component_UI_Resizable : IComponent
     {
     }
 }

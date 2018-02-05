@@ -52,13 +52,23 @@ namespace DeftEngine
 
             systemPool.Add<System_Process_KillMe>();
 
+            systemPool.Add<System_Event_SelectUIOnLeftPress>();
+
+            systemPool.Add<System_Event_StartUIResizeOnLeftPress>();
             systemPool.Add<System_Event_StartUIDragOnLeftPress>();
+
+            systemPool.Add<System_Event_StopUIResizeOnLeftRelease>();
             systemPool.Add<System_Event_StopUIDragOnLeftRelease>();
+
+            systemPool.Add<System_Event_ResizeUIOnMouseMove>();
             systemPool.Add<System_Event_DragUIOnMouseMove>();
 
             systemPool.Add<System_Display_Texture>();
             systemPool.Add<System_Display_Box>();
             systemPool.Add<System_Display_Circle>();
+
+            systemPool.Add<System_UIDisplay_SelectedBorder>();
+            systemPool.Add<System_UIDisplay_ResizePoints>();
         }
 
         public static void Start()
