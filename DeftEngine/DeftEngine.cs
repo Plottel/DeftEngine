@@ -43,15 +43,12 @@ namespace DeftEngine
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             
-            graphics.PreferredBackBufferWidth = 1366;
-            graphics.PreferredBackBufferHeight = 768;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
 
             // Restrict mouse to stay within the window.
             Input.SetMaxMouseX(graphics.PreferredBackBufferWidth);
             Input.SetMaxMouseY(graphics.PreferredBackBufferHeight);
-
-            Assets.content = Content;
-            Assets.LoadAssets();
         }
 
         /// <summary>
@@ -66,6 +63,12 @@ namespace DeftEngine
 
             IsMouseVisible = true;
             Mouse.WindowHandle = Window.Handle;
+            Window.TextInput += Input.OnTextInput;
+
+            var dicks = Content.Load<SpriteFont>("Arial12");
+
+            Assets.content = Content;
+            Assets.LoadAssets();
 
             base.Initialize();
         }
@@ -102,8 +105,12 @@ namespace DeftEngine
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            Console.WriteLine(Input.InputString);
             Input.UpdateStates();
             this.gameTime = gameTime;
+
+            if (Input.KeyTyped(Keys.F1))
+                graphics.ToggleFullScreen();
 
             // TODO: Add your update logic here
             ECSCore.Update();

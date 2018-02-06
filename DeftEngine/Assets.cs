@@ -15,6 +15,9 @@ namespace DeftEngine
         private static Dictionary<string, Texture2D> _textures =
             new Dictionary<string, Texture2D>();
 
+        private static Dictionary<string, SpriteFont> _fonts =
+            new Dictionary<string, SpriteFont>();
+
         public static ContentManager content;
 
         private static void ShowAllFoldersUnder(string path, int indent)
@@ -28,6 +31,7 @@ namespace DeftEngine
 
         public static void LoadAssets()
         {
+            _fonts["arial12"] = content.Load<SpriteFont>("Arial12");
             return;
             // Recursively trace structure
 
@@ -66,6 +70,12 @@ namespace DeftEngine
                 return _textures[lower];
 
             throw new Exception("Texture with name: " + textureName + " not found.");
+        }
+
+        public static SpriteFont GetFont(string fontName)
+        {
+            string lower = fontName.ToLower();
+            return _fonts.ContainsKey(lower) ? _fonts[lower] : _fonts["arial12"];
         }
     }
 }

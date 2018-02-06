@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Assets.cs" />
     <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
+    <Compile Include="UI\DeftUI.cs" />
+    <Compile Include="Gadget.cs" />
     <Compile Include="UI\UISystems\System_Event_ResizeUIOnMouseMove.cs" />
     <Compile Include="UI\UISystems\System_Event_StopUIResizeOnLeftRelease.cs" />
     <Compile Include="UI\UIComponents\Component_UI_Resize.cs" />

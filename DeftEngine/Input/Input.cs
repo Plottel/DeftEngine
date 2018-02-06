@@ -9,10 +9,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace DeftEngine
 {
-    // TODO: Make mouse position relative to top-left corner of screen.
-
-
-
     /// <summary>
     /// Defines the core Input handling methods for the program.
     /// 
@@ -28,6 +24,9 @@ namespace DeftEngine
     /// </summary>
     public static class Input
     {
+        private static string _inputString = "";
+
+
         /// <summary>
         /// The state of the keyboard last tick. Used for evaluating KeyTyped and KeyReleased.
         /// </summary>
@@ -110,14 +109,6 @@ namespace DeftEngine
             // Update mouse states.
             oldMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
-        }
-
-        public static Keys[] TypedKeys
-        {
-            get
-            {
-                return currentKeyStates.GetPressedKeys().Where(key => !(oldKeyStates.GetPressedKeys().Contains(key))).ToArray();
-            }
         }
 
         /// <summary>
@@ -220,6 +211,42 @@ namespace DeftEngine
         public static void SetMaxMouseY(int max)
         {
             _maxMouseY = max;
+        }
+
+        public static void OnTextInput(object sender, TextInputEventArgs e)
+        {
+            char c = e.Character;
+
+            if (char.IsControl(c))
+                return;            
+
+            _inputString += c;
+
+            //int really = (int)e.Character;
+            //if (really == 8)
+            //{
+            //    _backSpaceRaw = true;
+            //}
+            //else if (really == 9)
+            //{
+            //    //something with tabs?
+            //}
+            //else
+            //{
+            //    _capturedChars += e.Character.ToString();
+            //}
+        }
+
+        public static string PumpInputString()
+        {
+            string result = _inputString;
+            _inputString = "";
+            return result;
+        }
+
+        public static string InputString
+        {
+            get => _inputString;
         }
     }
 }

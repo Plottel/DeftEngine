@@ -50,8 +50,8 @@ namespace DeftEngine
             // Add resize components
             if (anchorPoint != AnchorPoint.None)
             {
-                foreach (var e in entities)
-                    e.Add(new Component_UI_Resize { anchorPoint = anchorPoint });
+                for (int i = entities.Count - 1; i >= 0; --i)
+                    entities[i].Add(new Component_UI_Resize { anchorPoint = anchorPoint });
             }
         }
     }
