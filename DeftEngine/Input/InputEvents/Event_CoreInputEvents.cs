@@ -12,5 +12,8 @@ namespace DeftEngine
     public class Event_OnRightMousePress : DeftEvent { }
     public class Event_OnLeftMouseClick : DeftEvent { }
     public class Event_OnLeftMousePress : DeftEvent { }
+
     public class Event_OnMouseMove : DeftEvent { }
+    public class Event_OnLeftMouseDrag : DeftEvent { }
+    public class Event_OnRightMouseDrag : DeftEvent { }
 }

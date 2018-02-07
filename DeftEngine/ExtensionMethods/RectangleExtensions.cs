@@ -56,6 +56,19 @@ namespace DeftEngine
             };
         }
 
+        public static AnchorPoint GetBoxAnchorPointAtPos(this Rectangle r, Vector2 pos, int boxSize)
+        {
+            var boxes = r.Get8ExternalBorderBoxes(boxSize);
+
+            for (int i = 0; i < 8; ++i)
+            {
+                if (boxes[i].Contains(pos))
+                    return (AnchorPoint)i;
+            }
+
+            return AnchorPoint.None;
+        }
+
         public static Vector2[] Get8BorderVectors(this Rectangle r)
         {
             var mid = r.Center;

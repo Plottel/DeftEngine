@@ -7,7 +7,11 @@ using Microsoft.Xna.Framework;
 
 namespace DeftEngine
 {
-    public class Component_UI_Draggable : IComponent
+    public class Template_SetupSystem : ISystem, ISetupSystem
     {
+        public void Setup()
+        {
+
+        }
     }
 }

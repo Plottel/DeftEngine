@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace DeftEngine
 {
-    public class Component_UI_Resizable : IComponent
+    public class Template_ActionSystem : ISystem, IActionSystem
     {
+        public void ProcessActions()
+        {
+
+        }
     }
 }

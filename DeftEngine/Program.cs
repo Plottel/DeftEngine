@@ -43,19 +43,12 @@ namespace DeftEngine
             e.Get<Component_Display_Box>().color = Color.Blue;
             e.Add<Component_Collision_AABox>();
             //e.Add<Component_WASDMovement>();
-            e.Add<Component_UI_Draggable>();
-            e.Add<Component_UI_Selectable>();
-            e.Add<Component_UI_Resizable>();
 
             var e2 = Maker.Make("Blank", new Vector2(350, 200), new Vector2(50, 50));
             e2.Add<Component_Display_Circle>();
             e2.Get<Component_Display_Circle>().color = Color.Blue;
             e2.Add<Component_Collision_Circle>();
             //e2.Add<Component_WASDMovement>();
-            e2.Add<Component_UI_Draggable>();
-            e2.Add<Component_UI_Selectable>();
-            e2.Add<Component_UI_Resizable>();
-
 
             var e3 = Maker.Make("Blank", new Vector2(500, 500), new Vector2(50, 75));
             e3.Add<Component_Collision_Box>();
@@ -64,7 +57,14 @@ namespace DeftEngine
             var e4 = Maker.Make("Blank", new Vector2(280, 180), new Vector2(84, 25));
             e4.Add<Component_Collision_Box>();
 
-            Serializer.WriteEntityTo(e, "entity.json");
+            Gadget g = new Gadget();
+            g.isDraggable = true;
+            g.isResizable = true;
+            g.layer = 10;
+            g.Pos = new Vector2(800, 200);
+            g.Size = new Vector2(100, 50);
+
+            DeftUI.AddGadget(g);
             
         }
     }

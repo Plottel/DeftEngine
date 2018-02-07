@@ -20,7 +20,7 @@ namespace DeftEngine
             foreach (var e in entities)
             {
                 box = e.Get<Component_Collision_AABox>();
-                color = ECSCore.collisionPool.HasCollision(e) ? Color.Red : Color.LawnGreen;
+                color = ECSCore.collisionPool.HasCollision(e) ? Color.Red : ColorScheme.UISelect;
 
                 spriteBatch.DrawRectangle(box.Bounds, color, 1);
             }

@@ -45,26 +45,26 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnchorPoint.cs" />
     <Compile Include="Assets.cs" />
     <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
+    <Compile Include="UI\UISystems\System_Event_DragAndResizeFocusGadget.cs" />
+    <Compile Include="UI\UISystems\System_Event_UpdateUIFocusState.cs" />
+    <Compile Include="UI\UISystems\System_UIDisplay_DisplayGadgets.cs" />
+    <Compile Include="UI\UISystems\System_UIDisplay_FocusGadgetOverlay.cs" />
+    <Compile Include="UI\UISystems\System_Event_SelectUIFocus.cs" />
+    <Compile Include="Templates\Template_EventSystem.cs" />
+    <Compile Include="Templates\Template_ProcessSystem.cs" />
+    <Compile Include="Templates\Template_ActionSystem.cs" />
+    <Compile Include="Templates\Template_DisplaySystem.cs" />
+    <Compile Include="Templates\Template_UIDisplaySystem.cs" />
+    <Compile Include="Templates\Template_CollisionSystem.cs" />
+    <Compile Include="Templates\Template_SetupSystem.cs" />
+    <Compile Include="Templates\Template_Component.cs" />
+    <Compile Include="UI\ColorScheme.cs" />
     <Compile Include="UI\DeftUI.cs" />
-    <Compile Include="Gadget.cs" />
-    <Compile Include="UI\UISystems\System_Event_ResizeUIOnMouseMove.cs" />
-    <Compile Include="UI\UISystems\System_Event_StopUIResizeOnLeftRelease.cs" />
-    <Compile Include="UI\UIComponents\Component_UI_Resize.cs" />
-    <Compile Include="UI\UISystems\System_Event_StartUIResizeOnLeftPress.cs" />
-    <Compile Include="UI\UISystems\System_UIDisplay_ResizePoints.cs" />
-    <Compile Include="UI\UIComponents\Component_UI_Resizable.cs" />
+    <Compile Include="UI\Gadget.cs" />
     <Compile Include="Debug\DebugSystems\System_UIDisplay_DebugHack.cs" />
-    <Compile Include="UI\UIComponents\Component_UI_Selected.cs" />
-    <Compile Include="UI\UISystems\System_UIDisplay_SelectedBorder.cs" />
-    <Compile Include="UI\UISystems\System_Event_DragUIOnMouseMove.cs" />
-    <Compile Include="UI\UISystems\System_Event_StopUIDragOnLeftRelease.cs" />
-    <Compile Include="UI\UISystems\System_Event_StartUIDragOnLeftPress.cs" />
-    <Compile Include="UI\UIComponents\Component_UI_Drag.cs" />
-    <Compile Include="UI\UIComponents\Component_UI_Selectable.cs" />
-    <Compile Include="UI\UISystems\System_Event_SelectUIOnLeftPress.cs" />
-    <Compile Include="UI\UIComponents\Component_UI_Draggable.cs" />
     <Compile Include="Graphics\GraphicsComponents\Component_Display_Texture.cs" />
     <Compile Include="Geometry\Box.cs" />
     <Compile Include="Collisions\Collisions.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="ECSCore\DeftAction.cs" />
     <Compile Include="DeftEngine.cs" />
     <Compile Include="ECSCore\DeftEvent.cs" />
-    <Compile Include="EntityModel\ECSCore.cs" />
+    <Compile Include="ECSCore\ECSCore.cs" />
     <Compile Include="EntityModel\Entity.cs" />
     <Compile Include="ECSCore\Pools\EntityPool.cs" />
     <Compile Include="ECSCore\Pools\EventPool.cs" />
@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Debug\DebugComponents\" />
+    <Folder Include="UI\UIComponents\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

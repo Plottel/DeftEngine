@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace DeftEngine
 {
@@ -15,9 +16,13 @@ namespace DeftEngine
 
         public bool isDraggable;
         public bool isResizable;
+        public bool canReceiveTextInput;
 
         private Vector2 _pos;
+        private Vector2 _size;
         private Rectangle _bounds;
+
+        public int layer;
 
         public Vector2 Pos
         {
@@ -65,7 +70,18 @@ namespace DeftEngine
                 _pos.Y = value;
                 _bounds.Y = (int)_pos.Y;
             }
-        }    
+        }   
+        
+        public Vector2 Size
+        {
+            get => _size;
+
+            set
+            {
+                _size = value;
+                _bounds.Size = _size.ToPoint();
+            }
+        }
 
         public Rectangle Bounds
         {
@@ -85,6 +101,8 @@ namespace DeftEngine
         { }
 
         public virtual void Display(SpriteBatch spriteBatch)
-        {}
+        {
+            spriteBatch.FillRectangle(_bounds, ColorScheme.GadgetBackground);
+        }
     }
 }

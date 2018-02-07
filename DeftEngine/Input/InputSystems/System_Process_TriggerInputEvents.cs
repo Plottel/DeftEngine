@@ -16,6 +16,8 @@ namespace DeftEngine
         {
             var pool = ECSCore.eventPool;
 
+            bool mouseMoved = Input.DeltaMousePos != Vector2.Zero;
+
             // Trigger events if their conditions are met.
             if (Input.RightMouseClicked())
                 pool.Trigger<Event_OnRightMouseClick>();
@@ -25,8 +27,16 @@ namespace DeftEngine
                 pool.Trigger<Event_OnLeftMouseClick>();
             if (Input.LeftMousePressed())
                 pool.Trigger<Event_OnLeftMousePress>();
-            if (Input.DeltaMousePos != Vector2.Zero)
+
+            if (mouseMoved)
+            {
                 pool.Trigger<Event_OnMouseMove>(Input.DeltaMousePos);
+
+                if (Input.LeftMouseDown())
+                    pool.Trigger<Event_OnLeftMouseDrag>(Input.DeltaMousePos);
+                if (Input.RightMouseDown())
+                    pool.Trigger<Event_OnRightMouseDrag>(Input.DeltaMousePos);
+            }                
         }
     }
 }

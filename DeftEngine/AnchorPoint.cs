@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace DeftEngine
 {
-    // Start at top left and work around clockwise.
+    // Start at top left, work around clockwise
     public enum AnchorPoint
     {
         TopLeft = 0,
@@ -19,10 +19,5 @@ namespace DeftEngine
         BotLeft = 6,
         Left = 7,
         None = 8
-    }
-
-    public class Component_UI_Resize : IComponent
-    {
-        public AnchorPoint anchorPoint;
     }
 }

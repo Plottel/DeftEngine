@@ -23,8 +23,8 @@ namespace DeftEngine
                 color = ECSCore.collisionPool.HasCollision(e) ? Color.Red : Color.LawnGreen;
 
                 spriteBatch.DrawBox(box, color);
-                spriteBatch.DrawLine(box.Center, box.Center + box.LocalXAxis * (box.Size.X * 1.5f), Color.LawnGreen, 1);
-                spriteBatch.DrawLine(box.Center, box.Center + box.LocalYAxis * (box.Size.Y * 1.5f), Color.LawnGreen, 1);
+                spriteBatch.DrawLine(box.Center, box.Center + box.LocalXAxis * (box.Size.X * 1.5f), ColorScheme.UISelect, 1);
+                spriteBatch.DrawLine(box.Center, box.Center + box.LocalYAxis * (box.Size.Y * 1.5f), ColorScheme.UISelect, 1);
                 spriteBatch.DrawPoint(box.ClosestPointTo(Input.MousePos), Color.Red, 5);
             }
 

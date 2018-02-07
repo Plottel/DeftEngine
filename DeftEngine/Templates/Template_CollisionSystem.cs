@@ -7,8 +7,11 @@ using Microsoft.Xna.Framework;
 
 namespace DeftEngine
 {
-    public class Component_UI_Drag : IComponent
+    public class Template_CollisionSystem : ISystem, ICollisionSystem
     {
-        public Vector2 dragStartPos;
+        public void HandleCollisions()
+        {
+
+        }
     }
 }
