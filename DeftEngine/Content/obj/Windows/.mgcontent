@@ -4,9 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Arial12.spritefont</File>
-    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Arial.spritefont</File>
-    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/GadgetBackground.jpg</File>
-    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/DefaultTexture.png</File>
+    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/Arial.spritefont</File>
+    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/Arial12.spritefont</File>
+    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Textures/DefaultTexture.png</File>
+    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Textures/GadgetBackground.jpg</File>
   </SourceFiles>
 </SourceFileCollection>

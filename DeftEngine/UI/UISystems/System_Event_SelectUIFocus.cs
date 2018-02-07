@@ -61,9 +61,9 @@ namespace DeftEngine
             foreach (var g in DeftUI.Gadgets)
             {
                 if (g.layer > layer && g.Bounds.Contains(pos))
-                    return true;
+                    return false;
             }
-            return false;
+            return true;
         }
     }
 }

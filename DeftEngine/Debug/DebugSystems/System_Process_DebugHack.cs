@@ -18,6 +18,12 @@ namespace DeftEngine
                 foreach (var e in entities)
                     e.Rotation += 1;
             }
+
+            if (Input.KeyTyped(Keys.Space))
+            {
+                if (DeftUI.focus != null)
+                    DeftUI.focus.AddGadget<InputBox>("Dicks");
+            }
         }
     }
 }

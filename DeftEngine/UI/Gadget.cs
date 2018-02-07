@@ -11,6 +11,9 @@ namespace DeftEngine
 {
     public class Gadget
     {
+        public const int X_PADDING = 5;
+        public const int Y_PADDING = 3;
+
         public Gadget parent;
         private List<Gadget> _children = new List<Gadget>();
 
@@ -20,16 +23,29 @@ namespace DeftEngine
         public bool alwaysShowTexture = false;
 
         public string backgroundTextureName;
+        public string label;
 
         private Vector2 _pos;
         private Vector2 _size;
         private Rectangle _bounds;
 
+        public float LastGadgetBottom
+        {
+            get
+            {
+                if (_children.Count == 0)
+                    return _pos.Y;
+
+                return _children[_children.Count - 1].Bounds.Bottom;
+            }
+        }
+
         public int layer;
 
         public Gadget()
         {
-            backgroundTextureName = "GadgetBackground"; 
+            backgroundTextureName = "GadgetBackground";
+            Size = new Vector2(75, 50);
         }
 
         public Vector2 Pos
@@ -94,6 +110,30 @@ namespace DeftEngine
         public Rectangle Bounds
         {
             get => _bounds;
+        }
+
+        public T AddGadget<T>(string label) where T : Gadget
+        {
+            var newGadget = (T)Activator.CreateInstance(typeof(T));
+            newGadget.layer = this.layer + 1;
+            newGadget.label = label;
+
+            // Stuff in here about sizes and such
+            newGadget.Pos = new Vector2(_pos.X + X_PADDING, LastGadgetBottom + Y_PADDING);
+
+            int overflow = newGadget.Bounds.Bottom - Bounds.Bottom;
+
+            if (overflow > 0)
+                Size += new Vector2(0, overflow + Y_PADDING);
+
+            _children.Add(newGadget);
+            DeftUI.AddGadget(newGadget);
+            return newGadget;
+        }
+
+        public T GetGadget<T>(string label) where T : Gadget
+        {
+            return _children.Find(g => g.label == label) as T;
         }
         
         public virtual void OnSelect()

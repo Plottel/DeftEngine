@@ -31,49 +31,38 @@ namespace DeftEngine
 
         public static void LoadAssets()
         {
-            _fonts["arial12"] = content.Load<SpriteFont>("Arial12");
-            _textures["gadgetbackground"] = content.Load<Texture2D>("GadgetBackground");
-            _textures["defaulttexture"] = content.Load<Texture2D>("DefaultTexture");
-            return;
-            // Recursively trace structure
-
-            // foreach folder
-            // Load Textures in that folder
-            // fetch all folders
-            // repeat until no more sub folders
-            LoadAssetsUnder("Content/Textures/");
-
-
-            var allTextureNames = Directory.GetFiles("Content/Textures/", "*.xnb").Select(Path.GetFileNameWithoutExtension).ToList();
-            foreach (var textureName in allTextureNames)
-                _textures[textureName.ToLower()] = content.Load<Texture2D>("Textures/" + textureName);
+            LoadTexturesUnder("Textures");
+            LoadFontsUnder("Fonts");
         }
 
-        public static void LoadAssetsUnder(string path)
+        private static void LoadTexturesUnder(string path)
         {
-            foreach (string folder in Directory.GetDirectories(path))
-            {
-                var allTextureNames = Directory.GetFiles(path, "*.xnb").Select(Path.GetFileNameWithoutExtension).ToList();
+            var allTextureNames = Directory.GetFiles("Content/" + path, "*.xnb").Select(Path.GetFileNameWithoutExtension).ToList();
+            foreach (var textureName in allTextureNames)
+                _textures[textureName.ToLower()] = content.Load<Texture2D>(path + "/" + textureName);
 
-                foreach (var textureName in allTextureNames)
-                    _textures[textureName.ToLower()] = content.Load<Texture2D>(path + textureName);
+            foreach (string folder in Directory.GetDirectories("Content/" + path))
+                LoadTexturesUnder(folder.Replace("Content/", ""));
+        }
 
-                LoadAssetsUnder(folder);
-            }
+        private static void LoadFontsUnder(string path)
+        {
+            var allFontNames = Directory.GetFiles("Content/" + path, "*.xnb").Select(Path.GetFileNameWithoutExtension).ToList();
+            foreach (var fontName in allFontNames)
+                _fonts[fontName.ToLower()] = content.Load<SpriteFont>(path + "/" + fontName);
+
+            foreach (string folder in Directory.GetDirectories("Content/" + path))
+                LoadTexturesUnder(folder.Replace("Content/", ""));
         }
 
         public static bool HasTexture(string textureName) => _textures.ContainsKey(textureName.ToLower());
-
         public static Texture2D GetTexture(string textureName)
         {
             var lower = textureName.ToLower();
-
-            if (_textures.ContainsKey(lower))
-                return _textures[lower];
-
-            throw new Exception("Texture with name: " + textureName + " not found.");
+            return _textures.ContainsKey(lower) ? _textures[lower] : _textures["defaulttexture"];
         }
 
+        public static bool HasFont(string fontName) => _fonts.ContainsKey(fontName.ToLower());
         public static SpriteFont GetFont(string fontName)
         {
             string lower = fontName.ToLower();

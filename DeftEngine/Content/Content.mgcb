@@ -13,21 +13,21 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Arial12.spritefont
+#begin Fonts/Arial.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Arial12.spritefont
+/build:Fonts/Arial.spritefont
 
-#begin Arial.spritefont
+#begin Fonts/Arial12.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Arial.spritefont
+/build:Fonts/Arial12.spritefont
 
-#begin GadgetBackground.jpg
+#begin Textures/DefaultTexture.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -37,9 +37,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:GadgetBackground.jpg
+/build:Textures/DefaultTexture.png
 
-#begin DefaultTexture.png
+#begin Textures/GadgetBackground.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -49,5 +49,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:DefaultTexture.png
+/build:Textures/GadgetBackground.jpg
 
