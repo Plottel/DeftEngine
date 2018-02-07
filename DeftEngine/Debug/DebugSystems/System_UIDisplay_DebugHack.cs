@@ -22,6 +22,13 @@ namespace DeftEngine
                 _string = _string.Remove(_string.Length - 1);
 
             spriteBatch.DrawString(Assets.GetFont("Arial12"), _string, new Vector2(100, 100), Color.Black);
+
+            spriteBatch.DrawString((DeftUI.focus == null).ToString(), new Vector2(800, 100), Color.Black);
+
+            if (DeftUI.focus != null)
+            {
+                spriteBatch.DrawString("Focus Type: " + DeftUI.focus.GetType().ToString(), new Vector2(800, 150), Color.Black);
+            }
         }
     }
 }

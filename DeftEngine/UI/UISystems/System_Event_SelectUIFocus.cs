@@ -33,7 +33,9 @@ namespace DeftEngine
                 }
                 else // Mouse not within focus borders
                 {
-                    if (focus.isResizable && focus.Bounds.GetBoxAnchorPointAtPos(Input.MousePos, 7) == AnchorPoint.None)
+                    if (!focus.isResizable)
+                        SelectNewFocusGadget();
+                    else if (focus.Bounds.GetBoxAnchorPointAtPos(Input.MousePos, 7) == AnchorPoint.None)
                         SelectNewFocusGadget();
                 }
             }

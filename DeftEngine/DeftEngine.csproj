@@ -48,7 +48,7 @@
     <Compile Include="AnchorPoint.cs" />
     <Compile Include="Assets.cs" />
     <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
-    <Compile Include="InputBox.cs" />
+    <Compile Include="UI\InputBox.cs" />
     <Compile Include="UI\UISystems\System_Event_DragAndResizeFocusGadget.cs" />
     <Compile Include="UI\UISystems\System_Event_UpdateUIFocusState.cs" />
     <Compile Include="UI\UISystems\System_UIDisplay_DisplayGadgets.cs" />

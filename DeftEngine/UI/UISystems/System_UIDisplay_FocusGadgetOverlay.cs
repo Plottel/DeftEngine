@@ -17,7 +17,7 @@ namespace DeftEngine
 
             if (focus != null)
             {
-                if (focus.isDraggable)
+                //if (focus.isDraggable)
                     spriteBatch.DrawRectangle(focus.Bounds, ColorScheme.UISelect, 1);
 
                 if (focus.isResizable)

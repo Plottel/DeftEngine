@@ -26,13 +26,13 @@ namespace DeftEngine
                 DeftUI.focusState = UIFocusState.None;
             else if (eventType == typeof(Event_OnLeftMousePress))
             {
-                if (DeftUI.focus.Bounds.Contains(Input.MousePos))
+                if (DeftUI.focus.Bounds.Contains(Input.MousePos) && DeftUI.focus.isDraggable)
                     DeftUI.focusState = UIFocusState.Dragging;
                 else
                 {
                     var anchor = DeftUI.focus.Bounds.GetBoxAnchorPointAtPos(Input.MousePos, 15);
 
-                    if (anchor != AnchorPoint.None)
+                    if (anchor != AnchorPoint.None && DeftUI.focus.isResizable)
                     {
                         DeftUI.focusState = UIFocusState.Resizing;
                         DeftUI.focusResizeAnchor = anchor;

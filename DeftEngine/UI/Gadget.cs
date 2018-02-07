@@ -117,6 +117,8 @@ namespace DeftEngine
             var newGadget = (T)Activator.CreateInstance(typeof(T));
             newGadget.layer = this.layer + 1;
             newGadget.label = label;
+            newGadget.isDraggable = false;
+            newGadget.isResizable = false;
 
             // Stuff in here about sizes and such
             newGadget.Pos = new Vector2(_pos.X + X_PADDING, LastGadgetBottom + Y_PADDING);
