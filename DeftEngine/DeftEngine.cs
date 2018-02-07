@@ -65,11 +65,6 @@ namespace DeftEngine
             Mouse.WindowHandle = Window.Handle;
             Window.TextInput += Input.OnTextInput;
 
-            var dicks = Content.Load<SpriteFont>("Arial12");
-
-            Assets.content = Content;
-            Assets.LoadAssets();
-
             base.Initialize();
         }
 
@@ -84,6 +79,8 @@ namespace DeftEngine
             ECSCore.spriteBatch = spriteBatch;
 
             // TODO: use this.Content to load your game content here
+            Assets.content = Content;
+            Assets.LoadAssets();
         }
 
         /// <summary>

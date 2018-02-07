@@ -101,3 +101,5 @@ C:\Users\Matt\Desktop\DeftEngine-master\DeftEngine\obj\x86\Debug\DeftEngine.pdb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\DeftEngine.exe.config
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Arial12.xnb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Arial.xnb
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\GadgetBackground.xnb
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\DefaultTexture.xnb

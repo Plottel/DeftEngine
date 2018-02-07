@@ -17,12 +17,20 @@ namespace DeftEngine
         public bool isDraggable;
         public bool isResizable;
         public bool canReceiveTextInput;
+        public bool alwaysShowTexture = false;
+
+        public string backgroundTextureName;
 
         private Vector2 _pos;
         private Vector2 _size;
         private Rectangle _bounds;
 
         public int layer;
+
+        public Gadget()
+        {
+            backgroundTextureName = "GadgetBackground"; 
+        }
 
         public Vector2 Pos
         {
@@ -102,7 +110,8 @@ namespace DeftEngine
 
         public virtual void Display(SpriteBatch spriteBatch)
         {
-            spriteBatch.FillRectangle(_bounds, ColorScheme.GadgetBackground);
+            if (parent == null || alwaysShowTexture)
+                spriteBatch.Draw(Assets.GetTexture(backgroundTextureName), Pos, 0, Size);
         }
     }
 }

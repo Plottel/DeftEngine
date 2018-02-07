@@ -12,10 +12,13 @@ namespace DeftEngine
     public static class SpriteBatchExtensions
     {
         /// <summary>
-        /// Draws an entire Texture. Rescales the texture according to passed in Scale vector.
+        /// Draws an entire Texture. Rescales the texture according to passed in size Vector.
         /// </summary>
-        public static void Draw(this SpriteBatch spriteBatch, Texture2D texture, Vector2 pos, float rotation, Vector2 scale)
+        public static void Draw(this SpriteBatch spriteBatch, Texture2D texture, Vector2 pos, float rotation, Vector2 size)
         {
+            var scale = new Vector2(size.X / texture.Width, size.Y / texture.Height);
+
+
             var midVec = new Vector2((texture.Width * scale.X) / 2, (texture.Height * scale.Y) / 2);
             var unscaledMidVec = new Vector2(texture.Width / 2, texture.Height / 2);
 

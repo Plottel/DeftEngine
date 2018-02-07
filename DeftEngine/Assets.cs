@@ -32,6 +32,8 @@ namespace DeftEngine
         public static void LoadAssets()
         {
             _fonts["arial12"] = content.Load<SpriteFont>("Arial12");
+            _textures["gadgetbackground"] = content.Load<Texture2D>("GadgetBackground");
+            _textures["defaulttexture"] = content.Load<Texture2D>("DefaultTexture");
             return;
             // Recursively trace structure
 
