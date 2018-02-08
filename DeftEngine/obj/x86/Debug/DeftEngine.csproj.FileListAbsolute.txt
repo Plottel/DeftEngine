@@ -105,3 +105,4 @@ C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\Arial12.xnb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Textures\DefaultTexture.xnb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Textures\GadgetBackground.xnb
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\Arial10.xnb

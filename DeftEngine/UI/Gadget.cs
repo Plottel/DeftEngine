@@ -23,11 +23,26 @@ namespace DeftEngine
         public bool alwaysShowTexture = false;
 
         public string backgroundTextureName;
-        public string label;
+
+        protected string _label;
+        public virtual string Label
+        {
+            get => _label;
+            set => _label = value;
+        }
 
         private Vector2 _pos;
         private Vector2 _size;
         private Rectangle _bounds;
+
+        public int layer;
+
+        public Gadget()
+        {
+            backgroundTextureName = "GadgetBackground";
+            Size = new Vector2(75, 50);
+            Label = "";
+        }
 
         public float LastGadgetBottom
         {
@@ -38,14 +53,6 @@ namespace DeftEngine
 
                 return _children[_children.Count - 1].Bounds.Bottom;
             }
-        }
-
-        public int layer;
-
-        public Gadget()
-        {
-            backgroundTextureName = "GadgetBackground";
-            Size = new Vector2(75, 50);
         }
 
         public Vector2 Pos
@@ -61,6 +68,11 @@ namespace DeftEngine
 
                 _pos = value;
                 _bounds.Location = _pos.ToPoint();
+
+                OnDrag();
+
+                foreach (var child in _children)
+                    child.OnDrag();
             }
         }
 
@@ -77,6 +89,11 @@ namespace DeftEngine
 
                 _pos.X = value;
                 _bounds.X = (int)_pos.X;
+
+                OnDrag();
+
+                foreach (var child in _children)
+                    child.OnDrag();
             }
         }
 
@@ -93,6 +110,11 @@ namespace DeftEngine
 
                 _pos.Y = value;
                 _bounds.Y = (int)_pos.Y;
+
+                OnDrag();
+
+                foreach (var child in _children)
+                    child.OnDrag();
             }
         }   
         
@@ -102,8 +124,17 @@ namespace DeftEngine
 
             set
             {
+                Vector2 delta = value - _size; 
                 _size = value;
                 _bounds.Size = _size.ToPoint();
+
+                OnResize();
+
+                foreach (var child in _children)
+                {
+                    child.OnResize();
+                    child.Size += new Vector2(delta.X, 0);
+                }
             }
         }
 
@@ -115,18 +146,23 @@ namespace DeftEngine
         public T AddGadget<T>(string label) where T : Gadget
         {
             var newGadget = (T)Activator.CreateInstance(typeof(T));
+            newGadget.parent = this;
+            newGadget.Size = new Vector2(Size.X - (X_PADDING * 2), newGadget.Size.Y);
             newGadget.layer = this.layer + 1;
-            newGadget.label = label;
+            newGadget.Label = label;
             newGadget.isDraggable = false;
             newGadget.isResizable = false;
 
             // Stuff in here about sizes and such
             newGadget.Pos = new Vector2(_pos.X + X_PADDING, LastGadgetBottom + Y_PADDING);
 
-            int overflow = newGadget.Bounds.Bottom - Bounds.Bottom;
+            int overflowY = newGadget.Bounds.Bottom - Bounds.Bottom;
+            if (overflowY > 0)
+                Size += new Vector2(0, overflowY + Y_PADDING);
 
-            if (overflow > 0)
-                Size += new Vector2(0, overflow + Y_PADDING);
+            int overflowX = newGadget.Bounds.Right - Bounds.Right;
+            if (overflowX > 0)
+                Size += new Vector2(overflowX + X_PADDING, 0);
 
             _children.Add(newGadget);
             DeftUI.AddGadget(newGadget);
@@ -135,7 +171,7 @@ namespace DeftEngine
 
         public T GetGadget<T>(string label) where T : Gadget
         {
-            return _children.Find(g => g.label == label) as T;
+            return _children.Find(g => g.Label == label) as T;
         }
         
         public virtual void OnSelect()
@@ -147,7 +183,7 @@ namespace DeftEngine
         public virtual void OnResize()
         { }
 
-        public virtual void OnTextEntry()
+        public virtual void OnTextEntry(string text)
         { }
 
         public virtual void Display(SpriteBatch spriteBatch)

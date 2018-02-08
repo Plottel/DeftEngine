@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace DeftEngine
 {
@@ -36,7 +37,14 @@ namespace DeftEngine
                     pool.Trigger<Event_OnLeftMouseDrag>(Input.DeltaMousePos);
                 if (Input.RightMouseDown())
                     pool.Trigger<Event_OnRightMouseDrag>(Input.DeltaMousePos);
-            }                
+            }
+
+            if (Input.InputString != "")
+                pool.Trigger<Event_OnTextEntry>(Input.InputString);
+            if (Input.KeyTyped(Keys.Back))
+                pool.Trigger<Event_OnTextEntry>("BACKSPACE");
+            if (Input.KeyTyped(Keys.Delete))
+                pool.Trigger<Event_OnTextEntry>("DELETE");
         }
     }
 }
