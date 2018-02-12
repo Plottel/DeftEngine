@@ -21,6 +21,8 @@ namespace DeftEngine
         public bool isResizable;
         public bool canReceiveTextInput;
         public bool alwaysShowTexture = false;
+        public bool inheritSizeX = true;
+        public bool inheritSizeY = false;
 
         public string backgroundTextureName;
 
@@ -40,7 +42,7 @@ namespace DeftEngine
         public Gadget()
         {
             backgroundTextureName = "GadgetBackground";
-            Size = new Vector2(75, 50);
+            SetSize(new Vector2(75, 50));
             Label = "";
         }
 
@@ -57,85 +59,12 @@ namespace DeftEngine
 
         public Vector2 Pos
         {
-            get => _pos;
-
-            set
-            {
-                Vector2 delta = value - _pos;
-
-                foreach (var child in _children)
-                    child.Pos += delta;
-
-                _pos = value;
-                _bounds.Location = _pos.ToPoint();
-
-                OnDrag();
-
-                foreach (var child in _children)
-                    child.OnDrag();
-            }
-        }
-
-        public float X
-        {
-            get => _pos.X;
-
-            set
-            {
-                float delta = value - _pos.X;
-
-                foreach (var child in _children)
-                    child.X += delta;
-
-                _pos.X = value;
-                _bounds.X = (int)_pos.X;
-
-                OnDrag();
-
-                foreach (var child in _children)
-                    child.OnDrag();
-            }
-        }
-
-        public float Y
-        {
-            get => _pos.Y;
-
-            set
-            {
-                float delta = value - _pos.Y;
-
-                foreach (var child in _children)
-                    child.Y += delta;
-
-                _pos.Y = value;
-                _bounds.Y = (int)_pos.Y;
-
-                OnDrag();
-
-                foreach (var child in _children)
-                    child.OnDrag();
-            }
-        }   
+            get => _pos;            
+        } 
         
         public Vector2 Size
         {
             get => _size;
-
-            set
-            {
-                Vector2 delta = value - _size; 
-                _size = value;
-                _bounds.Size = _size.ToPoint();
-
-                OnResize();
-
-                foreach (var child in _children)
-                {
-                    child.OnResize();
-                    child.Size += new Vector2(delta.X, 0);
-                }
-            }
         }
 
         public Rectangle Bounds
@@ -147,22 +76,22 @@ namespace DeftEngine
         {
             var newGadget = (T)Activator.CreateInstance(typeof(T));
             newGadget.parent = this;
-            newGadget.Size = new Vector2(Size.X - (X_PADDING * 2), newGadget.Size.Y);
+            newGadget.SetSize(new Vector2(Size.X - (X_PADDING * 2), newGadget.Size.Y));
             newGadget.layer = this.layer + 1;
             newGadget.Label = label;
             newGadget.isDraggable = false;
             newGadget.isResizable = false;
 
             // Stuff in here about sizes and such
-            newGadget.Pos = new Vector2(_pos.X + X_PADDING, LastGadgetBottom + Y_PADDING);
+            newGadget.MoveTo(new Vector2(_pos.X + X_PADDING, LastGadgetBottom + Y_PADDING));
 
             int overflowY = newGadget.Bounds.Bottom - Bounds.Bottom;
             if (overflowY > 0)
-                Size += new Vector2(0, overflowY + Y_PADDING);
+                Resize(new Vector2(0, overflowY + Y_PADDING));
 
             int overflowX = newGadget.Bounds.Right - Bounds.Right;
             if (overflowX > 0)
-                Size += new Vector2(overflowX + X_PADDING, 0);
+                Resize(new Vector2(overflowX + X_PADDING, 0));
 
             _children.Add(newGadget);
             DeftUI.AddGadget(newGadget);
@@ -177,11 +106,60 @@ namespace DeftEngine
         public virtual void OnSelect()
         { }
 
-        public virtual void OnDrag()
-        { }
+        public virtual void MoveTo(Vector2 newPos)
+        {
+            var delta = newPos - _pos;
 
-        public virtual void OnResize()
-        { }
+            _pos = newPos;
+            _bounds.Location = _pos.ToPoint();
+
+            foreach (var child in _children)
+                child.OnParentMoveBy(delta);
+        }
+
+        public void MoveToX(float newX) => MoveTo(new Vector2(newX, _pos.Y));
+        public void MoveToY(float newY) => MoveTo(new Vector2(_pos.X, newY));
+
+        public void MoveBy(Vector2 delta) => MoveTo(_pos + delta);
+        public void MoveByX(float deltaX) => MoveTo(new Vector2(_pos.X + deltaX, _pos.Y));
+        public void MoveByY(float deltaY) => MoveTo(new Vector2(_pos.X, _pos.Y + deltaY));
+
+        public virtual void SetSize(Vector2 newSize)
+        {
+            Vector2 delta = newSize - _size;
+            Resize(delta);
+        }
+
+        public virtual void Resize(Vector2 deltaSize)
+        {
+            _size += deltaSize;
+            _bounds.Size = _size.ToPoint();
+
+            foreach (var child in _children)
+                child.OnParentResize(deltaSize);
+        }
+
+        public virtual void OnParentResize(Vector2 deltaSize)
+        {
+            if (inheritSizeX)
+                _size.X += deltaSize.X;
+            if (inheritSizeY)
+                _size.Y += deltaSize.Y;
+
+            _bounds.Size = _size.ToPoint();
+
+            foreach (var child in _children)
+                child.OnParentResize(deltaSize);
+        }
+
+        public virtual void OnParentMoveBy(Vector2 delta)
+        {
+            _pos += delta;
+            _bounds.Location = _pos.ToPoint();
+
+            foreach (var child in _children)
+                child.OnParentMoveBy(delta);
+        }
 
         public virtual void OnTextEntry(string text)
         { }

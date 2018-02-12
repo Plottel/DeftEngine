@@ -61,11 +61,10 @@ namespace DeftEngine
             g.isDraggable = true;
             g.isResizable = true;
             g.layer = 10;
-            g.Pos = new Vector2(800, 200);
-            g.Size = new Vector2(100, 50);
+            g.MoveTo(new Vector2(800, 200));
+            g.SetSize(new Vector2(100, 50));
 
-            DeftUI.AddGadget(g);
-            
+            DeftUI.AddGadget(g);            
         }
     }
 #endif

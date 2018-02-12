@@ -35,42 +35,40 @@ namespace DeftEngine
 
             if (anchor == AnchorPoint.Left)
             {
-                g.X += dx;
-                g.Size += new Vector2(-dx, 0);
+                g.MoveByX(dx);
+                g.Resize(new Vector2(-dx, 0));
             }
             else if (anchor == AnchorPoint.Top)
             {
-                g.Y += dy;
-                g.Size += new Vector2(0, -dy);
+                g.MoveByY(dy);
+                g.Resize(new Vector2(0, -dy));
             }
             else if (anchor == AnchorPoint.Right)
-                g.Size += new Vector2(dx, 0);
+                g.Resize(new Vector2(dx, 0));
             else if (anchor == AnchorPoint.Bot)
-                g.Size += new Vector2(0, dy);
+                g.Resize(new Vector2(0, dy));
             else if (anchor == AnchorPoint.TopLeft)
             {
-                g.Pos += delta;
-                g.Size += -delta;
+                g.MoveBy(delta);
+                g.Resize(-delta);
             }
             else if (anchor == AnchorPoint.TopRight)
             {
-                g.Y += dy;
-                g.Size += new Vector2(dx, -dy);
+                g.MoveByY(dy);
+                g.Resize(new Vector2(dx, -dy));
             }
             else if (anchor == AnchorPoint.BotLeft)
-            {
-                g.X += dx;
-                g.Size += new Vector2(-dx, dy);
+            { 
+                g.MoveByX(dx);
+                g.Resize(new Vector2(-dx, dy));
             }
             else if (anchor == AnchorPoint.BotRight)
-            {
-                g.Size += delta;
-            }
+                g.Resize(delta);
         }
 
         private void Drag(Gadget g)
         {
-            g.Pos += Input.DeltaMousePos;
+            g.MoveBy(Input.DeltaMousePos);
         }
     }
 }

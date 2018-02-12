@@ -20,7 +20,7 @@ namespace DeftEngine
 
         public InputBox()
         {
-            Size = new Vector2(175, 30);
+            SetSize(new Vector2(175, 30));
             _inputLineHeight = (int)Assets.GetFont("Arial10").MeasureString("00000").Y;
             Text = "";
         }
@@ -51,15 +51,33 @@ namespace DeftEngine
             }
         }
 
-        public override void OnDrag()
+        public override void MoveTo(Vector2 newPos)
         {
-            base.OnDrag();
+            base.MoveTo(newPos);
             SyncInputArea();
         }
 
-        public override void OnResize()
+        public override void OnParentMoveBy(Vector2 delta)
         {
-            base.OnResize();
+            base.OnParentMoveBy(delta);
+            SyncInputArea();
+        }
+
+        public override void SetSize(Vector2 newSize)
+        {
+            base.SetSize(newSize);
+            SyncInputArea();
+        }
+
+        public override void Resize(Vector2 deltaSize)
+        {
+            base.Resize(deltaSize);
+            SyncInputArea();
+        }
+
+        public override void OnParentResize(Vector2 deltaSize)
+        {
+            base.OnParentResize(deltaSize);
             SyncInputArea();
         }
 
