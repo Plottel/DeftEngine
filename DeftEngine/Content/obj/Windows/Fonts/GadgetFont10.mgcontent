@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/Arial.spritefont</SourceFile>
-  <SourceTime>2017-03-02T02:05:30+11:00</SourceTime>
-  <DestFile>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/bin/Windows/Fonts/Arial.xnb</DestFile>
-  <DestTime>2018-02-07T19:40:04.0119379+11:00</DestTime>
+  <SourceFile>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/GadgetFont10.spritefont</SourceFile>
+  <SourceTime>2018-02-13T12:01:26.0083307+11:00</SourceTime>
+  <DestFile>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/bin/Windows/Fonts/GadgetFont10.xnb</DestFile>
+  <DestTime>2018-02-13T12:02:48.0366409+11:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-02T02:05:36+11:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

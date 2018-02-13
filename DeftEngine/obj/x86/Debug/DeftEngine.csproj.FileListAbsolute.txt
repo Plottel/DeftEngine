@@ -101,8 +101,10 @@ C:\Users\Matt\Desktop\DeftEngine-master\DeftEngine\obj\x86\Debug\DeftEngine.pdb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\DeftEngine.exe.config
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\GadgetBackground.xnb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\DefaultTexture.xnb
-C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\Arial.xnb
-C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\Arial12.xnb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Textures\DefaultTexture.xnb
 C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Textures\GadgetBackground.xnb
-C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\Arial10.xnb
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\asdasdasdsad.xnb
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\GadgetFont10.xnb
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\GadgetFont12.xnb
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\GadgetFont14.xnb
+C:\Users\User\Desktop\DeftEngine\DeftEngine\bin\Windows\x86\Debug\Content\Fonts\GadgetFont16.xnb

@@ -22,7 +22,7 @@ namespace DeftEngine
             if (Input.KeyTyped(Keys.Space))
             {
                 if (DeftUI.focus != null)
-                    DeftUI.focus.AddGadget<InputBox>("Dicks");
+                    DeftUI.focus.AddGadget<IntBox>("Dicks");
             }
         }
     }

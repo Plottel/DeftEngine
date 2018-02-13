@@ -33,6 +33,7 @@ namespace DeftEngine
         {
             LoadTexturesUnder("Textures");
             LoadFontsUnder("Fonts");
+            System.Diagnostics.Debug.Assert(_fonts["gadgetfont12"] != null);
         }
 
         private static void LoadTexturesUnder(string path)
@@ -66,7 +67,7 @@ namespace DeftEngine
         public static SpriteFont GetFont(string fontName)
         {
             string lower = fontName.ToLower();
-            return _fonts.ContainsKey(lower) ? _fonts[lower] : _fonts["arial12"];
+            return _fonts.ContainsKey(lower) ? _fonts[lower] : _fonts["gadgetfont12"];
         }
     }
 }

@@ -8,7 +8,7 @@ namespace DeftEngine
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class DeftEngine : Game
+    public class DeftGame : Game
     {
         public GraphicsDeviceManager graphics;
         public Color bgColor = Color.DimGray;
@@ -38,7 +38,7 @@ namespace DeftEngine
             return (float)result;
         }
 
-        public DeftEngine()
+        public DeftGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

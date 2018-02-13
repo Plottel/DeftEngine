@@ -30,7 +30,16 @@ namespace DeftEngine
         public virtual string Label
         {
             get => _label;
-            set => _label = value;
+            set
+            {
+                _label = value;
+                float labelWidth = Assets.GetFont("GadgetFont14").MeasureString(_label).X;
+
+                int overflowX = (int)labelWidth - (int)_size.X + X_PADDING;
+                if (overflowX > 0)
+                    Resize(new Vector2(overflowX + X_PADDING, 0));
+            }
+            
         }
 
         private Vector2 _pos;
@@ -46,7 +55,16 @@ namespace DeftEngine
             Label = "";
         }
 
-        public float LastGadgetBottom
+        public virtual float FirstChildTop
+        {
+            get
+            {
+                float labelHeight = Assets.GetFont("GadgetFont14").MeasureString("AAAA").Y;
+                return Pos.Y + Y_PADDING + labelHeight + Y_PADDING;
+            }
+        }
+
+        public float LastChildBottom
         {
             get
             {
@@ -82,8 +100,10 @@ namespace DeftEngine
             newGadget.isDraggable = false;
             newGadget.isResizable = false;
 
-            // Stuff in here about sizes and such
-            newGadget.MoveTo(new Vector2(_pos.X + X_PADDING, LastGadgetBottom + Y_PADDING));
+            if (_children.Count == 0)
+                newGadget.MoveTo(new Vector2(_pos.X + X_PADDING, FirstChildTop));
+            else
+                newGadget.MoveTo(new Vector2(_pos.X + X_PADDING, LastChildBottom + Y_PADDING));
 
             int overflowY = newGadget.Bounds.Bottom - Bounds.Bottom;
             if (overflowY > 0)
@@ -168,6 +188,8 @@ namespace DeftEngine
         {
             if (parent == null || alwaysShowTexture)
                 spriteBatch.Draw(Assets.GetTexture(backgroundTextureName), Pos, 0, Size);
+
+            spriteBatch.DrawString(Assets.GetFont("GadgetFont14"), Label, Pos + new Vector2(X_PADDING, Y_PADDING), ColorScheme.GadgetText);
         }
     }
 }

@@ -9,7 +9,7 @@ using MonoGame.Extended;
 
 namespace DeftEngine
 {
-    public class InputBox : Gadget
+    public class TextBox : Gadget
     {
         public const int INPUT_AREA_Y_PADDING = 3;
 
@@ -18,7 +18,7 @@ namespace DeftEngine
         private string _text;
         private int _inputLineHeight;
 
-        public InputBox()
+        public TextBox()
         {
             SetSize(new Vector2(175, 30));
             _inputLineHeight = (int)Assets.GetFont("Arial10").MeasureString("00000").Y;
@@ -32,7 +32,7 @@ namespace DeftEngine
             set
             {
                 _label = value;
-                _labelSize = Assets.GetFont("Arial12").MeasureString(_label);
+                _labelSize = Assets.GetFont("GadgetFont12").MeasureString(_label);
                 SyncInputArea();
             }
         }
@@ -44,10 +44,9 @@ namespace DeftEngine
             set
             {
                 _text = value;
-                Vector2 textSize = Assets.GetFont("Arial10").MeasureString(_text);
+                Vector2 textSize = Assets.GetFont("GadgetFont10").MeasureString(_text);
+                // TODO: Add text horizontal scrolling when text overflows.
 
-                if (textSize.X > _inputArea.X)
-                    _inputArea.X = (int)textSize.X + X_PADDING;
             }
         }
 
@@ -81,25 +80,26 @@ namespace DeftEngine
             SyncInputArea();
         }
 
+        public void ApplyTextOpCode(string textOpCode)
+        {
+            if (textOpCode == "BACKSPACE" && textOpCode.Length > 0)
+                Text = Text.Remove(Text.Length - 1);
+            else if (textOpCode == "DELETE")
+                Text = "";          
+        }
+
         public override void OnTextEntry(string text)
         {
             base.OnTextEntry(text);
-
-            if (text == "BACKSPACE" && text.Length > 0)
-                Text = Text.Remove(Text.Length - 1);
-            else if (text == "DELETE")
-                Text = "";
-            else
-                Text += text;
+            Text += text;
         }
 
         public override void Display(SpriteBatch spriteBatch)
         {
-            base.Display(spriteBatch);
             spriteBatch.FillRectangle(_inputArea, Color.LightSlateGray);
 
-            spriteBatch.DrawString(_label, new Vector2(Pos.X + X_PADDING, Bounds.Center.Y - (_labelSize.Y / 2)), Color.WhiteSmoke);
-            spriteBatch.DrawString(Assets.GetFont("Arial10"), _text, new Vector2(_inputArea.X + X_PADDING, _inputArea.Center.Y - (_inputLineHeight / 2)), Color.Black);
+            spriteBatch.DrawString(_label, new Vector2(Pos.X + X_PADDING, Bounds.Center.Y - (_labelSize.Y / 2)), ColorScheme.GadgetText);
+            spriteBatch.DrawString(Assets.GetFont("GadgetFont10"), _text, new Vector2(_inputArea.X + X_PADDING, _inputArea.Center.Y - (_inputLineHeight / 2)), ColorScheme.InputBoxText);
         }
 
         private void SyncInputArea()

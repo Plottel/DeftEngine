@@ -18,8 +18,18 @@ namespace DeftEngine
         {
             string text = (string)args[0];
 
-            if (DeftUI.focus != null)
+            if (DeftUI.focus == null)
+                return;
+
+            if (DeftUI.focus.GetType().IsSubclassOf(typeof(TextBox)) &&
+                (text == "BACKSPACE" || text == "Delete"))
+            {
+                    var textBox = DeftUI.focus as TextBox;
+                    textBox.ApplyTextOpCode(text);
+            }
+            else
                 DeftUI.focus.OnTextEntry(text);
+
         }
     }
 }

@@ -45,11 +45,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AnchorPoint.cs" />
+    <Compile Include="UI\AnchorPoint.cs" />
     <Compile Include="Assets.cs" />
     <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
-    <Compile Include="System_Event_UITextEntry.cs" />
-    <Compile Include="UI\InputBox.cs" />
+    <Compile Include="UI\Gadgets\FloatBox.cs" />
+    <Compile Include="UI\Gadgets\IntBox.cs" />
+    <Compile Include="MyGame.cs" />
+    <Compile Include="UI\Gadgets\StringBox.cs" />
+    <Compile Include="UI\UISystems\System_Event_UITextEntry.cs" />
+    <Compile Include="UI\Gadgets\TextBox.cs" />
     <Compile Include="UI\UISystems\System_Event_DragAndResizeFocusGadget.cs" />
     <Compile Include="UI\UISystems\System_Event_UpdateUIFocusState.cs" />
     <Compile Include="UI\UISystems\System_UIDisplay_DisplayGadgets.cs" />
@@ -90,7 +94,7 @@
     <Compile Include="Physics\PhysicsSystems\System_Process_ClearMovedComponents.cs" />
     <Compile Include="Physics\PhysicsActions\Action_SetVelocity.cs" />
     <Compile Include="ECSCore\DeftAction.cs" />
-    <Compile Include="DeftEngine.cs" />
+    <Compile Include="DeftGame.cs" />
     <Compile Include="ECSCore\DeftEvent.cs" />
     <Compile Include="ECSCore\ECSCore.cs" />
     <Compile Include="EntityModel\Entity.cs" />
@@ -157,6 +161,8 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="Content\Montserrat-Bold.ttf" />
+    <None Include="Content\Montserrat-Regular.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -49,7 +49,7 @@ namespace DeftEngine
 
         public static void DrawString(this SpriteBatch spriteBatch, string text, Vector2 pos, Color color)
         {
-            spriteBatch.DrawString(Assets.GetFont("Arial12"), text, pos, color);
+            spriteBatch.DrawString(Assets.GetFont("GadgetFont12"), text, pos, color);
         }
     }
 }

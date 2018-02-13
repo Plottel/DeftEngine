@@ -4,10 +4,11 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/Arial.spritefont</File>
-    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/Arial12.spritefont</File>
     <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Textures/DefaultTexture.png</File>
     <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Textures/GadgetBackground.jpg</File>
-    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/Arial10.spritefont</File>
+    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/GadgetFont10.spritefont</File>
+    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/GadgetFont12.spritefont</File>
+    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/GadgetFont14.spritefont</File>
+    <File>C:/Users/User/Desktop/DeftEngine/DeftEngine/Content/Fonts/GadgetFont16.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>
