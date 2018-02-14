@@ -22,7 +22,7 @@ namespace DeftEngine
                 return;
 
             if (DeftUI.focus.GetType().IsSubclassOf(typeof(TextBox)) &&
-                (text == "BACKSPACE" || text == "Delete"))
+                (text == "BACKSPACE" || text == "DELETE"))
             {
                     var textBox = DeftUI.focus as TextBox;
                     textBox.ApplyTextOpCode(text);

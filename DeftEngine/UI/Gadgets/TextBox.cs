@@ -37,7 +37,7 @@ namespace DeftEngine
             }
         }
 
-        public string Text
+        protected string Text
         {
             get => _text;
 
@@ -46,7 +46,6 @@ namespace DeftEngine
                 _text = value;
                 Vector2 textSize = Assets.GetFont("GadgetFont10").MeasureString(_text);
                 // TODO: Add text horizontal scrolling when text overflows.
-
             }
         }
 
@@ -82,6 +81,8 @@ namespace DeftEngine
 
         public void ApplyTextOpCode(string textOpCode)
         {
+            if (Text.Length == 0) return;
+
             if (textOpCode == "BACKSPACE" && textOpCode.Length > 0)
                 Text = Text.Remove(Text.Length - 1);
             else if (textOpCode == "DELETE")
