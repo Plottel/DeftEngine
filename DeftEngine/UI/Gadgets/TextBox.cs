@@ -32,7 +32,7 @@ namespace DeftEngine
             set
             {
                 _label = value;
-                _labelSize = Assets.GetFont("GadgetFont12").MeasureString(_label);
+                _labelSize = Font.MeasureString(_label);
                 SyncInputArea();
             }
         }
@@ -99,11 +99,11 @@ namespace DeftEngine
         {
             spriteBatch.FillRectangle(_inputArea, Color.LightSlateGray);
 
-            spriteBatch.DrawString(_label, new Vector2(Pos.X + X_PADDING, Bounds.Center.Y - (_labelSize.Y / 2)), ColorScheme.GadgetText);
+            spriteBatch.DrawString(Font, _label, new Vector2(Pos.X + X_PADDING, Bounds.Center.Y - (_labelSize.Y / 2)), ColorScheme.GadgetText);
             spriteBatch.DrawString(Assets.GetFont("GadgetFont10"), _text, new Vector2(_inputArea.X + X_PADDING, _inputArea.Center.Y - (_inputLineHeight / 2)), ColorScheme.InputBoxText);
         }
 
-        private void SyncInputArea()
+        public void SyncInputArea()
         {
             _inputArea = new Rectangle(
                 (int)(Pos.X + X_PADDING + _labelSize.X + X_PADDING),

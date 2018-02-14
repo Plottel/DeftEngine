@@ -15,7 +15,7 @@ namespace DeftEngine
         public const int Y_PADDING = 3;
 
         public Gadget parent;
-        private List<Gadget> _children = new List<Gadget>();
+        protected List<Gadget> _children = new List<Gadget>();
 
         public bool isDraggable;
         public bool isResizable;
@@ -24,7 +24,14 @@ namespace DeftEngine
         public bool inheritSizeX = true;
         public bool inheritSizeY = false;
 
+        public int fontSize;
+
         public string backgroundTextureName;
+
+        protected SpriteFont Font
+        {
+            get => Assets.GetFont("GadgetFont" + fontSize.ToString());
+        }
 
         protected string _label;
         public virtual string Label
@@ -33,7 +40,7 @@ namespace DeftEngine
             set
             {
                 _label = value;
-                float labelWidth = Assets.GetFont("GadgetFont14").MeasureString(_label).X;
+                float labelWidth = Assets.GetFont("GadgetFont16").MeasureString(_label).X;
 
                 int overflowX = (int)labelWidth - (int)_size.X + X_PADDING;
                 if (overflowX > 0)
@@ -46,20 +53,32 @@ namespace DeftEngine
         private Vector2 _size;
         private Rectangle _bounds;
 
-        public int layer;
+        protected int _layer;
+        public int Layer
+        {
+            get => _layer;
+            set
+            {
+                _layer = value;
+
+                foreach (var child in _children)
+                    child.Layer = value + 1;
+            }
+        }
 
         public Gadget()
         {
             backgroundTextureName = "GadgetBackground";
             SetSize(new Vector2(75, 50));
             Label = "";
+            fontSize = 12;
         }
 
         public virtual float FirstChildTop
         {
             get
             {
-                float labelHeight = Assets.GetFont("GadgetFont14").MeasureString("AAAA").Y;
+                float labelHeight = Font.MeasureString("AAAA").Y;
                 return Pos.Y + Y_PADDING + labelHeight + Y_PADDING;
             }
         }
@@ -90,12 +109,15 @@ namespace DeftEngine
             get => _bounds;
         }
 
-        public T AddGadget<T>(string label) where T : Gadget
+        public Gadget Add(Type gadgetType, string label)
         {
-            var newGadget = (T)Activator.CreateInstance(typeof(T));
+            if (!IsValidGadgetType(gadgetType))
+                throw new Exception("Tried to Add invalid Gadget Type : " + gadgetType.ToString());
+
+            var newGadget = (Gadget)Activator.CreateInstance(gadgetType);
             newGadget.parent = this;
             newGadget.SetSize(new Vector2(Size.X - (X_PADDING * 2), newGadget.Size.Y));
-            newGadget.layer = this.layer + 1;
+            newGadget.Layer = this.Layer + 1;
             newGadget.Label = label;
             newGadget.isDraggable = false;
             newGadget.isResizable = false;
@@ -114,14 +136,18 @@ namespace DeftEngine
                 Resize(new Vector2(overflowX + X_PADDING, 0));
 
             _children.Add(newGadget);
-            DeftUI.AddGadget(newGadget);
+            DeftUI.Subscribe(newGadget);
             return newGadget;
         }
 
-        public T GetGadget<T>(string label) where T : Gadget
-        {
-            return _children.Find(g => g.Label == label) as T;
-        }
+        public T Add<T>(string label) where T : Gadget
+            => (T)Add(typeof(T), label);
+
+        public T Get<T>(string label) where T : Gadget
+            => _children.Find(g => g.Label == label) as T;
+
+        public Gadget Get(string label)
+            => _children.Find(g => g.Label == label);
         
         public virtual void OnSelect()
         { }
@@ -189,7 +215,10 @@ namespace DeftEngine
             if (parent == null || alwaysShowTexture)
                 spriteBatch.Draw(Assets.GetTexture(backgroundTextureName), Pos, 0, Size);
 
-            spriteBatch.DrawString(Assets.GetFont("GadgetFont14"), Label, Pos + new Vector2(X_PADDING, Y_PADDING), ColorScheme.GadgetText);
+            spriteBatch.DrawString(Font, Label, Pos + new Vector2(X_PADDING, Y_PADDING), ColorScheme.GadgetText);
         }
+
+        private bool IsValidGadgetType(Type t)
+            => t.IsSubclassOf(typeof(Gadget)) || t == typeof(Gadget);
     }
 }

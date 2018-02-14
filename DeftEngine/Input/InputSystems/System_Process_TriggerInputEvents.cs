@@ -40,7 +40,7 @@ namespace DeftEngine
             }
 
             if (Input.InputString != "")
-                pool.Trigger<Event_OnTextEntry>(Input.InputString);
+                pool.Trigger<Event_OnTextEntry>(Input.PumpInputString());
             if (Input.KeyTyped(Keys.Back))
                 pool.Trigger<Event_OnTextEntry>("BACKSPACE");
             if (Input.KeyTyped(Keys.Delete))

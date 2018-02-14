@@ -33,9 +33,11 @@ namespace DeftEngine
             get => _gadgets.Count > 0;
         }
 
-
-        public static void AddGadget(Gadget g)
+        public static void Subscribe(Gadget g)
             => _gadgets.Add(g);
+
+        public static void Unsubscribe(Gadget g)
+            => _gadgets.Remove(g);
 
         /// <summary>
         /// Returns gadgets sorted by layer.
@@ -43,12 +45,12 @@ namespace DeftEngine
         /// </summary>
         public static List<Gadget> FrontToBackGadgets
         {
-            get => _gadgets.OrderByDescending(g => g.layer).ToList();
+            get => _gadgets.OrderByDescending(g => g.Layer).ToList();
         }
 
         public static List<Gadget> BackToFrontGadgets
         {
-            get => _gadgets.OrderBy(g => g.layer).ToList();
+            get => _gadgets.OrderBy(g => g.Layer).ToList();
         }
 
 

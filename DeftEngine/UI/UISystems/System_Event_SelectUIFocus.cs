@@ -28,7 +28,7 @@ namespace DeftEngine
                 //          If resizable, mouse not within resize boxes
                 if (focus.Bounds.Contains(Input.MousePos))
                 {
-                    if (!IsHighestLayerGadgetAtPos(focus.layer, Input.MousePos))
+                    if (!IsHighestLayerGadgetAtPos(focus.Layer, Input.MousePos))
                         SelectNewFocusGadget();
                 }
                 else // Mouse not within focus borders
@@ -62,7 +62,7 @@ namespace DeftEngine
         {
             foreach (var g in DeftUI.Gadgets)
             {
-                if (g.layer > layer && g.Bounds.Contains(pos))
+                if (g.Layer > layer && g.Bounds.Contains(pos))
                     return false;
             }
             return true;

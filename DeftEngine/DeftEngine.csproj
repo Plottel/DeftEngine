@@ -45,6 +45,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PointBox.cs" />
+    <Compile Include="RectangleBox.cs" />
     <Compile Include="UI\AnchorPoint.cs" />
     <Compile Include="Assets.cs" />
     <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Testing\Test_AABoxCircleCollisions.cs" />
     <Compile Include="Testing\Test_ObjectCopying.cs" />
     <Compile Include="ExtensionMethods\VectorExtensions.cs" />
+    <Compile Include="UI\Gadgets\Vector2Box.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=1.0.617.0, Culture=neutral, processorArchitecture=MSIL">

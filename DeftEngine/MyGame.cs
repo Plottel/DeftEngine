@@ -44,12 +44,13 @@ namespace DeftEngine
             Gadget g = new Gadget();
             g.isDraggable = true;
             g.isResizable = true;
-            g.layer = 10;
+            g.Layer = 10;
+            g.fontSize = 16;
             g.MoveTo(new Vector2(800, 200));
             g.SetSize(new Vector2(100, 50));
             g.Label = "Test Gadget";
 
-            DeftUI.AddGadget(g);
+            DeftUI.Subscribe(g);
         }
     }
 }
