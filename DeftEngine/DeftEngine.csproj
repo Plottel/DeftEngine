@@ -45,8 +45,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="PointBox.cs" />
-    <Compile Include="RectangleBox.cs" />
+    <Compile Include="UI\Gadgets\ByteBox.cs" />
+    <Compile Include="UI\Gadgets\ColorBox.cs" />
+    <Compile Include="ComponentEditorPanel.cs" />
+    <Compile Include="UI\UISystems\System_Process_UpdateGadgets.cs" />
+    <Compile Include="UI\IUpdateGadget.cs" />
+    <Compile Include="UI\DeftEditor.cs" />
+    <Compile Include="UI\Gadgets\PointBox.cs" />
+    <Compile Include="UI\Gadgets\RectangleBox.cs" />
     <Compile Include="UI\AnchorPoint.cs" />
     <Compile Include="Assets.cs" />
     <Compile Include="Collisions\CollisionComponents\Component_Collision_Box.cs" />
@@ -142,6 +148,7 @@
     <Compile Include="UI\Gadgets\Vector2Box.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MonoGame.Extended, Version=1.0.617.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Extended.1.0.617\lib\portable-net45+win8+wpa81\MonoGame.Extended.dll</HintPath>
     </Reference>

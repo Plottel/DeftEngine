@@ -79,14 +79,25 @@ namespace DeftEngine
             SyncInputArea();
         }
 
+        /// <summary>
+        /// Works by clearing the text, adding what the opcode needs and then
+        /// calling OnTextEntry with an entirely new string. Since the Text has been cleared,
+        /// the OnTextEntry will work.
+        /// </summary>
+        /// <param name="textOpCode"></param>
         public void ApplyTextOpCode(string textOpCode)
         {
             if (Text.Length == 0) return;
 
+            string newText = Text;
+
             if (textOpCode == "BACKSPACE" && textOpCode.Length > 0)
-                Text = Text.Remove(Text.Length - 1);
+                newText = Text.Remove(Text.Length - 1);
             else if (textOpCode == "DELETE")
-                Text = "";          
+                newText = "";
+
+            Text = "";
+            OnTextEntry(newText);
         }
 
         public override void OnTextEntry(string text)

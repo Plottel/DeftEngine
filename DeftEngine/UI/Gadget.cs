@@ -17,9 +17,14 @@ namespace DeftEngine
         public Gadget parent;
         protected List<Gadget> _children = new List<Gadget>();
 
-        public bool isDraggable;
-        public bool isResizable;
-        public bool canReceiveTextInput;
+        public List<Gadget> Children
+        {
+            get => _children;
+        }
+
+        public bool isDraggable = true;
+        public bool isResizable = true;
+        public bool canReceiveTextInput; // TODO: Consider using this for "ReadOnly" boxes.
         public bool alwaysShowTexture = false;
         public bool inheritSizeX = true;
         public bool inheritSizeY = false;
@@ -72,6 +77,7 @@ namespace DeftEngine
             SetSize(new Vector2(75, 50));
             Label = "";
             fontSize = 12;
+            Layer = 1;
         }
 
         public virtual float FirstChildTop

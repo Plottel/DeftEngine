@@ -11,6 +11,7 @@ namespace DeftEngine
     {
         public Vector2Box()
         {
+            fontSize = 14;
             Add<FloatBox>("X");
             Add<FloatBox>("Y");
         }

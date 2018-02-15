@@ -11,6 +11,7 @@ namespace DeftEngine
     {
         public RectangleBox()
         {
+            fontSize = 14;
             Add<IntBox>("X");
             Add<IntBox>("Y");
             Add<IntBox>("Width");

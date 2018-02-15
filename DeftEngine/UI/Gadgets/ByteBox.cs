@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DeftEngine
 {
-    public class IntBox : TextBox
+    public class ByteBox : TextBox
     {
-        private int _value;
+        private byte _value;
 
-        public int Value
+        public byte Value
         {
             get => _value;
             set
@@ -24,7 +24,7 @@ namespace DeftEngine
         {
             if (Text + text == "")
                 Value = 0;
-            else if (int.TryParse(Text + text, out int newValue))
+            else if (byte.TryParse(Text + text, out byte newValue))
                 Value = newValue;
         }
     }

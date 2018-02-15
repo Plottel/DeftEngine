@@ -22,6 +22,12 @@ namespace DeftEngine
 
         public override void OnTextEntry(string text)
         {
+            if (Text + text == "")
+            {
+                Value = 0f;
+                return;
+            }
+
             if (StringIsAllDigits(text))
             {
                 string oldText = Text;

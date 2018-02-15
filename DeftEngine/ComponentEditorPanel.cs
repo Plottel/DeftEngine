@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace DeftEngine
 {
-    public class ComponentEditorPanel : Gadget
+    public class ComponentEditorPanel : Gadget, IUpdateGadget
     {
         private IComponent _component;
 
@@ -24,11 +25,13 @@ namespace DeftEngine
             foreach (var field in GetComponentFields(component))
             {
                 Type gadgetType = DeftEditor.GetGadgetType(field.FieldType);
-                Add(gadgetType, field.Name);
+                dynamic fieldGadget = Add(gadgetType, field.Name);
+
+                var fieldValue = field.GetValue(_component);
+                gadgetType.GetProperty("Value").SetValue(fieldGadget, fieldValue);
             }
         }
 
-        // Consider IUpdateGadget interface -> represents a gadget that needs to be updated every frame. Kinda IM but not really.
         public void Update()
         {
             if (_component == null) return;

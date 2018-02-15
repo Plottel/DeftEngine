@@ -52,6 +52,8 @@ namespace DeftEngine
 
             systemPool.Add<System_Process_KillMe>();
 
+            systemPool.Add<System_Process_UpdateGadgets>();
+
             systemPool.Add<System_Event_SelectUIFocus>();
             systemPool.Add<System_Event_UpdateUIFocusState>();
             systemPool.Add<System_Event_DragAndResizeFocusGadget>();

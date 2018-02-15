@@ -19,10 +19,13 @@ namespace DeftEngine
                     e.Rotation += 1;
             }
 
-            if (Input.KeyTyped(Keys.Space))
+            var ent = ECSCore.pool.GetEntities<Component_Display_Box>()[0];
+            var cPanel = DeftUI.Get<ComponentEditorPanel>("Component Editor");
+
+            if (Input.KeyDown(Keys.Space))
             {
-                if (DeftUI.focus != null)
-                    DeftUI.focus.Add<RectangleBox>("Dicks");
+                ent.Get<Component_Display_Box>().color.R += 1;
+                cPanel.SetComponent(ent.Get<Component_Display_Box>());
             }
         }
     }

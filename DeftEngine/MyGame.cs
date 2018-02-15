@@ -41,16 +41,13 @@ namespace DeftEngine
             var e4 = Maker.Make("Blank", new Vector2(280, 180), new Vector2(84, 25));
             e4.Add<Component_Collision_Box>();
 
-            Gadget g = new Gadget();
-            g.isDraggable = true;
-            g.isResizable = true;
-            g.Layer = 10;
-            g.fontSize = 16;
-            g.MoveTo(new Vector2(800, 200));
-            g.SetSize(new Vector2(100, 50));
-            g.Label = "Test Gadget";
+            ComponentEditorPanel cPanel = new ComponentEditorPanel();
+            cPanel.Label = "Component Editor";
+            cPanel.fontSize = 16;
+            cPanel.MoveTo(new Vector2(5, 5));
+            cPanel.SetComponent(e.Get<Component_Display_Box>());
 
-            DeftUI.Subscribe(g);
+            DeftUI.Subscribe(cPanel);
         }
     }
 }

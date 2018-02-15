@@ -19,13 +19,23 @@ namespace DeftEngine
     public static class DeftUI
     {
         private static List<Gadget> _gadgets = new List<Gadget>();
+        private static List<IUpdateGadget> _updateGadgets = new List<IUpdateGadget>();
+
         public static Gadget focus;
         public static UIFocusState focusState;
         public static AnchorPoint focusResizeAnchor;
 
+        public static T Get<T>(string label) where T : Gadget
+            => (T)_gadgets.Find(g => g.Label == label);
+
         public static List<Gadget> Gadgets
         {
             get => _gadgets;
+        }
+
+        public static List<IUpdateGadget> UpdateGadgets
+        {
+            get => _updateGadgets;
         }
 
         public static bool IsEmpty
@@ -34,10 +44,25 @@ namespace DeftEngine
         }
 
         public static void Subscribe(Gadget g)
-            => _gadgets.Add(g);
+        {
+            if (_gadgets.Contains(g)) return; // Prevent duplicates
+
+            _gadgets.Add(g);
+
+            var update = g as IUpdateGadget;
+            if (update != null) _updateGadgets.Add(update);
+        }
 
         public static void Unsubscribe(Gadget g)
-            => _gadgets.Remove(g);
+        {
+            _gadgets.Remove(g);
+
+            var update = g as IUpdateGadget;
+            if (update != null) _updateGadgets.Remove(update);
+
+            foreach (var child in g.Children)
+                Unsubscribe(child);
+        }
 
         /// <summary>
         /// Returns gadgets sorted by layer.

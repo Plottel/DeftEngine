@@ -11,6 +11,7 @@ namespace DeftEngine
     {
         public PointBox()
         {
+            fontSize = 14;
             Add<IntBox>("X");
             Add<IntBox>("Y");
         }

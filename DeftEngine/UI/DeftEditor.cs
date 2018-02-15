@@ -28,9 +28,11 @@ namespace DeftEngine
             AssociateGadget<IntBox, int>();
             AssociateGadget<FloatBox, float>();
             AssociateGadget<StringBox, string>();
+            AssociateGadget<ByteBox, byte>();
             AssociateGadget<Vector2Box, Vector2>();
             AssociateGadget<PointBox, Point>();
             AssociateGadget<RectangleBox, Rectangle>();
+            AssociateGadget<ColorBox, Color>();
         }
     }
 }
