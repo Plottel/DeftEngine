@@ -13,10 +13,10 @@ namespace DeftEngine
     {
         public const int INPUT_AREA_Y_PADDING = 3;
 
-        private Vector2 _labelSize;
-        private Rectangle _inputArea;
+        protected Vector2 _labelSize;
+        protected Rectangle _inputArea;
         private string _text;
-        private int _inputLineHeight;
+        protected int _inputLineHeight;
 
         public TextBox()
         {
@@ -85,7 +85,7 @@ namespace DeftEngine
         /// the OnTextEntry will work.
         /// </summary>
         /// <param name="textOpCode"></param>
-        public void ApplyTextOpCode(string textOpCode)
+        public virtual void ApplyTextOpCode(string textOpCode)
         {
             if (Text.Length == 0) return;
 
@@ -111,10 +111,13 @@ namespace DeftEngine
             spriteBatch.FillRectangle(_inputArea, Color.LightSlateGray);
 
             spriteBatch.DrawString(Font, _label, new Vector2(Pos.X + X_PADDING, Bounds.Center.Y - (_labelSize.Y / 2)), ColorScheme.GadgetText);
-            spriteBatch.DrawString(Assets.GetFont("GadgetFont10"), _text, new Vector2(_inputArea.X + X_PADDING, _inputArea.Center.Y - (_inputLineHeight / 2)), ColorScheme.InputBoxText);
+            spriteBatch.DrawString(Assets.GetFont("GadgetFont10"), 
+                _text, 
+                new Vector2(_inputArea.X + X_PADDING, _inputArea.Center.Y - (_inputLineHeight / 2)), 
+                ColorScheme.InputBoxText);
         }
 
-        public void SyncInputArea()
+        public virtual void SyncInputArea()
         {
             _inputArea = new Rectangle(
                 (int)(Pos.X + X_PADDING + _labelSize.X + X_PADDING),

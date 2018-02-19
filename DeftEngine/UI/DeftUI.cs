@@ -43,6 +43,11 @@ namespace DeftEngine
             get => _gadgets.Count > 0;
         }
 
+        public static int TopLayer
+        {
+            get => _gadgets.Max(g => g.Layer);
+        }
+
         public static void Subscribe(Gadget g)
         {
             if (_gadgets.Contains(g)) return; // Prevent duplicates

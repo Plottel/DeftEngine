@@ -45,6 +45,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="UI\Gadgets\DropDownList.cs" />
     <Compile Include="UI\Gadgets\ByteBox.cs" />
     <Compile Include="UI\Gadgets\ColorBox.cs" />
     <Compile Include="ComponentEditorPanel.cs" />

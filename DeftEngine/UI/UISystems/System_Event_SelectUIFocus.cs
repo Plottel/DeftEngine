@@ -39,6 +39,10 @@ namespace DeftEngine
                         SelectNewFocusGadget();
                 }
             }
+
+            // After focus gadget has been determined, fire its OnClick event.
+            if (DeftUI.focus != null)
+                DeftUI.focus.OnClick();
         }
 
         private void SelectNewFocusGadget()

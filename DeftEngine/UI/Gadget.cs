@@ -155,7 +155,7 @@ namespace DeftEngine
         public Gadget Get(string label)
             => _children.Find(g => g.Label == label);
         
-        public virtual void OnSelect()
+        public virtual void OnClick()
         { }
 
         public virtual void MoveTo(Vector2 newPos)

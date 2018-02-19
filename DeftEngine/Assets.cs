@@ -20,14 +20,7 @@ namespace DeftEngine
 
         public static ContentManager content;
 
-        private static void ShowAllFoldersUnder(string path, int indent)
-        {
-            foreach (string folder in Directory.GetDirectories(path))
-            {
-                Console.WriteLine("{0}{1}", new string(' ', indent), Path.GetFileName(folder));
-                ShowAllFoldersUnder(folder, indent + 2);
-            }
-        }
+        
 
         public static void LoadAssets()
         {

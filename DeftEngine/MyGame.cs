@@ -48,6 +48,9 @@ namespace DeftEngine
             cPanel.SetComponent(e.Get<Component_Display_Box>());
 
             DeftUI.Subscribe(cPanel);
+
+            DeftUI.Subscribe(new DropDownList { Label = "Dicks",
+                Options = new List<String> { "ASDS", "ASDSAD", "ASDSADASDSAD" } });
         }
     }
 }
